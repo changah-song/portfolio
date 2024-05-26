@@ -20,11 +20,11 @@ menu__settings:
       url: '/videos/'
     - title: 'Pages'
       submenu:
-      - url: '/about/'
+      - url: '/portfolio/about/'
         title: 'About'
-      - url: '/contact/'
+      - url: '/portfolio/contact/'
         title: 'Contact'
-      - url: '/elements/'
+      - url: '/portfolio/elements/'
         title: 'Elements'
 
 
