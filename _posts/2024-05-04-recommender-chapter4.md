@@ -5,7 +5,7 @@ description: “You like blue? Lemme introduce you to a slightly different shade
 date:   2024-05-04 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter4-thumbnail.avif'
-tags:   [ML, NLP, Recommender System (추천 시스템), Python]
+tags:   [machine-learning, rec-sys, python, nlp]
 tags_color: '#477690'
 ---
 

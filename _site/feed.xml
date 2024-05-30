@@ -5,8 +5,8 @@
         <description></description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 31 May 2024 02:42:35 +0900</pubDate>
-        <lastBuildDate>Fri, 31 May 2024 02:42:35 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 03:03:48 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 03:03:48 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
         
             <item>
@@ -124,13 +124,13 @@ Spearman: 0.8605877952195891
                 <link>http://localhost:4000/blog/recommender-chapter6</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter6</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>Deep Learning</category>
+                <category>rec-sys</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>python</category>
                 
-                <category>Python</category>
+                <category>deep-learning</category>
                 
                 
             </item>
@@ -394,13 +394,13 @@ The filtering section is where the constraint satisfaction happens in its simple
                 <link>http://localhost:4000/blog/recommender-chapter5</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter5</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>Knowledge Base</category>
+                <category>rec-sys</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>python</category>
                 
-                <category>Python</category>
+                <category>knowledge-base</category>
                 
                 
             </item>
@@ -594,13 +594,13 @@ The filtering section is where the constraint satisfaction happens in its simple
                 <link>http://localhost:4000/blog/recommender-chapter4</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter4</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>NLP</category>
+                <category>rec-sys</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>python</category>
                 
-                <category>Python</category>
+                <category>nlp</category>
                 
                 
             </item>
@@ -867,11 +867,11 @@ MAE:  0.6851
                 <link>http://localhost:4000/blog/recommender-chapter3</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter3</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>rec-sys</category>
                 
-                <category>Python</category>
+                <category>python</category>
                 
                 
             </item>
@@ -1074,11 +1074,11 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                 <link>http://localhost:4000/blog/recommender-chapter2</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter2</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>rec-sys</category>
                 
-                <category>Python</category>
+                <category>python</category>
                 
                 
             </item>
@@ -1159,11 +1159,11 @@ This series will initially cover the four broad categories of recommender system
                 <link>http://localhost:4000/blog/recommender-chapter1</link>
                 <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter1</guid>
                 
-                <category>ML</category>
+                <category>machine-learning</category>
                 
-                <category>Recommender System (추천 시스템)</category>
+                <category>rec-sys</category>
                 
-                <category>Python</category>
+                <category>python</category>
                 
                 
             </item>

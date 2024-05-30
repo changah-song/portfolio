@@ -5,7 +5,7 @@ description: How to approach evaluating recommenders. It’s more complicated th
 date:   2024-05-02 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter2-thumbnail.avif'
-tags:   [ML, Recommender System (추천 시스템), Python]
+tags:   [machine-learning, rec-sys, python]
 tags_color: '#477690'
 ---
 

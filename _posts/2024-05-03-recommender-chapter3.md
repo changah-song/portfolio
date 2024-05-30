@@ -5,7 +5,7 @@ description: “People similar to you liked this, try it out”
 date:   2024-05-03 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter3-thumbnail.avif'
-tags:   [ML, Recommender System (추천 시스템), Python]
+tags:   [machine-learning, rec-sys, python]
 tags_color: '#477690'
 ---
 

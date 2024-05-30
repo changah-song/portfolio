@@ -5,7 +5,7 @@ description: “Ask and you shall receive”
 date:   2024-05-05 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter5-thumbnail.avif'
-tags:   [ML, Knowledge Base, Recommender System (추천 시스템), Python]
+tags:   [machine-learning, rec-sys, python, knowledge-base]
 tags_color: '#477690'
 ---
 

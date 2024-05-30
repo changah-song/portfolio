@@ -12,16 +12,14 @@ menu__settings:
   menu__items:
     - title: 'Home'
       url: '/'    
-    - title: 'Element'
+    - title: 'Project'
       url: '/element/'
     - title: 'Blog'
       url: '/blog/'
-    - title: 'Contact'
-      url: '/contact/'
     - title: 'About'
       url: '/about/'
-
-
+    - title: 'Contact'
+      url: '/contact/'
 
 #-------------------------------
 # Hero Settings
