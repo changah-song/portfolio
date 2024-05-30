@@ -3,10 +3,10 @@
     <channel>
         <title>Mria</title>
         <description>Mria is a multipurpose blog theme for Jekyll</description>
-        <link>http://localhost:4000/portfolio/</link>
-        <atom:link href="http://localhost:4000/portfolio/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sun, 26 May 2024 23:38:13 +0900</pubDate>
-        <lastBuildDate>Sun, 26 May 2024 23:38:13 +0900</lastBuildDate>
+        <link>http://localhost:4000/</link>
+        <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Thu, 30 May 2024 21:59:35 +0900</pubDate>
+        <lastBuildDate>Thu, 30 May 2024 21:59:35 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
         
             <item>
@@ -38,7 +38,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -76,8 +76,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 14 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</guid>
+                <link>http://localhost:4000/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</guid>
                 
                 <category>lifestyle</category>
                 
@@ -113,7 +113,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -151,8 +151,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Fri, 12 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/only-a-life-lived-for-others-is-a-life-worthwhile</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/only-a-life-lived-for-others-is-a-life-worthwhile</guid>
+                <link>http://localhost:4000/blog/only-a-life-lived-for-others-is-a-life-worthwhile</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/only-a-life-lived-for-others-is-a-life-worthwhile</guid>
                 
                 <category>workflow</category>
                 
@@ -188,7 +188,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -226,8 +226,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 11 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/the-purpose-of-our-lives-is-to-be-happy</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/the-purpose-of-our-lives-is-to-be-happy</guid>
+                <link>http://localhost:4000/blog/the-purpose-of-our-lives-is-to-be-happy</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/the-purpose-of-our-lives-is-to-be-happy</guid>
                 
                 <category>lifestyle</category>
                 
@@ -263,7 +263,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -301,8 +301,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 10 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/love-the-life-you-live-live-the-life-you-love</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/love-the-life-you-live-live-the-life-you-love</guid>
+                <link>http://localhost:4000/blog/love-the-life-you-live-live-the-life-you-love</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/love-the-life-you-live-live-the-life-you-love</guid>
                 
                 <category>lifestyle</category>
                 
@@ -338,7 +338,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -376,8 +376,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Tue, 09 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/if-opportunity-doesn-t-knock-build-a-door</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/if-opportunity-doesn-t-knock-build-a-door</guid>
+                <link>http://localhost:4000/blog/if-opportunity-doesn-t-knock-build-a-door</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/if-opportunity-doesn-t-knock-build-a-door</guid>
                 
                 <category>oregon</category>
                 
@@ -413,7 +413,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -451,8 +451,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 08 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</guid>
+                <link>http://localhost:4000/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</guid>
                 
                 <category>technology</category>
                 
@@ -488,7 +488,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -526,8 +526,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 07 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/either-you-run-the-day-or-the-day-runs-you</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/either-you-run-the-day-or-the-day-runs-you</guid>
+                <link>http://localhost:4000/blog/either-you-run-the-day-or-the-day-runs-you</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/either-you-run-the-day-or-the-day-runs-you</guid>
                 
                 <category>lifestyle</category>
                 
@@ -563,7 +563,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -601,8 +601,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Fri, 10 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</guid>
+                <link>http://localhost:4000/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</guid>
                 
                 <category>travel</category>
                 
@@ -640,7 +640,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -678,8 +678,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 09 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</guid>
+                <link>http://localhost:4000/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</guid>
                 
                 <category>travel</category>
                 
@@ -717,7 +717,7 @@
 
 &lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/portfolio/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
 &lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
@@ -755,8 +755,8 @@
 &lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 08 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/portfolio/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</link>
-                <guid isPermaLink="true">http://localhost:4000/portfolio/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</guid>
+                <link>http://localhost:4000/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</guid>
                 
                 <category>travel</category>
                 

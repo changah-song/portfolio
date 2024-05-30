@@ -1,7 +1,7 @@
 ---
 username: alena
 name: Alena Curtis
-image: '/images/01-1.jpg'
+image: 'images/01-1.jpg'
 cover:
 location: Mexico
 website: https://www.google.com
