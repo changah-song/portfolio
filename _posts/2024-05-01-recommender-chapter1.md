@@ -5,7 +5,7 @@ description:
 date:   2024-05-01 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter1-thumbnail.avif'
-tags:   [machine-learning, rec-sys, python]
+tags:   [machine-learning, rec-sys]
 tags_color: '#477690'
 category: blog
 ---

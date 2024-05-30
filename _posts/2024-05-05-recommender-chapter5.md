@@ -5,9 +5,9 @@ description: “Ask and you shall receive”
 date:   2024-05-05 00:00:00 +0900
 author: nolan
 image:  '/images/rs-chapter5-thumbnail.avif'
-tags:   [machine-learning, rec-sys, python, knowledge-base]
+tags:   [machine-learning, rec-sys]
 tags_color: '#477690'
-category: project
+category: blog
 ---
 
 ### Overview

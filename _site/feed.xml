@@ -5,9 +5,30 @@
         <description></description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 31 May 2024 03:38:59 +0900</pubDate>
-        <lastBuildDate>Fri, 31 May 2024 03:38:59 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 04:28:17 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 04:28:17 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
+        
+            <item>
+                <title>Fluent Fable: Reading for Language Learning</title>
+                <description>&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/fluent-fable-viz.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</description>
+                <pubDate>Tue, 07 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/fluent-fable</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/fluent-fable</guid>
+                
+                <category>full-stack</category>
+                
+                <category>react-native</category>
+                
+                
+                <category>project</category>
+                
+            </item>
         
             <item>
                 <title>Making Recommenders Better (6/6)</title>
@@ -128,12 +149,10 @@ Spearman: 0.8605877952195891
                 
                 <category>rec-sys</category>
                 
-                <category>python</category>
-                
                 <category>deep-learning</category>
                 
                 
-                <category>project</category>
+                <category>blog</category>
                 
             </item>
         
@@ -400,12 +419,8 @@ The filtering section is where the constraint satisfaction happens in its simple
                 
                 <category>rec-sys</category>
                 
-                <category>python</category>
                 
-                <category>knowledge-base</category>
-                
-                
-                <category>project</category>
+                <category>blog</category>
                 
             </item>
         
@@ -602,12 +617,10 @@ The filtering section is where the constraint satisfaction happens in its simple
                 
                 <category>rec-sys</category>
                 
-                <category>python</category>
-                
                 <category>nlp</category>
                 
                 
-                <category>project</category>
+                <category>blog</category>
                 
             </item>
         
@@ -877,8 +890,6 @@ MAE:  0.6851
                 
                 <category>rec-sys</category>
                 
-                <category>python</category>
-                
                 
                 <category>blog</category>
                 
@@ -1086,8 +1097,6 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                 
                 <category>rec-sys</category>
                 
-                <category>python</category>
-                
                 
                 <category>blog</category>
                 
@@ -1172,8 +1181,6 @@ This series will initially cover the four broad categories of recommender system
                 <category>machine-learning</category>
                 
                 <category>rec-sys</category>
-                
-                <category>python</category>
                 
                 
                 <category>blog</category>
