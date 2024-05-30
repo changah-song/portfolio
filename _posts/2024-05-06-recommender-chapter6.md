@@ -7,6 +7,7 @@ author: nolan
 image:  '/images/rs-chapter6-thumbnail.avif'
 tags:   [machine-learning, rec-sys, python, deep-learning]
 tags_color: '#477690'
+category: project
 ---
 
 Good job reaching the end of the series! Now you know a lot about the basics of recommender systems. What now? Now we discuss ways we can improve upon the previous approaches we covered. We’ve gone over so many different approaches each with their own pros and cons. There are countless ways to make recommenders stronger and we will be looking at two common approaches.

@@ -5,8 +5,8 @@
         <description></description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 31 May 2024 03:08:40 +0900</pubDate>
-        <lastBuildDate>Fri, 31 May 2024 03:08:40 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 03:17:36 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 03:17:36 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
         
             <item>
@@ -132,6 +132,8 @@ Spearman: 0.8605877952195891
                 
                 <category>deep-learning</category>
                 
+                
+                <category>project</category>
                 
             </item>
         
@@ -403,6 +405,8 @@ The filtering section is where the constraint satisfaction happens in its simple
                 <category>knowledge-base</category>
                 
                 
+                <category>project</category>
+                
             </item>
         
             <item>
@@ -602,6 +606,8 @@ The filtering section is where the constraint satisfaction happens in its simple
                 
                 <category>nlp</category>
                 
+                
+                <category>project</category>
                 
             </item>
         
@@ -874,6 +880,8 @@ MAE:  0.6851
                 <category>python</category>
                 
                 
+                <category>blog</category>
+                
             </item>
         
             <item>
@@ -1081,6 +1089,8 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                 <category>python</category>
                 
                 
+                <category>blog</category>
+                
             </item>
         
             <item>
@@ -1165,6 +1175,8 @@ This series will initially cover the four broad categories of recommender system
                 
                 <category>python</category>
                 
+                
+                <category>blog</category>
                 
             </item>
         

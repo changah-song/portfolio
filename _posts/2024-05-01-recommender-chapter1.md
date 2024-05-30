@@ -7,6 +7,7 @@ author: nolan
 image:  '/images/rs-chapter1-thumbnail.avif'
 tags:   [machine-learning, rec-sys, python]
 tags_color: '#477690'
+category: blog
 ---
 
 ### 1. What are Recommender Systems?

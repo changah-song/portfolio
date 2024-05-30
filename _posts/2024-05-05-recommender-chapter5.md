@@ -7,6 +7,7 @@ author: nolan
 image:  '/images/rs-chapter5-thumbnail.avif'
 tags:   [machine-learning, rec-sys, python, knowledge-base]
 tags_color: '#477690'
+category: project
 ---
 
 ### Overview

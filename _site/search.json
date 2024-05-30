@@ -2,7 +2,7 @@
   
     {
       "title"    : "Making Recommenders Better (6/6)",
-      "category" : "",
+      "category" : "project",
       "tags"     : "machine-learning, rec-sys, python, and deep-learning",
       "url"      : "/blog/recommender-chapter6",
       "date"     : "06 May 2024",
@@ -11,7 +11,7 @@
   
     {
       "title"    : "Knowledge-Based Recommenders (5/6)",
-      "category" : "",
+      "category" : "project",
       "tags"     : "machine-learning, rec-sys, python, and knowledge-base",
       "url"      : "/blog/recommender-chapter5",
       "date"     : "05 May 2024",
@@ -20,7 +20,7 @@
   
     {
       "title"    : "Content-Based Recommenders (4/6)",
-      "category" : "",
+      "category" : "project",
       "tags"     : "machine-learning, rec-sys, python, and nlp",
       "url"      : "/blog/recommender-chapter4",
       "date"     : "04 May 2024",
@@ -29,7 +29,7 @@
   
     {
       "title"    : "Collaborative Filtering Recommenders (3/6)",
-      "category" : "",
+      "category" : "blog",
       "tags"     : "machine-learning, rec-sys, and python",
       "url"      : "/blog/recommender-chapter3",
       "date"     : "03 May 2024",
@@ -38,7 +38,7 @@
   
     {
       "title"    : "Evaluating Recommender Systems (2/6)",
-      "category" : "",
+      "category" : "blog",
       "tags"     : "machine-learning, rec-sys, and python",
       "url"      : "/blog/recommender-chapter2",
       "date"     : "02 May 2024",
@@ -47,7 +47,7 @@
   
     {
       "title"    : "Recommendation System for Dummies (1/6)",
-      "category" : "",
+      "category" : "blog",
       "tags"     : "machine-learning, rec-sys, and python",
       "url"      : "/blog/recommender-chapter1",
       "date"     : "01 May 2024",

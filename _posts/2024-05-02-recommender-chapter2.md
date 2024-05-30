@@ -7,6 +7,7 @@ author: nolan
 image:  '/images/rs-chapter2-thumbnail.avif'
 tags:   [machine-learning, rec-sys, python]
 tags_color: '#477690'
+category: blog
 ---
 
 > LEARNING GOALS — 4 different ways to evaluate recommender systems: accuracy, correlation, utility, and usage.
