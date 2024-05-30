@@ -26,7 +26,7 @@ layout: default
 
         {% if author %}
         <a href="{{ author.url }}" class="post__author__image">
-          <img class="lazy" data-src="{{ author.image }}" alt="{{ author.name }}">
+          <img class="lazy" data-src="../{{ author.image }}" alt="{{ author.name }}">
         </a>
         {% else %}
         <a href="{{site.baseurl}}/about/" class="post__author__image">
@@ -110,7 +110,7 @@ layout: default
     <div class="card-author__media">
       {% if author %}
       <a class="card-author__image" href="{{ author.url }}">
-        <img class="lazy" data-src="{{ author.image }}" alt="{{ author.name }}">
+        <img class="lazy" data-src="../{{ author.image }}" alt="{{ author.name }}">
       </a>
       {% else %}
       <a class="card-author__image" href="{{ author.url }}">

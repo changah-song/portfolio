@@ -1,6 +1,42 @@
 [
   
     {
+      "title"    : "Content-Based Recommenders (4/6)",
+      "category" : "",
+      "tags"     : "ML, NLP, Recommender System (추천 시스템), and Python",
+      "url"      : "/blog/recommender-chapter4",
+      "date"     : "04 May 2024",
+      "image"    : "/images/rs-chapter4-thumbnail.avif"
+    } ,
+  
+    {
+      "title"    : "Collaborative Filtering Recommenders (3/6)",
+      "category" : "",
+      "tags"     : "ML, Recommender System (추천 시스템), and Python",
+      "url"      : "/blog/recommender-chapter3",
+      "date"     : "03 May 2024",
+      "image"    : "/images/rs-chapter3-thumbnail.avif"
+    } ,
+  
+    {
+      "title"    : "Evaluating Recommender Systems (2/6)",
+      "category" : "",
+      "tags"     : "ML, Recommender System (추천 시스템), and Python",
+      "url"      : "/blog/recommender-chapter2",
+      "date"     : "02 May 2024",
+      "image"    : "/images/rs-chapter2-thumbnail.avif"
+    } ,
+  
+    {
+      "title"    : "Recommendation System for Dummies (1/6)",
+      "category" : "",
+      "tags"     : "ML, Recommender System (추천 시스템), and Python",
+      "url"      : "/blog/recommender-chapter1",
+      "date"     : "01 May 2024",
+      "image"    : "/images/rs-chapter1-thumbnail.avif"
+    } ,
+  
+    {
       "title"    : "In three words I can sum up everything I’ve learned about life: It goes on",
       "category" : "",
       "tags"     : "lifestyle",

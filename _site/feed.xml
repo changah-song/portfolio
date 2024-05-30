@@ -5,9 +5,772 @@
         <description>Mria is a multipurpose blog theme for Jekyll</description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 30 May 2024 21:59:35 +0900</pubDate>
-        <lastBuildDate>Thu, 30 May 2024 21:59:35 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 01:28:03 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 01:28:03 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
+        
+            <item>
+                <title>Content-Based Recommenders (4/6)</title>
+                <description>&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
+&lt;p&gt;Content-Based Recommender Systems (CB RS) recommends items based on a &lt;strong&gt;user’s historical item-rating data&lt;/strong&gt;. Looking at previous items the user favorably rated (either explicitly or implicitly), items similar to that one can be recommended. That is all. Here are the three steps that are followed:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Item profile. Also called content analyzer, attributes about the item are collected. In the context of movies, that could be the director, genre, length of film, keywords, etc. This step is the pre-processing step that extracts all relevant information from items. There are many feature extraction techniques available to use and has already been extensively researched in the field of &lt;strong&gt;Information Retrieval&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;User profile. Also called profile learner, data representative of the user’s preferences are collected. Data is collected about the user’s historical ratings and is used to create a model that generalizes the users’ preference. This generalization step utilizes &lt;strong&gt;Machine Learning&lt;/strong&gt; techniques.&lt;/li&gt;
+  &lt;li&gt;Prediction. Also called filtering component, items that are similar to the user’s item preference are found and recommended. &lt;strong&gt;Similarity metrics&lt;/strong&gt; are used to find the items most similar to what the user profile suggests that the user would like.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: What is the difference between item-based CF and CB recommenders? I had this question pop up during my research and it seems like these two methods seem identical. Some resources describe them exactly the same way but the one explanation that made sense for me is the following: Item-based CF uses the items rated by various users as a basis to find similar users (to then recommend items that a similar user liked) while CB uses the profile of the items in a database and the items that a user liked to find similar items to then recommend. [1]&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;strengths-and-weaknesses&quot;&gt;Strengths and Weaknesses&lt;/h4&gt;
+&lt;p&gt;— — — — — — — — — — — — — — —&lt;/p&gt;
+
+&lt;p&gt;🔺 Strengths&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Other-User Independent&lt;/em&gt;&lt;/strong&gt;. The recommendations are not reliant on other users such as collaborative filtering (CF) since we just rely on the one user’s historical data to find similar items.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Transparency&lt;/em&gt;&lt;/strong&gt;. Can explicitly let the user know why certain items are being recommended such as the content’s features or descriptions. “Since you liked action-packed, superhero movies such as ‘Avengers: Endgame’ and ‘Batman: The Dark Knight’, we think you will also like…”.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;New-Item Friendly&lt;/em&gt;&lt;/strong&gt;. New items can be recommended right away as long it is found to be similar to other items the user liked in the past. In CF, new items take time to be rated by other users and only when other similar users like it can it then be suggested to you.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;🔻 Weaknesses&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Limited Content Information&lt;/em&gt;&lt;/strong&gt;. The most important step is to find all the relevant attributes of items. However, there is a natural limit to the number and type of features associated with items and oftentimes domain-specific knowledge is needed and that has to be manually added. When comparing to CF, in return for not needing other user’s data, it requires a lot of data on the items itself.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Over-Specialization&lt;/em&gt;&lt;/strong&gt;. Limited ‘novelty’ and lack of ‘serendipity’. As discussed in the first post, novelty and more so serendipity are the goals of a good recommender system. Items recommended should be new (novel) but also unexpected (serendipitous). With the Content-based approach, the goal is to find items most similar to ones the user already liked and so, in theory, a ‘perfect’ CB recommender shouldn’t be recommending anything new while in practice, hardly any unexpected items are recommended.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;New-User Unfriendly&lt;/em&gt;&lt;/strong&gt;. Since this method depends on having historical data about the user, a new user without any prior ratings wouldn’t have any data to give to the recommender. This limits the effectiveness of this approach for new users and can also be seen as a type of ‘cold-start’ problem.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: The strength and weaknesses of CF and CB are almost entirely flipped. CF struggles with relying on other users, weak transparency, and dealing with new items while it doesn’t deal with limited content information or over-specialization (it still struggles with the cold-start problem).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;item-profile&quot;&gt;Item Profile&lt;/h3&gt;
+&lt;p&gt;Two steps: &lt;strong&gt;Feature Extraction&lt;/strong&gt; and &lt;strong&gt;Feature Similarity&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To get the item profile, we need feature extraction from items to convert them into a keyword-based vector-space representation. That is just a fancy way of saying that we need to collect information, whether it is structured or unstructured, about the item and map it into a vector space so that our algorithms can do stuff with it mathematically. Structured information is numerical or fields with few possible descriptions such as prices or colors. Unstructured information is usually text-based and describes the item in natural language such as a description of a book, its content, title, and author. Most content-based recommender use unstructured textual data as that is the easiest to find and lots of it can be found.&lt;/p&gt;
+
+&lt;p&gt;These features are then chosen to be included in the model depending on their relevance (&lt;strong&gt;feature selection&lt;/strong&gt;) or included but with varying weights depending on their importance (&lt;strong&gt;feature weighting&lt;/strong&gt;). Most content-based recommenders use a simple retrieval model called the Vector Space Model (VSM) with basic TF-IDF weighting.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: We will focus on feature extraction from &lt;strong&gt;text-based descriptions&lt;/strong&gt; of an item as that is the most common implementation of CB RS.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;How to extract features from item? … NLP&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;VSM&lt;/strong&gt; represents each item as a vector of term weights in n-dimensional space, each dimension being a term from the overall vocabulary of a given set of items. Well aren’t there so many unique words in a document? (Document will be used to mean a collection of texts). Correct ,and we will have each as a dimension. However, we can reduce the dimensions by utilizing some natural language processing (NLP) operations such as stop-word removal, stemming, and/or tokenization.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Stop-word removal: Get rid of unnecessary or irrelevant words. For example, [a, an, the, is, was, etc.] in the English language.&lt;/li&gt;
+  &lt;li&gt;Stemming: Cut down words into its main component, usually by locating the root of the word or cutting out its prefix and/or suffix. For example, [buy, buying, bought] could all be reduced to [buy].&lt;/li&gt;
+  &lt;li&gt;Tokenization: Break a sequence of strings into groups whether it is by character, subword, word, phrase, or some other method. For example, “larger than life” can be tokenized word-wise as [“larger”, “than”, “life”], character-wise as [‘l’, ‘a’, ‘r’, ‘g’, ‘e’, ‘r’, …, ‘e’]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;NLP is a large field in itself and so we won’t cover much more in detail but there are various ways to implement these methods and also other methods to extract features from text using NLP.&lt;/p&gt;
+
+&lt;p&gt;Once the document is sufficiently reduced and the terms are extracted, we should have a set of documents, D, and a set of terms, T. Each document in D is represented as a vector in a n-dimensional vector space, each with weights for each term in T.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-4-1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        N is the number of documents and n is the number of total terms covering all the documents. w_kj is the weight for term t_k in document d_j
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;How to find the weights? … TF-IDF&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We know D (input) and T (NLP feature extraction). How do we calculate the weights for each document? We can use TF-IDF (term frequency-inverse document frequency) which is a method that finds relevant words in a document by multiplying two metrics: how many times a word appears in a document (TF), and the inverse document frequency of the word across a set of documents (IDF). This approach has its basis on three assumptions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;em&gt;TF assumption&lt;/em&gt;: multiple occurences of a term in a document are not less relevant than single occurrences&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;IDF assumption&lt;/em&gt;: rare terms are not less relevant than frequent terms&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;normalization assumption&lt;/em&gt;: long documents are not preferred to short documents&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Terms that occur frequently in one document (TF) but rarely in the rest of the documents (IDF) are more likely to be relevant to the topic of the document. Normalizing prevents longer documents from having a better chance of retrieval.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; The math is as follow:&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-4-2.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        TF-IDF = TF * IDF where TF is simply the frequency of a term k in document j and IDF is the inverse document frequency. Taken from Aggarwal (2016).
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The equation for TF is the frequency of a specific term, k, divided by the frequency of all terms, z. The IDF section just shows the log of the number of documents, N, over the number of documents where term k occurs at least once. This calculates the inverse document frequency. We multiply the two components and normalize it to get the weights, w_{k,j}, which is the last equation.&lt;/p&gt;
+
+&lt;h3 id=&quot;user-profile&quot;&gt;User Profile&lt;/h3&gt;
+&lt;p&gt;Learning user profiles is closely related to the classification and regression modeling problem as we’ve discussed in a previous post (Collaborative Filtering RS). When ratings are discrete values, the problem is text classification while when ratings are continuous, the problem is regression modeling. Given that a user rated certain documents, those documents are a set we can call D_L which is the training data and the un-rated documents we can call D_U. Each set has documents but the different is that D_L is rated or, in other words, labeled. We are just trying to label D_U and to do so we can use various classification and regression tactics.&lt;/p&gt;
+
+&lt;p&gt;The most simple, and one we are familiar with from CF recommenders is the nearest neighbor classification. There are other methods such as Bayes Classifier, Rule-Based Classifier, etc. but we will go with the simplest one.&lt;/p&gt;
+
+&lt;p&gt;We map D_L onto the same vector space as in the item profile step. The user profile is then a vector space with all the relevant documents they’ve rated. When we map the D_U documents onto that same space, we can use similarity metrics, such as cosine similarity, to find the nearest neighbors in that vector space.&lt;/p&gt;
+
+&lt;h3 id=&quot;prediction&quot;&gt;Prediction&lt;/h3&gt;
+&lt;p&gt;Similar to CF recommenders, we can recommend items that were found to be similar to the items the user liked in their user profile. The simplest way would just be top-N recommendation where we pick the N most similar items to recommend.&lt;/p&gt;
+
+&lt;h3 id=&quot;visual-overview&quot;&gt;Visual Overview&lt;/h3&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-4-3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Visual overview of Content-Based RS. Image by Author.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The basic steps in content-based is pretty straightforward and the image above shows the process we discussed above. We first start off with the user-item matrix and item-feature matrix. The item-feature matrix is where all the information from our feature extraction is stored in. Usually, features are not described in number (e.g. movie description, keywords, actors, etc.) and so we have to convert the feature information into usable, numerical values. This is where tokenization and other NLP methods can help.&lt;/p&gt;
+
+&lt;p&gt;Next, we create the user profile by combining the user-item matrix (ratings data) and the item-feature matrix (item profile). A simple matrix multiplication can do the job but there can be other approaches. Once the user-feature matrix is calculated, we can now know each users’ feature preferences.&lt;/p&gt;
+
+&lt;p&gt;Finally, we can compare the similarity between every item and the user’s feature preference. We find the top-n most similar items and recommend it to the user.&lt;/p&gt;
+
+&lt;h3 id=&quot;code-implementation&quot;&gt;Code Implementation&lt;/h3&gt;
+&lt;p&gt;Let’s try implementing this is code. Three steps — (1) feature profile, (2) user profile, (3) recommendation based on similarity.&lt;/p&gt;
+
+&lt;h4 id=&quot;import-data-and-get-feature-profile&quot;&gt;Import data and get feature profile&lt;/h4&gt;
+&lt;p&gt;Using the MovieLens 1M dataset, we get the user-item matrix and the item-feature matrix. There is only one feature to consider for this dataset: genre. Since the genre is a categorical data type, we just need to replace each genre with a unique integer. That is what I do below from lines 18–23. Now we have the ratings matrix and the feature profile.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/78ec68719832e19ea86e2b9c94bc6b27.js&quot;&gt;&lt;/script&gt;
+
+&lt;h4 id=&quot;user-profile-and-recommendation&quot;&gt;User Profile and Recommendation&lt;/h4&gt;
+&lt;p&gt;Now, we simply find the dot product between the two matrices to get the user-profile. What we end up getting is all the genres the users liked in the past and so we have a list of a bunch of genres and many are overlapping. Therefore, I replace the user preference with a dictionary that captures which genres they liked as a percentage. The output shows that for user 0, their top 3 genres were 10 (23.27%), 11 (16.63%), and 4 (10.45%). Given this, we can now recommend items that are in these genre categories.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/edcf50d13810691cabb9dcf11628c6d6.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{1: 0.028503562945368172,
+ 2: 0.0498812351543943,
+ 3: 0.0498812351543943,
+ 4: 0.10451306413301663,
+ 5: 0.007125890736342043,
+ 6: 0.030878859857482184,
+ 7: 0.0688836104513064,
+ 8: 0.035629453681710214,
+ 10: 0.2327790973871734,
+ 11: 0.166270783847981,
+ 12: 0.03800475059382423,
+ 13: 0.030878859857482184,
+ 14: 0.009501187648456057,
+ 15: 0.0332541567695962,
+ 16: 0.0688836104513064,
+ 17: 0.04513064133016627}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;We have gone through the basics of content-based recommenders and an intuitive code implementation of each step. Now you should be able to understand more advanced extensions of this that will be discussed in chapter 6.&lt;/p&gt;
+
+&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+&lt;p&gt;Aggarwal, C. C. (2016). Recommender systems: The textbook. SPRINGER.&lt;/p&gt;
+
+&lt;p&gt;Kantor, P. B., Rokach, L., Shapira, B., &amp;amp; Ricci, F. (2011). Recommender Systems Handbook. Springer.&lt;/p&gt;
+</description>
+                <pubDate>Sat, 04 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter4</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter4</guid>
+                
+                <category>ML</category>
+                
+                <category>NLP</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
+        
+            <item>
+                <title>Collaborative Filtering Recommenders (3/6)</title>
+                <description>&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
+&lt;p&gt;Collaborative Filtering methods relies on &lt;strong&gt;other users&lt;/strong&gt; as well as the target user’s ratings to recommend relevant items. Think about how videos are recommended on Youtube. Usually once you start watching a video about the fall of Rome, you get recommended similar content, whether it be the subject (Roman history), video format (video essays), or content creator (same or other history-focused channels).&lt;/p&gt;
+
+&lt;p&gt;This is the basis of collaborative filtering and it makes sense intuitively. If A liked an item and A is similar to B, it follows that B would also like that item. Or in the same line of thought, if A liked an item, it follows that A would like similar items.&lt;/p&gt;
+
+&lt;p&gt;There are two main types of collaborative filtering recommender systems: memory-based and model-based.&lt;/p&gt;
+
+&lt;p&gt;This chapter will cover the very basics of these two categories to ensure that we have a firm grasp on the underlying concept and simple implementation. Later chapters will revisit CF but will explore more advanced ways to approach it.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;memory-based&quot;&gt;Memory-Based&lt;/h2&gt;
+&lt;p&gt;This method uses the entire user-item ratings matrix to generate predictions. It uses statistical methods to search for a set of users who have similar transactions history to the active user. Such a simple concept translates to a simple implementation. We simply have to worry about three things: (1) method for calculating the similarity between users or items, (2) method for predicting what items a user might like, and (3) recommending items. Of course, these three key steps have various forms of implementation.&lt;/p&gt;
+
+&lt;p&gt;In memory-based RS, there are two categories: (1) &lt;strong&gt;user-based&lt;/strong&gt; and (2) &lt;strong&gt;item-based&lt;/strong&gt;. The difference is in how we calculate the similarities. The user-based approach uses &lt;em&gt;user similarity&lt;/em&gt; to fill in the empty cells while the item-based approach uses the &lt;em&gt;item similarity&lt;/em&gt; to do so. User-based is the more intuitive one that is largely used to explain collaborative filtering in general. Finding similar users and then ratings items that those similar users liked makes sense right away. On the other hand, finding similar items and then rating “users” that the items ended up being liked by is a bit harder to wrap your head around.&lt;/p&gt;
+
+&lt;p&gt;The visualization below shows the two different categories of memory-based RS. For the rest of this article, we will be using the user-based approach but the math and implementation behind item-based is almost identical. While reading the rest of the article, refer back to this visualization to make sure you know how we are moving from one step to the next.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;Two different approaches in memory-based recommenders.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&quot;1-similarity&quot;&gt;(1) Similarity&lt;/h3&gt;
+&lt;p&gt;| &lt;strong&gt;Keywords&lt;/strong&gt;: Euclidean distance, Manhattan distance, Cosine similarity, Pearson correlation, KNN&lt;/p&gt;
+
+&lt;p&gt;Calculating similarity can be thought of as finding the distance between the two users. Why distance? As a simple example, imagine we want to compare the similarity between three people A, B, and C. We only know two things about each person — their height and weight. If we map out the “location” of these people in a space where the x- and y- axis are height and weight, we get the following graph:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-2.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;Visualization of users.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;We can see that A and B are closer in distance in this space and so we can conclude that they are more similar to each other than either are to C. This is the basis of calculating similarity: after mapping out each user in a space that captures the users’ features, we calculate the distance between our target user and the other users.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;After mapping out each user in a space that captures the users’ features, we calculate the distance between our target user and the other users.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The simplest way to calculate the distance here is the &lt;strong&gt;Manhattan&lt;/strong&gt; and &lt;strong&gt;Euclidean&lt;/strong&gt; distance. The following equation is for calculating the Euclidean distance where i is the number of dimension and x and y are the users. The Euclidean distance is essentially the Pythagorean equation when calculating the hypotenuse in a right triangle:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The closer a user is to another, the Euclidean/Manhattan distance should be closer to 0.&lt;/p&gt;
+
+&lt;p&gt;There are more ways to calculate the similarity amongst users that is commonly used: &lt;strong&gt;cosine similarity&lt;/strong&gt; and &lt;strong&gt;Pearson correlation&lt;/strong&gt;. If we imagine the space that the users are located in as a vector space (as a point can be represented as a vector), we get the following graph:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;Visualization of users in vector space.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In simple terms, cosine similarity measures the angle between two vectors. If the angle is 0, the vectors overlap. This doesn’t take into account magnitude and so it isn’t really a ‘distance similarity’ but more of a ‘directional similarity.’ The following equation calculates cosine similarity.&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-4.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Pearson correlation is very mathematically similar to cosine similarity. The details of Pearson correlation will not be discussed but if you are interested in the core difference between the two, &lt;a href=&quot;https://leimao.github.io/blog/Cosine-Similarity-VS-Pearson-Correlation-Coefficient/&quot;&gt;here’s&lt;/a&gt; a nice resource that explains it briefly.&lt;/p&gt;
+
+&lt;p&gt;Our simple example above only considers two attributes of a person (height and weight). However, for a more accurate calculation of similarity, we might imagine adding more dimensions such as age and gender. As the dimensions increase, we are not able to visualize the location of each user in the higher dimensional space. This is not a problem when calculating the distance amongst users because the equations we use to calculate the distance can scale up to higher dimensions.&lt;/p&gt;
+
+&lt;h5 id=&quot;when-to-use-euclidean-distance-vs-cosine-similarity&quot;&gt;When to use Euclidean distance vs. Cosine similarity&lt;/h5&gt;
+
+&lt;p&gt;When do we use one over the other? There are no strict rules that dictate which similarity functions are the best. Trial and error is helpful and sometimes what function you pick doesn’t matter too much. However, since we know the core difference (distance vs. angle difference), we can use the following heuristic:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cosine similarity when the magnitude of features doesn’t matter or even disrupt the outputs (for example, in finding similar text by word frequency). It is the similarity of ratio/scale.&lt;/li&gt;
+  &lt;li&gt;Euclidean distance when the magnitude is important (for example, if the factors have actual meaning). It is the similarity of actual values.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Locating most similar users&lt;/strong&gt;
+Now that we calculated the similarity value amongst users, we simply need to find the most similar users and then we can move onto the prediction phase. A very commonly used method is the &lt;strong&gt;K-nearest neighbor (KNN)&lt;/strong&gt;. As the name suggests, it uses similarity functions (as discussed above) to find the K-nearest neighbors. It has essentially two parameters: the similarity function and k-value. The similarity function is what we discussed above and the k-value just picks the top-k most similar users.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-prediction&quot;&gt;(2) Prediction&lt;/h3&gt;
+&lt;p&gt;After the closest neighbors have been located, we should now fill in the empty cells in our user-item ratings matrix. Since we know the target user’s similarity with all other users in the database, we can do some more calculations to guess, or predict, the values of the empty cells.&lt;/p&gt;
+
+&lt;p&gt;The simplest way to approach this is the weighted average method.&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-5.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;Weighted average. Image by Abjiheet Anand (2020).&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This looks complicated but it is essentially taking the weighted average of the neighbors’ ratings (decided by KNN) for an item that the target user hasn’t rated yet and adding to the target user’s average rating.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-recommendation&quot;&gt;(3) Recommendation&lt;/h3&gt;
+&lt;p&gt;Now that we filled out the empty cells in the user-item ratings matrix for our target user, we can simply recommend the items with the highest predicted rating scores.&lt;/p&gt;
+
+&lt;h4 id=&quot;code-implementation&quot;&gt;Code Implementation&lt;/h4&gt;
+&lt;p&gt;Let’s translate theory into code. We are using the MovieLens 1M dataset. There are plenty of libraries that can implement this faster but we will go through this process from scratch so that we can see clearly what is going on. First, we load the data and clean it. Below, I make sure that the index of the users and items are consecutive (pd.factorize) and normalize the user-item matrix so that variances in user’s rating behavior are accounted for.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/da2e6f22be80e7293427bc6ee83d7edb.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Next, we find the similarity between the users and the items and so we are trying out both the user-based and item-based approach. I’m also using cosine similarity and pearson similarity to see if there is a large difference.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/da60c6340b0ba6880bd3f586912c9a86.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Then, we use the similarity matrices to predict empty cells using a simple weighted average of the top-n similar users/items to the target user/item.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/67dab0afdaa07df075f010e3a5b4ad93.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Finally, we can evaluate the performance of the four approaches using three metrics: RMSE, MAE, and Spearman’s coefficient. From the previous chapter, you should be familiar with these evaluation metrics. If not, go here and catch up!&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/93095deda3f2e87fb3c1fe69a62432ac.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User-based approach with cosine similarity
+RMSE:  0.26672632258637224 
+MAE:  0.0943938468652809 
+Spearman:  0.5938959359206174
+None 
+---------
+User-based approach with pearson similarity
+RMSE:  0.2667263225863723 
+MAE:  0.09439384686528093 
+Spearman:  0.5938959349277827
+None
+---------
+Item-based approach with cosine similarity
+RMSE:  0.28283421661104957 
+MAE:  0.09080784956365832 
+Spearman:  0.23046860395364357
+None 
+---------
+Item-based approach with pearson similarity
+RMSE:  0.2734087079745447 
+MAE:  0.08185400557506971 
+Spearman:  0.24259847846933547
+None 
+---------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The rating accuracy metrics (RMSE and MAE) are similar for all of the approaches but we can see a clear difference in the Spearman correlation which shows how accurate the predicted ranking was to the true ranking. The user-based approach outperformed the item-based approach by far and this makes sense as we had a lot more users (~6000) than items (~3000) in our dataset.&lt;/p&gt;
+
+&lt;p&gt;This shows that when we have more users than items, user-based CF RS are preferable while when we have more items than users (which is usually the case), item-based CF RS are better.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;model-based&quot;&gt;Model-Based&lt;/h2&gt;
+&lt;p&gt;This method creates a model from the user rating data and uses it to recommend items. It reduces or compresses a large but sparse item-user matrix to improve performance and makes and uses a model to make predictions. This approach utilizes Machine Learning and Data Mining concepts such as classification, clustering, and rule-based approaches.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: The distinction between memory- and model-based CF is quite arbitrary since memory-based KNN recommenders can technically be classified as a model (although it is a lazy learner model).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The most concise way I’ve found model-based CF to be divided is in three categories: non-parametric approach, matrix factorization-based, and deep learning. As mentioned above, the non-parametric approach (such as KNN from above) are similar to memory-based CF. We will explore this category in more detail in the future but for now, we will leave clustering based algorithms there.&lt;/p&gt;
+
+&lt;p&gt;The other two main categories are &lt;strong&gt;Matrix Factorization-based&lt;/strong&gt; algorithms and &lt;strong&gt;Deep Learning&lt;/strong&gt; algorithms. Deep Learning is a bit more advanced and so we will discuss it in a future chapter. Just understanding Matrix Factorization-based algorithms is good enough for a basic overview of model-based recommender systems.&lt;/p&gt;
+
+&lt;p&gt;Before we move on, let’s see why a model-based algorithm might be preferable.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Advantages of model-based CF&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Taken from Aggarwal, 2016:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1. Space-efficiency: Typically, the size of the learned model is much smaller than the original ratings matrix. Thus, the space requirements are often quite low. On the other hand, a user-based neighborhood method might have O(m2) space complexity, where m is the number of users. An item-based method will have O(n2) space complexity.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2. Training speed and prediction speed: One problem with neighborhood-based methods is that the pre-processing stage is quadratic in either the number of users or the number of items. Model-based systems are usually much faster in the preprocessing phase of constructing the trained model. In most cases, the compact and summarized model can be used to make predictions efficiently.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3. Avoiding overfitting: Overfitting is a serious problem in many machine learning algorithms, in which the prediction is overly influenced by random artifacts in the data. This problem is also encountered in classification and regression models. The sum arization approach of model-based methods can often help in avoiding overfitting. Furthermore, regularization methods can be used to make these models robust.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;1-matrix-factorization&quot;&gt;(1) Matrix Factorization&lt;/h4&gt;
+&lt;p&gt;| &lt;strong&gt;Keywords&lt;/strong&gt;: Singular Value Decomposition, Stochastic Gradient Descent&lt;/p&gt;
+
+&lt;p&gt;Matrix factorization aims to reduce the item-user matrix and decompose it into smaller parts. This allows for the attributes and preferences of users to be determined by a small number of hidden factors. Once decomposed sufficiently, we can use these decomposed parts to fill in missing ratings. This will be clearer as we go on. One such popular technique we will focus on here is Singular Value Decomposition (SVD).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SVD (Singular Value Decomposition)&lt;/strong&gt;
+Given our user-item ratings matrix of A with m users and n items, our model aims to learn:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a user embedding matrix U with m x i dimensions&lt;/li&gt;
+  &lt;li&gt;an item embedding matrix V, with n x j dimensions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-6.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;Matrix Factorization. Image by Google &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The image above shows the decomposition of our matrix A into two smaller matrices U and V. The goal of SVD is to learn the decomposed matrices so that UV^T is a good approximation of A. That’s it.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The goal of SVD is to best learn the decomposed matrices so that it is a good approximation of A when combined.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After the two decomposed matrices are found/trained, we can go back and fill in the blanks from the original ratings matrix. That is how we predict and recommend items to users.&lt;/p&gt;
+
+&lt;h3 id=&quot;objective-function&quot;&gt;Objective Function&lt;/h3&gt;
+
+&lt;p&gt;To find the matrices U and V, we treat this like an optimization problem. We start with a bad formation of these matrices and calculate the error. We iteratively update these matrices to minimize the errors.&lt;/p&gt;
+
+&lt;p&gt;One common and intuitive way to approach the objective function is by using squared distances. We minimize the sum of squared errors over all pairs of observed entries:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-3-7.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;A very popular and basic optimization method is &lt;strong&gt;Stochastic Gradient Descent&lt;/strong&gt;. If you are not familiar with this concept, I recommend you find materials dedicated to it specifically . However, to summarize briefly, it is an iterative optimization technique that follows the steepest “direction down”. We know from calculus that the slope of a function is its derivative and if it is positive, the function is going up and vice versa. With simple functions, we can simply calculate the derivative of a function and look for where it is zero to locate its local minimum or maximum. However, with complex (non-convex) equations where derivatives are more complicated, we have to take it slower and iteratively go down the steepest slope to reach an approximation of a local minima.&lt;/p&gt;
+
+&lt;p&gt;After we apply gradient descent to the objective function and minimize the loss, we can be sure that our decomposed U and V matrices can be matrix multiplied to approximate the original ratings matrix, A. With the decomposed matrices, we can then fill in the missing cells in A.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Code Implementation&lt;/strong&gt;
+The Surprise library has many methods that can help us easily implement recommenders. We use the SVD method in this library to quickly and easily implement a model-based CF with the same data as the code implementation of the memory-based CF from above.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/80f44a4b9a25e14da656a7b3f407e30b.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RMSE: 0.8718
+MAE:  0.6851
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;One downside of using Surprise is that there are not many evaluation metrics we can use. RMSE and MAE are readily available but the other evaluation metrics discussed in the previous chapters are no where to be found. Therefore, I was only able to evaluate this model based on its RMSE and MAE score.&lt;/p&gt;
+
+&lt;p&gt;Something odd you might notice is that the memory-based model seems to outperform the SVD approach by far. The closer the scores are to zero, the more accurate the ratings are. This might be because of various reasons. First, the memory-based approach normalized the user-item matrix and thus reduced a lot of noise that can come from the rating patterns of each user. Second, the memory-based approach filled in all empty cells with 2.5 (a neutral rating) but that might have lead to an inaccurate prediction. However, we also know that the Spearman’s coefficient was not bad for the user-based approach and so if we calculate the Spearman’s coefficient for the SVD approach, perhaps we can have a fuller comparison of these two approaches.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;That was the basics of Collaborative Filtering recommendation systems. Now that you know the underlying concepts of both, we can explore more advanced ways to approach these methods in the future.&lt;/p&gt;
+
+&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+&lt;p&gt;Aggarwal, C. C. (2016). Recommender Systems. &lt;a href=&quot;https://doi.org/10.1007/978-3-319-29659-3&quot;&gt;https://doi.org/10.1007/978-3-319-29659-3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Anand, A. (2020, October 3). User-user collaborative filtering for jokes recommendation. Medium. Retrieved from &lt;a href=&quot;https://towardsdatascience.com/user-user-collaborative-filtering-for-jokes-recommendation-b6b1e4ec8642&quot;&gt;https://towardsdatascience.com/user-user-collaborative-filtering-for-jokes-recommendation-b6b1e4ec8642&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Cheng, Z. (2022, June 29). A comparison of cosine similarity vs euclidean distance in ALS recommendation engine. Medium. Retrieved from &lt;a href=&quot;https://medium.com/nerd-for-tech/a-comparison-of-cosine-similarity-vs-euclidean-distance-in-als-recommendation-engine-51898f9025e7#:~:text=According%20to%20my%20research%2C%20it&apos;s,the%20factors%20have%20actual%20meaning).&quot;&gt;https://medium.com/nerd-for-tech/a-comparison-of-cosine-similarity-vs-euclidean-distance-in-als-recommendation-engine-51898f9025e7#:~:text=According%20to%20my%20research%2C%20it’s,the%20factors%20have%20actual%20meaning).&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4, Article 19 (December 2015), 19 pages. DOI=&lt;a href=&quot;http://dx.doi.org/10.1145/2827872&quot;&gt;http://dx.doi.org/10.1145/2827872&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Google. (n.d.). Matrix factorization. Google. Retrieved from &lt;a href=&quot;https://developers.google.com/machine-learning/recommendation/collaborative/matrix&quot;&gt;https://developers.google.com/machine-learning/recommendation/collaborative/matrix&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Grover, P. (2020, March 31). Various implementations of collaborative filtering. Medium. Retrieved from &lt;a href=&quot;https://towardsdatascience.com/various-implementations-of-collaborative-filtering-100385c6dfe0&quot;&gt;https://towardsdatascience.com/various-implementations-of-collaborative-filtering-100385c6dfe0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Mao, L. (2021, September 22). Cosine similarity vs Pearson correlation coefficient. Lei Mao’s Log Book. Retrieved from &lt;a href=&quot;https://leimao.github.io/blog/Cosine-Similarity-VS-Pearson-Correlation-Coefficient/&quot;&gt;https://leimao.github.io/blog/Cosine-Similarity-VS-Pearson-Correlation-Coefficient/&lt;/a&gt;&lt;/p&gt;
+</description>
+                <pubDate>Fri, 03 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter3</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter3</guid>
+                
+                <category>ML</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
+        
+            <item>
+                <title>Evaluating Recommender Systems (2/6)</title>
+                <description>&lt;blockquote&gt;
+  &lt;p&gt;LEARNING GOALS — 4 different ways to evaluate recommender systems: accuracy, correlation, utility, and usage.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Before we start exploring the many different ways to implement recommender systems, we should first discuss how we can evaluate them because only then can we we compare different algorithms and see which one performs better in which ways. However, even before evaluating specific recommenders, let’s discuss two broad situations we find ourselves in when evaluating recommenders: offline and online.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: The offline approach is mostly used in evaluating recommenders and the one I’ll be using for the rest of the series but I discuss online approach for completeness.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;online&quot;&gt;Online&lt;/h4&gt;
+
+&lt;p&gt;When evaluating how well our recommender performs online, we are measuring the &lt;strong&gt;users’ (usually real-time) reactions&lt;/strong&gt; given the recommended item. For example, the clicks or views a recommended Youtube video gets gives insight into how effective the recommendation was. Some methods used in this approach is &lt;strong&gt;A/B testing&lt;/strong&gt; and &lt;strong&gt;multi-armed bandit&lt;/strong&gt; recommenders.&lt;/p&gt;
+
+&lt;p&gt;Briefly explained, A/B testing aims to see how well a different course of action impacts user behavior by conducting both the default (A) and new (B) at the same time and seeing which performs better.&lt;/p&gt;
+
+&lt;p&gt;For example, to user 1, I can recommend an item A and then to another similar user 2, I can recommend an item B. If item B ends up getting more clicks/purchases, we can conclude that recommending B was more effective.&lt;/p&gt;
+
+&lt;p&gt;A more nuanced approach to this is the multi-armed bandit approach where we optimize the recommendations by working within the tradeoff between exploration and exploitation After recommending various items (exploration), we get a sense of what is liked and so we can focus on recommending that item (exploitation). This is especially useful in combating the Cold-Start problem where there is initially no data to make good recommendations right away.&lt;/p&gt;
+
+&lt;p&gt;However, the online evaluation approach involves active user participation and an evaluation in real time and so we will not be using this approach in this series.&lt;/p&gt;
+
+&lt;h4 id=&quot;offline&quot;&gt;Offline&lt;/h4&gt;
+
+&lt;p&gt;From a research and practice perspective, we use the offline approach as we have access to many historical data and various data types that can lend to a better assessment of the generalizability strength of our recommenders. To start, we have to know that there is not one full-proof way to evaluate the effectiveness of recommenders as it has various goals as discussed in an earlier chapter.&lt;/p&gt;
+
+&lt;p&gt;There are two ways to evaluate recommenders — &lt;strong&gt;rating&lt;/strong&gt; or &lt;strong&gt;ranking&lt;/strong&gt;. Rating evaluates how accurately the recommender predicts the ratings of items. Ranking evaluates how well the recommender recommends items that is desirable to the user. Below are four common evaluation methods that either evaluate rating or ranking.&lt;/p&gt;
+
+&lt;h3 id=&quot;accuracy-rmse--rating&quot;&gt;Accuracy (RMSE) — rating&lt;/h3&gt;
+&lt;p&gt;This is the most straightforward method. We look at the predictions and compare that to the truth value. This means that when we train our model, we usually want to leave out some items that the user already rated, also known as the train-test split approach, so that we can compare prediction to truth. If this is done for all the users in our data and find the average, we can get a score for how accurately the recommender predicted ratings.&lt;/p&gt;
+
+&lt;p&gt;A common approach used in regression problems is &lt;strong&gt;&lt;em&gt;mean squared error (MSE)&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;root mean squared error (RMSE)&lt;/em&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;em&gt;mean absolute error (MAE)&lt;/em&gt;&lt;/strong&gt;. These are all simple ways to evaluate the accuracy of a classification algorithm. For recommenders, we have predicted ratings and truth ratings and so we can apply any of these methods to get a score.&lt;/p&gt;
+
+&lt;p&gt;RMSE measures the &lt;em&gt;average difference between values predicted by a model and the actual values&lt;/em&gt;. This leads to a simple formula and its translation into Python code shown below assuming ‘pred’ holds the predicted ratings and ‘true’ holds the true ratings 💻.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rmse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: This approach penalizes deviances that go further away from the truth value by squaring the difference between pred and true. MAE simply takes the absolute value of the difference instead of squaring it. Which is better has no clear answer and is a topic that the reader can choose to research further.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;correlation-spearman--ranking&quot;&gt;Correlation (Spearman) — ranking&lt;/h3&gt;
+&lt;p&gt;How can we evaluate recommenders without looking at the rating accuracy? Look at the ranking accuracy! This approach measures how effective the top-n recommendations are. We just want to check if our ranking is similar to the true ranking. One approach to this is to use the rank correlation coefficient and the main implementation of this is by using the Spearman rank correlation coefficient (though there are others such as the Kendall rank correlation coefficient with its own pros and cons).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Spearman rank correlation coefficient&lt;/em&gt; approach goes as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Rank all items for the prediction and truth value for a user&lt;/li&gt;
+  &lt;li&gt;Apply Pearson correlation coefficient between pred and true rankings&lt;/li&gt;
+  &lt;li&gt;Average over all users to obtain global correlation coefficient&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The coefficient will be in range (-1, +1) and large positive values are more desirable as the ranking of the predicted more highly correlated with the true ranking.&lt;/p&gt;
+
+&lt;p&gt;Using the &lt;em&gt;scipy.stats&lt;/em&gt; library and its &lt;em&gt;spearmanr&lt;/em&gt; method, one way we can implement this is in Python is shown below. This algorithm assumes that ‘true’ holds the true rating of every user and ‘pred’ holds the predicted ratings of every user (&lt;em&gt;np.argsort&lt;/em&gt; finds rankings based on the ratings) 💻.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scipy.stats&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spearmanr&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;spearman_scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;true_rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argsort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pred_rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argsort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;spearman_scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spearmanr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true_rank&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pred_rank&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;correlation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;average_spearman&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spearman_scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;utility-r-score-and-arhr--rating--ranking&quot;&gt;Utility (R-Score and ARHR) — rating &amp;amp; ranking&lt;/h3&gt;
+&lt;p&gt;Realistically, we want to consider &lt;strong&gt;both the rating and ranking&lt;/strong&gt; when evaluating recommenders. Accuracy measures, such as RMSE, are useful but don’t take into account the difference in importance of items highly ranked vs. lowly ranked. High ranked items are what the user is actually going to see.&lt;/p&gt;
+
+&lt;p&gt;The utility approach aims to use both the rating and ranking to evaluate the effectiveness of recommenders and assumes two things: (1) higher rated items are of greater utility and (2) higher ranked items are of greater utility. An intuitive way to implement these rules is make it so that our evaluation value is lower when the rank-based utility is higher (further down the recommended list) and higher when the rating-based utility is higher: &lt;em&gt;rating-utility / ranking-utility&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;R-Score&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One approach is the &lt;strong&gt;R-score&lt;/strong&gt; where the utility, U(u, i), of item i to user u is a product of the rating-based and ranking-based utility values as shown below. This utility function finds the utility of all items for a user and then the average of that is found to get the R-score value of a recommender.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq2.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;where v_i is the ranking of the item i and alpha is a half-life parameter&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;L limits the amount of ranked items we use in our calculation. For example, we can choose to just use the top-10 (L=10) items to calculate the ranking-based utility.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq4.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: Looking at the denominator when calculating U, we can see that this approach penalizes low-ranking items a lot. In situations where ranking doesn’t matter too much (such as news recommendations), we can choose to lighten the penalty. One such approach is the discounted cumulative gain (DCG).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ARHR&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Another approach is the &lt;em&gt;average reciprocal hit rate (ARHR)&lt;/em&gt; also called &lt;em&gt;mean reciprocal hit-rate (MRR)&lt;/em&gt;. This approaches is designed for implicit feedback data. Implicit feedback is given whenever a user clicks on an article, completes a video, or buys an item. The user is not explicitly rating items but their behavior can implicitly tell us what they like. This means that the data will likely be either 1 (bought, liked, clicked) or 0 (didn’t). While it is designed for implicit feedback where missing values can be set to 0, it can be generalized to be used for explicit feedback.&lt;/p&gt;
+
+&lt;p&gt;In this context, we can apply the same principle as above where the rank-based utility is 1/v_i (where v_i is the rank of item i) and the rating-based utility is simply r_ui.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq5.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq6.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;usage-precision-recall-and-roc&quot;&gt;Usage (Precision, Recall, and ROC)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Precision &amp;amp; Recall&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the context of recommenders, there are four scenarios.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;TP, true-positives&lt;/strong&gt;: relevant items + recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;FP, false-positives&lt;/strong&gt;: irrelevant items + recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;FN, false-negatives&lt;/strong&gt;: relevant items + not recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TN, true-negatives&lt;/strong&gt;: irrelevant items + not recommended&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Precision&lt;/em&gt; is defined as the percentage of recommended items that turn out to be relevant. All recommended items is TP + FP and relevant and recommended is TP and so the formula for precision is TP/(TP + FP).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Recall&lt;/em&gt; is defined as the percentage of relevant items that have been recommended. All relevant items is TP + TN and relevant and recommended is once again TP and so the formula for recall is TP/(TP+TN).&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq7.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;One way to unify the two metrics is the F1-measure which is the harmonic mean between the precision and the recall. The closer the precision, recall, or F1 are to 1, the better the recommender.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq8.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;F_1 measure that unifies precision and recall.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ROC&lt;/strong&gt;
+If you’re familiar with the ROC (receiver operating characteristic) curve, you would know that is a graph showing the performance of a classification model at all classification thresholds. It uses binary data and so is fit for evaluating recommenders that use binary data (usually implicit feedback). The x-axis is the false positive rate (FPR) and the y-axis is the true positive rate (TPR).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-2-eq9.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px; height: 100px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If the recommended list is too small, recommenders will not recommend all relevant items (false negative) and if the list is too large, recommenders will start to recommend irrelevant items (false positive). This trade-off can be captured in an ROC curve and we can quantify how effective the recommender is at recommending relevant items that has a high chance of being used.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;We’ve seen how there are many different ways to evaluate the effectiveness of recommenders. From looking at ratings, rankings, and both and considering how much the ranking order matters to which type of data we are working with (implicit or explicit, binary or multivariate), the evaluation metric can change. The best evaluation metric depends on the recommender we’re implementing and so when trying to find the best evaluation metric for your recommender, I hope that this guide can be a good starting point where you can now confidently find more nuanced metrics on your own!&lt;/p&gt;
+
+&lt;h4 id=&quot;resources&quot;&gt;Resources&lt;/h4&gt;
+
+&lt;p&gt;Aggarwal, C. C. (2016). Recommender Systems. &lt;a href=&quot;https://doi.org/10.1007/978-3-319-29659-3&quot;&gt;https://doi.org/10.1007/978-3-319-29659-3&lt;/a&gt;&lt;/p&gt;
+</description>
+                <pubDate>Thu, 02 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter2</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter2</guid>
+                
+                <category>ML</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
+        
+            <item>
+                <title>Recommendation System for Dummies (1/6)</title>
+                <description>&lt;h3 id=&quot;1-what-are-recommender-systems&quot;&gt;1. What are Recommender Systems?&lt;/h3&gt;
+&lt;p&gt;Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.&lt;/p&gt;
+
+&lt;p&gt;What are recommender systems? As its name suggests, it is any system put in place that tries to recommend the best (in whatever metric that is defined) item to a user. Here, item can be anything from books or movies to friend suggestions; it is just anything that can be recommended to a user.&lt;/p&gt;
+
+&lt;p&gt;Recommender systems have been around for a while now but is a constantly evolving field as our knowledge of new machine learning and optimization techniques grows. The best recommender systems are what Netflix uses to suggest a new movie you might enjoy or what Youtube uses to keep you hooked for hours at a time.&lt;/p&gt;
+
+&lt;p&gt;There are many resources online, from other Medium articles to textbooks to Google courses, that explain many different types of recommender systems. So then why am I writing this series on recommender systems? It is mainly to have a centralized place where all the different types of systems can be discussed where the tone and structure of each post is familiar. There are many different types of recommender systems and not one centralized place where are all of it is discussed; the resources you can find on each different systems varies greatly and I would like to create a resource that introduces each one in one place.&lt;/p&gt;
+
+&lt;p&gt;The best centralized resource I could find were the two following textbooks: “Recommender Systems: The Textbook” by Charu C. Aggarwal (2016) and “Recommender Systems Handbook” by Francesco Ricci et al. (2011). These textbooks has most of the currently known recommender systems but is lengthy and has no code implementation. As such, my mission was to summarize all of the concepts discussed in these resources, with the help of other online resources, and to also include code implementation for better understanding.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-overview-of-series&quot;&gt;2. Overview of Series&lt;/h3&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-chapter1-overview.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px; height: 300px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Overview of the series and the four main categories of recommender systems. Image by author.
+This series will initially cover the four broad categories of recommender systems: Collaborative Filtering, Content-Based, Knowledge-Based, and Hybrid Recommenders. These four categories alone cover most of what makes up recommender systems. Additional chapters to this series will be less-used, but still useful, systems or more advanced explorations of systems already covered earlier. We will also be covering case-studies, equipped with our new-found knowledge.&lt;/p&gt;
+
+&lt;p&gt;A brief summary of the four main categories are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Collaborative Filtering (CF)&lt;/strong&gt; — Uses the ratings of other users to recommend items to you.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Content-Based (CB)&lt;/strong&gt; — Uses your own historical data to recommend items to you.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Knowledge-Based (KB)&lt;/strong&gt; — Uses your explicitly requirements to recommend items to you.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Hybrid&lt;/strong&gt; — Combines algorithms in various ways to create a more well-rounded recommender.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While seemingly simple, there is a lot of information to cover in each of these fields. Anything that can be optimized, will be, and there are a lot of trade-offs to be considered. Through the discussion of these three categories, you should get a feel for the advantages and disadvantages of each and what we look out for in recommender systems.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-keywords-to-familiarize&quot;&gt;3. Keywords to Familiarize&lt;/h3&gt;
+&lt;p&gt;When diving into the field of recommender systems and especially if you want to do your own research and read up on more information during and after this series, there are keywords that will be very helpful if you familiarize yourself with them. These are mainly the goals and challenges of recommender systems. No matter what recommender system you choose to research, many of these keywords will pop up. I believe it will be helpful if you can greet most of those concepts here before moving on.&lt;/p&gt;
+
+&lt;p&gt;However, the first concept you should be familiar with is the &lt;strong&gt;user-item ratings matrix&lt;/strong&gt;. In its simplest form, imagine a table where the row heading is the item (i.e. Avengers, Lion King, Barbie, etc.) and the column heading is the user (i.e. Adam, Bob, Christine, etc.). The cells where the item and user intersect are the ratings given by the user for the item. Now, viewed as a matrix, it is a m x n matrix containing m users and n items.&lt;/p&gt;
+
+&lt;h4 id=&quot;goals&quot;&gt;Goals&lt;/h4&gt;
+
+&lt;p&gt;The goals of a recommender system are usually the same. Different systems try to reach these goals in various ways and how it does so will be covered in each chapter.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Relevance&lt;/strong&gt;. The most obvious one is relevance. Are the items being recommended relevant to the user? This is usually necessary in order for the user to engage with the item.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Novelty&lt;/strong&gt;. The item recommended should be new to the user.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Serendipity&lt;/strong&gt;. The item recommended should be unexpected to the user. This is slightly different from novelty as even new items can be expected. For example, if I know that I enjoyed Avatar, being recommended Avatar 2 is not unexpected although it is novel.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Diversity&lt;/strong&gt;. The items recommended should be diverse so that there is a higher change of the user liking at least one of what was recommended.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;challenges&quot;&gt;Challenges&lt;/h4&gt;
+
+&lt;p&gt;Throughout the series, the most common concepts that will be reoccurring are the challenges that recommender systems face in general and how different systems aim to combat these different challenges.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Long-Tail&lt;/strong&gt;. Only a fraction of items are rated frequently. Why is this a problem? (1) High-frequency items are relatively competitive with little profit for the merchant. There is more profit to be gained from the lower frequency items. (2) Difficult to provide robust rating predictions as many recommender systems tend to recommend popular items rather than infrequent items. Has a negative impact on diversity.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Sparsity&lt;/strong&gt;. The user-item ratings matrix is typically not going to be full. There wil be missing ratings as many users have not rated or have not interacted with many items. This leads to a matrix that is sparse and thus leads to less accurate predictions and recommendations.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scalability&lt;/strong&gt;. A recommender system feasible at a small scale might be infeasible at a larger scale. The time and space complexity of the algorithms used must be carefully considered.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cold-Start&lt;/strong&gt;. New items cannot be recommended until some users rate it, and new users are unlikely to be given good recommendations because of the lack of their rating or purchase history. When the number of initially available ratings are relatively small, it can be difficult to give recommendations because there is no way to compare a new user (that we want to recommend items to) with another user or look at their historical data.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Curse of Dimensionality&lt;/strong&gt;. When working with data in high-dimensional spaces, it can be challenging to analyze the data and make predictions with it. This isn’t an issue when just looking at user, item, and ratings but in many recommender systems, we want to include even more information such as age, location, gender, etc. for a more robust prediction. However, handling high-dimensional data is computationally more expensive and more complex.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-dataset&quot;&gt;4. Dataset&lt;/h3&gt;
+&lt;p&gt;The dataset that will be used for most of the code implementations is the MovieLense 1M dataset. This is a staple in many recommender system implementation resources you will find online. This is a simple dataset that contains the ratings of 6000 users for 4000 movies.&lt;/p&gt;
+
+&lt;p&gt;Download the dataset and save it for future use.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Are you ready to explore the many different types of recommender systems? Let’s go!&lt;/p&gt;
+</description>
+                <pubDate>Wed, 01 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter1</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter1</guid>
+                
+                <category>ML</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
         
             <item>
                 <title>In three words I can sum up everything I’ve learned about life: It goes on</title>
@@ -455,310 +1218,6 @@
                 <guid isPermaLink="true">http://localhost:4000/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</guid>
                 
                 <category>technology</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Either you run the day, or the day runs you</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Sun, 07 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/either-you-run-the-day-or-the-day-runs-you</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/either-you-run-the-day-or-the-day-runs-you</guid>
-                
-                <category>lifestyle</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Keep smiling, because life is a beautiful thing and there&apos;s so much to smile about</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Fri, 10 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/keep-smiling-because-life-is-a-beautiful-thing-and-there-s-so-much-to-smile-about</guid>
-                
-                <category>travel</category>
-                
-                <category>oregon</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>If you really look closely, most overnight successes took a long time</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Thu, 09 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/if-you-really-look-closely-most-overnight-successes-took-a-long-time</guid>
-                
-                <category>travel</category>
-                
-                <category>california</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Success usually comes to those who are too busy to be looking for it</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Wed, 08 Sep 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/success-usually-comes-to-those-who-are-too-busy-to-be-looking-for-it</guid>
-                
-                <category>travel</category>
                 
                 
             </item>
