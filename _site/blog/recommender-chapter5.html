@@ -6,22 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Blog</title>
-  <meta name='description' content='Laruso blog features productivity, tips, inspiration and strategies for massive profits. Find out how to set up a successful blog or how to make yours even b...'>
+  <title>Knowledge-Based Recommenders (5/6)</title>
+  <meta name='description' content='“Ask and you shall receive”'>
 
-  <link rel="canonical" href="http://localhost:4000/blog/">
+  <link rel="canonical" href="http://localhost:4000/blog/recommender-chapter5">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blog – Mria">
-  <meta name="twitter:description" content="Laruso blog features productivity, tips, inspiration and strategies for massive profits. Find out how to set up a successful blog or how to make yours even better!">
-  <meta name="twitter:image:src" content="">
+  <meta name="twitter:title" content="Knowledge-Based Recommenders (5/6) – Mria">
+  <meta name="twitter:description" content="“Ask and you shall receive”">
+  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter5-thumbnail.avif">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Blog – Mria">
-  <meta property="og:description" content="Laruso blog features productivity, tips, inspiration and strategies for massive profits. Find out how to set up a successful blog or how to make yours even better!">
-  <meta property="og:image" content="">
+  <meta property="og:title" content="Knowledge-Based Recommenders (5/6) – Mria">
+  <meta property="og:description" content="“Ask and you shall receive”">
+  <meta property="og:image" content="http://localhost:4000/images/rs-chapter5-thumbnail.avif">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -94,7 +94,7 @@
               
               
               <li class="nav__item">
-                <a href="/blog/" class="nav__link active-link">Blog</a>
+                <a href="/blog/" class="nav__link">Blog</a>
               </li>
               
               
@@ -171,368 +171,648 @@
   
     <!-- begin content -->
     <main class="content" aria-label="Content">
-      <!-- begin hero -->
-<section class="hero">
+      <div class="container">
+  <div class="post-head">
+    
+    <div class="post__info">
+
+      
+        <div class="post__tags">
+          
+            <a href="/tags/?tag=ml" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
+          
+            <a href="/tags/?tag=knowledge+base" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">Knowledge Base</a>
+          
+            <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
+          
+            <a href="/tags/?tag=python" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
+          
+        </div>
+      
+
+      <h1 class="post__title">Knowledge-Based Recommenders (5/6)</h1>
+
+      
+        <div class="post__description">“Ask and you shall receive”</div>
+      
+
+      <div class="post__meta">
+        
+
+        
+        <a href="/nolan" class="post__author__image">
+          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
+        </a>
+        
+
+        <div class="post__meta__bottom">
+          
+            <a class="post__author__name" href="/nolan">Nolan Bergson</a>
+          
+          <time class="post__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+    <div class="post-image">
+      <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
+    </div>
+    
+    
+    
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h3 id="overview">Overview</h3>
+<p>Knowledge Based Recommender Systems (KB RS) is the last (out of three) broad category of recommender we will discuss. Knowledge based recommenders specialize in receiving and utilizing explicit user requirements and using those to recommend items. So far, with both Collaborative Filtering and Content-Based recommenders, we had to predict what the user would like based on their rating information. The data we used was either explicit (e.g. likes on an Instagram post) or implicit (e.g. watch time on Youtube videos). However, this approach takes the explicit data step a lot further and <strong>specifically asks the user what they would like to find</strong>. Pretty simple huh?</p>
+
+<p>There are two types of KB RS:</p>
+
+<ul>
+  <li><strong>Constraint-Based</strong>: Given user requirements, this approach uses predefined recommender knowledge bases that contain <em>explicit rules</em> about how to relate customer requirements with item features. This is pretty much an <em>expert system</em> in <strong>knowledge base systems</strong> and is a constraint satisfaction problem.</li>
+  <li><strong>Case-Based</strong>: A user picks a specific item (case) as a target or anchor point and the algorithm finds a <strong>similar item to recommend</strong>. Results are usually used as new target cases with some interactive modifications. You’ll notice that this sounds similar to <em>Content-Based recommenders</em> where items similar to ones the user previously liked are suggested. The main difference is that most KB RS depend on the description of the items in the form of <strong>relational attributes in knowledge bases</strong> rather than as text keywords like in CB RS.
+Although quite different, both are considered KB algorithms because they encode various types of domain knowledge in the form of constraints, rules (constraint-based), similarity metrics, and utility functions (case-based) during the search process.</li>
+</ul>
+
+<h4 id="strengths-and-weaknesses">Strengths and Weaknesses</h4>
+<p>— — — — — — — — — — — — — — —</p>
+
+<p>🔺 Strengths</p>
+
+<ul>
+  <li>
+    <p><strong><em>Complex Item Domain</em></strong>. When the item has many complex aspects to consider and requires expert knowledge in the domain, KB RS are able to capture that using knowledge bases curated by these experts. This is especially important when the item is of great significance and requires a lot of thought such as the purchase of a house.</p>
+  </li>
+  <li>
+    <p><strong><em>Rarely-Bought Items</em></strong>. Items that are not frequently bought doesn’t garner enough ratings for CF &amp; CB recommenders to be able to work.</p>
+  </li>
+  <li>
+    <p><strong><em>Avoids Cold Start Problem</em></strong>. User data is not needed as what the user wants is explicitly defined. Recommendation can be accurate and start as soon as the user wants without the recommender requiring existing rating data to work well. This is a great strength over CF &amp; CB recommenders.</p>
+  </li>
+</ul>
+
+<p>🔻 Weaknesses</p>
+
+<ul>
+  <li><strong><em>Knowledge Acquisition Bottleneck</em></strong>. The creation of the knowledge base requires the conversion of the knowledge possessed by domain experts into formal, executable representations</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: The main takeaway should be that the three main categories of recommenders are good for different contexts. For KB, we don’t care too much for serendipitous recommendations, as we did for CF and CB, because the user is looking for something specific rather than something unexpected but pleasant.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="constraint-based">Constraint-Based</h3>
+<p>The following section will go into the theory and logic underlying this method but it is not necessary to understand to know what the constraint-based KB algorithm does. Read if you want to know its base level ties to knowledge bases and finite state machines.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: Knowledge base systems are an entire field on its own in AI and so I suggest finding resources to familiarize yourself with this topic if you haven’t learned about it. Briefly put, as shown in the image below, KB systems require the creation of a knowledge base (an organized collection of facts about the domain) and the rules engine (a bunch of logical rules, usually if-else statements, that represents the domain knowledge) by an expert in the domain. When the non-expert user specifies explicit requirements, the KB system runs it thorgh the rules engine to find something in the knowledge base that lies under the constraints of what the user wanted.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-1.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Source: Javapoint, N.D.
+    </p>
+</div>
+<p>Ricci et al. defines two variables and three sets of constraints. The two variables are the user and item attributes (V_C, V_PROD) while the three constraints are logical constraints, user-item constraints, and allowed recommendation constraints (C_R, C_F, C_PROD). This becomes a constraint satisfaction problem where we have to find the right variables to fit all the constraints.</p>
+
+<p>An example of a knowledge base with these variables and constraints is shown below:</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-2.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Example of KB in financial services. Image from Ricci et al. (2011)
+    </p>
+</div>
+
+<p>Given concrete user requirements, C_C, the solution cannot violate the following logic:</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-3.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<p>As long as an item meets this condition, it can be recommended to the user. One such way of doing that is in the form of finite state models (FSM). Finite state models can represent all the relationships built up in the KB in a graphical way. As long as an item can pass through all the nodes and reach the end, it satisfies all the constraints and can be recommended.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: Finite State Models is a topic in the theory of computation that is heavily based on logic and can be used to graphically represent relationships between many different states as long as the rules for the relationships are well defined. It is a fascinating subject but one you don’t need a deep understanding of to understand Constraint-Based KB.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As long as the constraints are well defined and the knowledge base is well structured, a requirement from user the should be able to draw out an item that best fits the item the user wants.</p>
+
+<h3 id="case-based">Case-Based</h3>
+<p>Similarity metrics are used to retrieve examples similar to the specified item. For this to work effectively, there are two crucial components: <strong>similarity metrics</strong> and <strong>critiquing methods</strong>.</p>
+
+<p><em>Note</em>: Not too much can be explained in detail in this section as each implementation of KB RS is so specific to each domain. It is very hard to generalize the best similarity metrics or critiquing methods; a lot of the decisions have to be made by the domain expert.</p>
+
+<h4 id="similarity-metrics">Similarity Metrics</h4>
+
+<p>With continuous variables, similarity can be something as simple as the difference between two numbers (e.g. the price of a car might be considered similar if the difference is close to 0) or it might be more complicated and consider more dimensions or use the standard deviation to set the similarity function.</p>
+
+<p>With categorical data, the determination of similarity is much more challenging. Usually, domain hierarchies are used to measure the similarity within these variables. <strong>Domain hierarchies</strong> can be thought of as tree graphs where each category can be set to be under some category and those categories can also have sub-categories. The closer two objects are within the context of a domain hierarchy, the more similar it is. There are sometimes pre-made domain hierarchies (e.g. movie genre where commercial romance is closer to commercial comedy than an education documentary) but sometimes it has to be hand made by domain experts.</p>
+
+<h4 id="critiquing">Critiquing</h4>
+
+<p>After a certain result is found using the similarity metrics and recommended to the user, the user has to be able to provide feedback and tweak the results to further match what they are looking for. This is also done in constraint-based KB recommenders. The user specifies change requests on one or more of the attributes of an item they like. The change request can be a directional critique (e.g. “smaller”) or a replacement critique (e.g. “different location”).</p>
+
+<p>These can then be fed back into the similarity metric step to find one closer to what the user wants.</p>
+
+<h3 id="code-implementation">Code Implementation</h3>
+<p>A lot of this is created with the help of another article. This article covers a simple implementation of a constraint-based KB recommender.</p>
+
+<ul>
+  <li><em>import data</em></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"path/to/data"</span><span class="p">)</span>
+
+<span class="c1"># Select just relevant features
+</span><span class="n">relevant_features</span> <span class="o">=</span> <span class="p">[</span><span class="s">'title'</span><span class="p">,</span><span class="s">'genres'</span><span class="p">,</span> <span class="s">'release_date'</span><span class="p">,</span> <span class="s">'runtime'</span><span class="p">,</span> <span class="s">'vote_average'</span><span class="p">,</span> <span class="s">'vote_count'</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">relevant_features</span><span class="p">]</span>
+
+<span class="c1"># Print the dataframe
+</span><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-4.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<ul>
+  <li><em>preprocess data</em></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Convert release_date into pandas datetime format
+</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s">'coerce'</span><span class="p">)</span>
+<span class="c1"># Extract year from release_date-column and store the values into a new year-column
+</span><span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">]).</span><span class="n">year</span>
+<span class="c1">#Helper function to convert NaN to 0, if there are any, and all other years to integers.
+</span><span class="k">def</span> <span class="nf">convert_int</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="k">try</span><span class="p">:</span>
+       <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+   <span class="k">except</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">0</span>
+<span class="c1">#Apply convert_int to the year feature
+</span><span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="n">convert_int</span><span class="p">)</span>
+<span class="c1">#Drop the release_date column
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'release_date'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span>
+<span class="c1">#Convert all NaN into stringified empty lists
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="s">'[]'</span><span class="p">)</span>
+<span class="c1">#Apply literal_eval to convert stringified empty lists to the list object
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="n">literal_eval</span><span class="p">)</span>
+<span class="c1">#Convert list of dictionaries to a list of strings
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s">'name'</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[])</span>
+
+<span class="c1">#Create a new feature by exploding genres
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">stack</span><span class="p">().</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1">#Name the new feature as 'genre'
+</span><span class="n">s</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">'genre'</span>
+
+<span class="c1">#Create a new dataframe gen_df which by dropping the old 'genres' feature and adding the new 'genre'.
+</span><span class="n">gen_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'genres'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1">#Print the head of the new gen_df
+</span><span class="n">gen_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-5.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<ul>
+  <li><em>implementation of constraint-based recommender</em>
+The filtering section is where the constraint satisfaction happens in its simplest form</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_chart</span><span class="p">(</span><span class="n">gen_df</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+   <span class="c1">#Ask for preferred genres
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input preferred genre"</span><span class="p">)</span>
+   <span class="n">genre</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">genre</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for lower limit of duration
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input shortest duration"</span><span class="p">)</span>
+   <span class="n">low_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">low_time</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for upper limit of duration
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input longest duration"</span><span class="p">)</span>
+   <span class="n">high_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">high_time</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for lower limit of timeline
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input earliest year"</span><span class="p">)</span>
+   <span class="n">low_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">low_year</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for upper limit of timeline
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input latest year"</span><span class="p">)</span>
+   <span class="n">high_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">high_year</span><span class="p">)</span>
+  
+   <span class="c1">#Define a new movies variable to store the preferred movies. Copy the contents of gen_df to movies
+</span>   <span class="n">movies</span> <span class="o">=</span> <span class="n">gen_df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+  
+   <span class="c1">#Filter based on the condition
+</span>   <span class="n">movies</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">movies</span><span class="p">[</span><span class="s">'genre'</span><span class="p">]</span> <span class="o">==</span> <span class="n">genre</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'runtime'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">low_time</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'runtime'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">high_time</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">low_year</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">high_year</span><span class="p">)]</span>
+  
+   <span class="c1">#Compute the values of C and m for the filtered movies
+</span>   <span class="n">C</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[</span><span class="s">'vote_average'</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+   <span class="n">m</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">].</span><span class="n">quantile</span><span class="p">(</span><span class="n">percentile</span><span class="p">)</span>
+  
+   <span class="c1">#Only consider movies that have higher than m votes. Save this in a new dataframe q_movies
+</span>   <span class="n">q_movies</span> <span class="o">=</span> <span class="n">movies</span><span class="p">.</span><span class="n">copy</span><span class="p">().</span><span class="n">loc</span><span class="p">[</span><span class="n">movies</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">]</span>
+  
+   <span class="c1">#Calculate score using the IMDB formula
+</span>   <span class="n">q_movies</span><span class="p">[</span><span class="s">'score'</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_movies</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span><span class="o">+</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s">'vote_average'</span><span class="p">])</span>
+                                      <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">])</span> <span class="o">*</span> <span class="n">C</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+   <span class="c1">#Sort movies in descending order of their scores
+</span>   <span class="n">q_movies</span> <span class="o">=</span> <span class="n">q_movies</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">'score'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+  
+   <span class="k">return</span> <span class="n">q_movies</span>
+</code></pre></div></div>
+
+<p>After inputting [animation, 10, 40, 2000, and 2019], I get the following recommendations.</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-6.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<h3 id="resources">Resources</h3>
+<p>Aggarwal, C. C. (2016). Recommender systems: The textbook. SPRINGER.</p>
+
+<p>Expert systems in Artificial Intelligence — Javatpoint. www.javatpoint.com. (n.d.). Retrieved February 26, 2023, from <a href="https://www.javatpoint.com/expert-systems-in-artificial-intelligence">https://www.javatpoint.com/expert-systems-in-artificial-intelligence</a></p>
+
+<p>Kantor, P. B., Rokach, L., Shapira, B., &amp; Ricci, F. (2011). Recommender Systems Handbook. Springer.</p>
+
+<p>Recommendation systems — knowledged-based recommender — Michael Fuchs Python. MFuchs. (2020, October 1). Retrieved February 26, 2023, from <a href="https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender">https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender</a></p>
+
+    </div>
+
+    <div class="post__share">
+      <div class="share__head">
+        <div class="share__title">Share this:</div>
+      </div>
+      <ul class="share__list list-reset">
+        <li class="share__item">
+          <a class="share__link share__twitter"
+            href="https://twitter.com/intent/tweet?text=Knowledge-Based%20Recommenders%20(5/6)&url=http://localhost:4000/blog/recommender-chapter5"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+        </li>
+        <li class="share__item">
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/recommender-chapter5"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+        </li>
+        <li class="share__item">
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/recommender-chapter5&amp;media=http://localhost:4000/images/rs-chapter5-thumbnail.avif&amp;description=Knowledge-Based%20Recommenders%20(5/6)"
+          onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
+          rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+        </li>
+        <li class="share__item">
+          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/recommender-chapter5&title=Knowledge-Based%20Recommenders%20(5/6)&summary=%E2%80%9CAsk%20and%20you%20shall%20receive%E2%80%9D&source="
+          onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="card-author">
+    <div class="card-author__media">
+      
+      <a class="card-author__image" href="/nolan">
+        <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
+      </a>
+      
+    </div>
+  
+    <div class="card-author__content">
+      <div class="card-author__role">Written by</div>
+        
+        <h3 class="card-author__name"><a href="/nolan" class="card-author__link">Nolan Bergson</a></h3>
+        <p class="card-author__description">I can and will deliver great results with a process that’s timely, collaborative and at a great value for my clients.</p>
+        
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <h2 class="related-posts__title">You may also like...</h2>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/blog/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
+                    
+                      <a href="/tags/?tag=deep+learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Deep Learning</a>
+                    
+                      <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
+                    
+                      <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
+
+                  <div class="article__meta">
+                    
+
+                    
+                    <a href="/nolan" class="article__author__image">
+                      <img class="lazy" data-src="images/02-1.jpg" alt="Nolan Bergson">
+                    </a>
+                    
+
+                    <div class="article__meta__bottom">
+                      
+                        <a class="article__author__name" href="/nolan">Nolan Bergson</a>
+                      
+                      <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+              
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
+                    
+                      <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">NLP</a>
+                    
+                      <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
+                    
+                      <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
+
+                  <div class="article__meta">
+                    
+
+                    
+                    <a href="/nolan" class="article__author__image">
+                      <img class="lazy" data-src="images/02-1.jpg" alt="Nolan Bergson">
+                    </a>
+                    
+
+                    <div class="article__meta__bottom">
+                      
+                        <a class="article__author__name" href="/nolan">Nolan Bergson</a>
+                      
+                      <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+              
+            
+            
+            
+      
+            
+      
+            
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/blog/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
+                    
+                      <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
+                    
+                      <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/blog/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">“People similar to you liked this, try it out”</p>
+
+                  <div class="article__meta">
+                    
+
+                    
+                    <a href="/nolan" class="article__author__image">
+                      <img class="lazy" data-src="images/02-1.jpg" alt="Nolan Bergson">
+                    </a>
+                    
+
+                    <div class="article__meta__bottom">
+                      
+                        <a class="article__author__name" href="/nolan">Nolan Bergson</a>
+                      
+                      <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
   <div class="container">
     <div class="row">
       <div class="col col-12">
-        <div class="hero__inner">
-          <h1 class="hero__title">Blog</h1>
-          
-            <p class="hero__description">Laruso blog features productivity, tips, inspiration and strategies for massive profits. Find out how to set up a successful blog or how to make yours even better!</p>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end hero -->
-
-<div class="container animate">
-  <div class="row">
-    
-      
-        <div class="article col col-12 article--first">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=deep+learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Deep Learning</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a>
-      </h2>
-
-      <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-        <div class="article col col-4 col-d-6 col-t-12">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=knowledge+base" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Knowledge Base</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
-      </h2>
-
-      <p class="article__excerpt">“Ask and you shall receive”</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-        <div class="article col col-4 col-d-6 col-t-12">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">NLP</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
-      </h2>
-
-      <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-        <div class="article col col-4 col-d-6 col-t-12">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
-      </h2>
-
-      <p class="article__excerpt">“People similar to you liked this, try it out”</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-        <div class="article col col-4 col-d-6 col-t-12">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter2" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter2-thumbnail.avif" alt="Evaluating Recommender Systems (2/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter2">Evaluating Recommender Systems (2/6)</a>
-      </h2>
-
-      <p class="article__excerpt">How to approach evaluating recommenders. It’s more complicated than you might think</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-02T00:00:00+09:00">02 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-        <div class="article col col-4 col-d-6 col-t-12">
-  <div class="article__inner">
-    <div class="article__head">
-
-      
-
-      
-      <a href="/blog/recommender-chapter1" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="/images/rs-chapter1-thumbnail.avif" alt="Recommendation System for Dummies (1/6)">
-      </a>
-      
-
-    </div>
-
-    <div class="article__content">
-
-      
-      <div class="article__tags">
-        
-          <a href="/tags/?tag=ml" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">ML</a>
-        
-          <a href="/tags/?tag=recommender+system+%28%EC%B6%94%EC%B2%9C+%EC%8B%9C%EC%8A%A4%ED%85%9C%29" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Recommender System (추천 시스템)</a>
-        
-          <a href="/tags/?tag=python" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">Python</a>
-        
-      </div>
-      
-
-      <h2 class="article__title">
-        <a href="/blog/recommender-chapter1">Recommendation System for Dummies (1/6)</a>
-      </h2>
-
-      <p class="article__excerpt">1. What are Recommender Systems?
-Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical appli...</p>
-
-      <div class="article__meta">
-        
-
-        
-        <a href="/nolan" class="article__author__image">
-          <img class="lazy" data-src="../images/02-1.jpg" alt="Nolan Bergson">
-        </a>
-        
-
-        <div class="article__meta__bottom">
-          
-            <a class="article__author__name" href="/nolan">Nolan Bergson</a>
-          
-          <time class="article__date" datetime="2024-05-01T00:00:00+09:00">01 May 2024</time>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-      
-    
-  </div>
+        <!-- begin comments -->
+<div class="show-comments animate">
+  <button class="button button--big disqus-button" id="show-comments-button" onclick="disqus();return false;">Show Comments</button>
 </div>
 
+<div id="disqus_thread" class="post__comments">
+  <div id="disqus_empty"></div>
+</div>
+
+<script>
+  var disqus_loaded = false;
+  var disqus_shortname = 'anvod-studio-test';
+  var disqus_container = document.getElementById("disqus_thread");
+  function disqus() {
+    if (!disqus_loaded) {
+      disqus_loaded = true;
+      var e = document.createElement("script");
+      e.type = "text/javascript";
+      e.async = true;
+      e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+      (document.getElementsByTagName("head")[0] ||
+        document.getElementsByTagName("body")[0])
+        .appendChild(e);
+      // Hide the button after opening
+      document.getElementById("show-comments-button").style.display = "none";
+      // Show disqus comments
+      disqus_container.classList.add("is-open");
+    }
+  }
+</script>
+
+<noscript>Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<!-- end comments --> 
+      </div>
+    </div>
+  </div>
 
     </main>
     <!-- end content -->

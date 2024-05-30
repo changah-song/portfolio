@@ -5,9 +5,405 @@
         <description>Mria is a multipurpose blog theme for Jekyll</description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 31 May 2024 01:28:03 +0900</pubDate>
-        <lastBuildDate>Fri, 31 May 2024 01:28:03 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 02:11:43 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 02:11:43 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
+        
+            <item>
+                <title>Making Recommenders Better (6/6)</title>
+                <description>&lt;p&gt;Good job reaching the end of the series! Now you know a lot about the basics of recommender systems. What now? Now we discuss ways we can improve upon the previous approaches we covered. We’ve gone over so many different approaches each with their own pros and cons. There are countless ways to make recommenders stronger and we will be looking at two common approaches.&lt;/p&gt;
+
+&lt;h3 id=&quot;hybrid&quot;&gt;Hybrid&lt;/h3&gt;
+&lt;p&gt;The hybrid approach, as its name suggests, takes advantage of different strengths of the three main recommenders (CF, CB, KB) and combines them in a way that makes the resulting recommender much stronger. There are three approaches within hybrid recommenders: ensemble, monolithic, and mixed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ensemble&lt;/strong&gt; — results from different algorithms are combined into a single output
+&lt;strong&gt;Monolithic&lt;/strong&gt; — various data types are used
+&lt;strong&gt;Mixed Systems&lt;/strong&gt; — results from different algorithms are shown side-by-side&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-6-1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Taxonomy of hybrid systems. Image by Aggarwal (2016).
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Within each category, there are different implementations but for now, we will explore hybrid recommenders from a more general perspective. What different algorithms could we use together? Below are some examples.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Knowledge-Based Ensemble: This type of hybrid recommender combines the strengths of knowledge-based systems with other recommender types. We know that the benefits of knowledge-based algorithms is that it doesn’t require user data and can thus avoid the cold-start problem. This is a problem that both CF and CB recommenders face and so this recommender starts with a KB recommender and then uses CF and CB once sufficient data is collected.&lt;/li&gt;
+  &lt;li&gt;Content-Boosted Collaborative Filtering: This type of hybrid recommender combines the strengths of both content-based and collaborative filtering techniques. Content-based filtering is used to analyze the features of items, and collaborative filtering is used to capture the user-item interactions. The content features are then used to adjust the similarity calculations in collaborative filtering, which leads to more personalized recommendations.&lt;/li&gt;
+  &lt;li&gt;Collaborative-Boosted Content Filtering: This type of hybrid recommender also combines content-based and collaborative filtering techniques, but in a different way. Collaborative filtering is used to generate a set of candidate items, and then content-based filtering is used to rank those items based on their features. This method is useful when there is a large number of items and the collaborative filtering algorithm struggles to efficiently generate recommendations.&lt;/li&gt;
+  &lt;li&gt;Model-Based Hybrid Recommenders: This type of hybrid recommender combines different recommendation algorithms into a single model. For example, a model could combine matrix factorization and association rule mining techniques. The advantage of this approach is that it can capture the strengths of different algorithms while minimizing their weaknesses. The challenge, however, is to determine the appropriate weighting and combination of the different algorithms in the model.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;machine-learning&quot;&gt;Machine Learning&lt;/h3&gt;
+&lt;p&gt;Ah, Machine Learning. A sure-fire way to improve classification models. ML is mostly used in collaborative filtering and content-based recommenders (and various hybrid recommenders). The implementation or deep-dive into ML in recommenders will not be done as there are many resources available online and that is a large topic to get into&lt;/p&gt;
+
+&lt;h4 id=&quot;ml-in-collaborative-filtering&quot;&gt;ML in Collaborative Filtering&lt;/h4&gt;
+
+&lt;p&gt;Well, in our model-based CF approach, we need to create a model that can fill in the empty cells of our user-item matrix. SVDs and its variations have been the main go-to until ML techniques completely outperformed traditional methods. Below are several ways in which ML can improve model-based CF.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Improve on Matrix Factorization — SVD is good but it only captures linear relationships within the data. The product of three matrices to best approximate the original matrix is limited as it cannot perform nonlinear transformation and can miss out on more complex patterns. ML can perform matrix factorization much better as it is not limited to linear transformations. This creates a much more accurate model.&lt;/li&gt;
+  &lt;li&gt;Use much more Data Types — Given that we have a lot of information about the user and/or item (what user watches, searches, age, location, gender, etc.), it can be hard to include all of the data we have in traditional approaches as it is not scalable and high-dimensionality can be infeasible. With ML, embeddings are a great way to reduce the dimensionality of various data types and can be directly inputted into neural networks. This provides the model with a greater quantity and quality of data and can only improve upon traditional methods.&lt;/li&gt;
+  &lt;li&gt;Learn the user-item matrix without Matrix Factorization — ML can also just go forth and predict the user-item matrix by finding patterns within the original matrix. Autoencoders (AE) are one such popular way to do that. As shown below, the architecture of this deep learning technique is to input the thing we want to recreate and outputting a good approximation of that thing. The middle layer forces the model to learn the input layer with a great reduction in dimensionality and nodes and thus learns only the essential qualities of the input. This is then generalized back into the same dimension as the input layer to create the output, an approximation of the input. In recommender systems, the input can be the user-item matrix with missing ratings. By training the AE to learn the patterns of the input, it is forced to learn the essential patterns of the matrix because of the bottleneck hidden layer. The output is the user-item matrix but with all the missing entries filled out.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-6-1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Image by Jordan (2018).
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;ml-in-content-based&quot;&gt;ML in Content-Based&lt;/h4&gt;
+
+&lt;p&gt;How does it benefit content-based algorithms? Well we have already touched on one method with NLP. Since a lot of data we have about an item ends up being text-based, NLP has been extremely useful in extracting features from such text-based data. However, ML isn’t just limited to extracting features from texts and items also have other forms of data. What other forms of data can be used? Images, audio, and video of course.&lt;/p&gt;
+
+&lt;p&gt;One deep learning neural network I want to introduce here is the convolutional neural network (CNN). It is well-known for working well with image data.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-6-3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Image by Ratan (2020).
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can see that it is composed of three types of layers: convolution, pooling, and fully-connected layers. What are they?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In convolutional layers, the CNN applies filters to the input image in order to extract features, such as edges, shapes, and textures. These filters are learned during the training process, and they can be reused across different regions of the input image.&lt;/li&gt;
+  &lt;li&gt;Pooling layers are used to reduce the dimensionality of the feature maps produced by the convolutional layers. This helps to decrease the computational requirements of the network while retaining important features.&lt;/li&gt;
+  &lt;li&gt;The fully connected layers are used to classify the image or video based on the features extracted by the convolutional and pooling layers. In these layers, the network combines the extracted features and makes a prediction about the class or category of the input image or video.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Using CNN, the capability of our content-based recommenders expand tenfold. We can now extract features from images and use that to learn a user’s preference and recommend personalized items. However, this isn’t all. Through CNN, there are ways to extract features from audio. How does a model for learning images learn sounds? Easy, convert the sounds into images and everything else is the same.&lt;/p&gt;
+
+&lt;p&gt;Spectrograms are a fascinating way to visualize sound in an accurate manner that takes into account amplitude, period, frequency, etc. of the audio. Ketan Doshi has a great &lt;a href=&quot;https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504&quot;&gt;Medium series on Audio Deep Learning&lt;/a&gt; that I recommend you check out!&lt;/p&gt;
+
+&lt;p&gt;Now that sound and images can be used as data sources, it is no surprise that we can also extract information from videos which is just a combination of sound and images. How exciting!&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;code-implementation-of-ml-in-model-based-cf&quot;&gt;Code Implementation of ML in Model-Based CF&lt;/h3&gt;
+&lt;p&gt;Here, we implement an Autoencoder that learns the user-item matrix with three simple layers.&lt;/p&gt;
+
+&lt;h4 id=&quot;data-prep&quot;&gt;Data Prep&lt;/h4&gt;
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/ce624f5f3e09d041f8d1d148d66bc4be.js&quot;&gt;&lt;/script&gt;
+
+&lt;h4 id=&quot;autoencoder-model&quot;&gt;Autoencoder Model**&lt;/h4&gt;
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/56b04a44970ade4055f31b81a9a53bc6.js&quot;&gt;&lt;/script&gt;
+
+&lt;h4 id=&quot;evaluation&quot;&gt;Evaluation&lt;/h4&gt;
+&lt;script src=&quot;https://gist.github.com/paul-song-minerva/d692d450fabfc2816b5522756e88b7a8.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MAE: 0.15602776775088187
+RMSE: 0.7032389679040674
+Spearman: 0.8605877952195891
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;We see that it has a great performance with only three layers. This is the same dataset used in our CB and CF chapters and so we can see that it performs better than any of the previous approaches, both for rating accuracy and rank correlation.&lt;/p&gt;
+
+&lt;p&gt;This was just a quick introduction into more advanced recommenders. Now that you know all there is to know about the basics of recommenders, find more advanced recommenders in fields you’re interested in to see how they work!&lt;/p&gt;
+
+&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+&lt;p&gt;Aggarwal, C. C. (2016). Recommender Systems. &lt;a href=&quot;https://doi.org/10.1007/978-3-319-29659-3&quot;&gt;https://doi.org/10.1007/978-3-319-29659-3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Doshi, K. (2021, May 21). Audio deep learning made simple (part 1): State-of-the-art techniques. Medium. Retrieved April 2, 2023, from &lt;a href=&quot;https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504&quot;&gt;https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Jeremy Jordan. (2018, March 19). Introduction to autoencoders. Jeremy Jordan. Retrieved April 2, 2023, from &lt;a href=&quot;https://www.jeremyjordan.me/autoencoders/&quot;&gt;https://www.jeremyjordan.me/autoencoders/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ratan, P. (2021, January 14). What is the Convolutional Neural Network Architecture? Analytics Vidhya. Retrieved April 2, 2023, from &lt;a href=&quot;https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/&quot;&gt;https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/&lt;/a&gt;&lt;/p&gt;
+</description>
+                <pubDate>Mon, 06 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter6</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter6</guid>
+                
+                <category>ML</category>
+                
+                <category>Deep Learning</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
+        
+            <item>
+                <title>Knowledge-Based Recommenders (5/6)</title>
+                <description>&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
+&lt;p&gt;Knowledge Based Recommender Systems (KB RS) is the last (out of three) broad category of recommender we will discuss. Knowledge based recommenders specialize in receiving and utilizing explicit user requirements and using those to recommend items. So far, with both Collaborative Filtering and Content-Based recommenders, we had to predict what the user would like based on their rating information. The data we used was either explicit (e.g. likes on an Instagram post) or implicit (e.g. watch time on Youtube videos). However, this approach takes the explicit data step a lot further and &lt;strong&gt;specifically asks the user what they would like to find&lt;/strong&gt;. Pretty simple huh?&lt;/p&gt;
+
+&lt;p&gt;There are two types of KB RS:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Constraint-Based&lt;/strong&gt;: Given user requirements, this approach uses predefined recommender knowledge bases that contain &lt;em&gt;explicit rules&lt;/em&gt; about how to relate customer requirements with item features. This is pretty much an &lt;em&gt;expert system&lt;/em&gt; in &lt;strong&gt;knowledge base systems&lt;/strong&gt; and is a constraint satisfaction problem.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Case-Based&lt;/strong&gt;: A user picks a specific item (case) as a target or anchor point and the algorithm finds a &lt;strong&gt;similar item to recommend&lt;/strong&gt;. Results are usually used as new target cases with some interactive modifications. You’ll notice that this sounds similar to &lt;em&gt;Content-Based recommenders&lt;/em&gt; where items similar to ones the user previously liked are suggested. The main difference is that most KB RS depend on the description of the items in the form of &lt;strong&gt;relational attributes in knowledge bases&lt;/strong&gt; rather than as text keywords like in CB RS.
+Although quite different, both are considered KB algorithms because they encode various types of domain knowledge in the form of constraints, rules (constraint-based), similarity metrics, and utility functions (case-based) during the search process.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;strengths-and-weaknesses&quot;&gt;Strengths and Weaknesses&lt;/h4&gt;
+&lt;p&gt;— — — — — — — — — — — — — — —&lt;/p&gt;
+
+&lt;p&gt;🔺 Strengths&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Complex Item Domain&lt;/em&gt;&lt;/strong&gt;. When the item has many complex aspects to consider and requires expert knowledge in the domain, KB RS are able to capture that using knowledge bases curated by these experts. This is especially important when the item is of great significance and requires a lot of thought such as the purchase of a house.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Rarely-Bought Items&lt;/em&gt;&lt;/strong&gt;. Items that are not frequently bought doesn’t garner enough ratings for CF &amp;amp; CB recommenders to be able to work.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Avoids Cold Start Problem&lt;/em&gt;&lt;/strong&gt;. User data is not needed as what the user wants is explicitly defined. Recommendation can be accurate and start as soon as the user wants without the recommender requiring existing rating data to work well. This is a great strength over CF &amp;amp; CB recommenders.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;🔻 Weaknesses&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Knowledge Acquisition Bottleneck&lt;/em&gt;&lt;/strong&gt;. The creation of the knowledge base requires the conversion of the knowledge possessed by domain experts into formal, executable representations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: The main takeaway should be that the three main categories of recommenders are good for different contexts. For KB, we don’t care too much for serendipitous recommendations, as we did for CF and CB, because the user is looking for something specific rather than something unexpected but pleasant.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;constraint-based&quot;&gt;Constraint-Based&lt;/h3&gt;
+&lt;p&gt;The following section will go into the theory and logic underlying this method but it is not necessary to understand to know what the constraint-based KB algorithm does. Read if you want to know its base level ties to knowledge bases and finite state machines.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: Knowledge base systems are an entire field on its own in AI and so I suggest finding resources to familiarize yourself with this topic if you haven’t learned about it. Briefly put, as shown in the image below, KB systems require the creation of a knowledge base (an organized collection of facts about the domain) and the rules engine (a bunch of logical rules, usually if-else statements, that represents the domain knowledge) by an expert in the domain. When the non-expert user specifies explicit requirements, the KB system runs it thorgh the rules engine to find something in the knowledge base that lies under the constraints of what the user wanted.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-1.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Source: Javapoint, N.D.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Ricci et al. defines two variables and three sets of constraints. The two variables are the user and item attributes (V_C, V_PROD) while the three constraints are logical constraints, user-item constraints, and allowed recommendation constraints (C_R, C_F, C_PROD). This becomes a constraint satisfaction problem where we have to find the right variables to fit all the constraints.&lt;/p&gt;
+
+&lt;p&gt;An example of a knowledge base with these variables and constraints is shown below:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-2.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Example of KB in financial services. Image from Ricci et al. (2011)
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Given concrete user requirements, C_C, the solution cannot violate the following logic:&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-3.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As long as an item meets this condition, it can be recommended to the user. One such way of doing that is in the form of finite state models (FSM). Finite state models can represent all the relationships built up in the KB in a graphical way. As long as an item can pass through all the nodes and reach the end, it satisfies all the constraints and can be recommended.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Note&lt;/strong&gt;: Finite State Models is a topic in the theory of computation that is heavily based on logic and can be used to graphically represent relationships between many different states as long as the rules for the relationships are well defined. It is a fascinating subject but one you don’t need a deep understanding of to understand Constraint-Based KB.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;As long as the constraints are well defined and the knowledge base is well structured, a requirement from user the should be able to draw out an item that best fits the item the user wants.&lt;/p&gt;
+
+&lt;h3 id=&quot;case-based&quot;&gt;Case-Based&lt;/h3&gt;
+&lt;p&gt;Similarity metrics are used to retrieve examples similar to the specified item. For this to work effectively, there are two crucial components: &lt;strong&gt;similarity metrics&lt;/strong&gt; and &lt;strong&gt;critiquing methods&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: Not too much can be explained in detail in this section as each implementation of KB RS is so specific to each domain. It is very hard to generalize the best similarity metrics or critiquing methods; a lot of the decisions have to be made by the domain expert.&lt;/p&gt;
+
+&lt;h4 id=&quot;similarity-metrics&quot;&gt;Similarity Metrics&lt;/h4&gt;
+
+&lt;p&gt;With continuous variables, similarity can be something as simple as the difference between two numbers (e.g. the price of a car might be considered similar if the difference is close to 0) or it might be more complicated and consider more dimensions or use the standard deviation to set the similarity function.&lt;/p&gt;
+
+&lt;p&gt;With categorical data, the determination of similarity is much more challenging. Usually, domain hierarchies are used to measure the similarity within these variables. &lt;strong&gt;Domain hierarchies&lt;/strong&gt; can be thought of as tree graphs where each category can be set to be under some category and those categories can also have sub-categories. The closer two objects are within the context of a domain hierarchy, the more similar it is. There are sometimes pre-made domain hierarchies (e.g. movie genre where commercial romance is closer to commercial comedy than an education documentary) but sometimes it has to be hand made by domain experts.&lt;/p&gt;
+
+&lt;h4 id=&quot;critiquing&quot;&gt;Critiquing&lt;/h4&gt;
+
+&lt;p&gt;After a certain result is found using the similarity metrics and recommended to the user, the user has to be able to provide feedback and tweak the results to further match what they are looking for. This is also done in constraint-based KB recommenders. The user specifies change requests on one or more of the attributes of an item they like. The change request can be a directional critique (e.g. “smaller”) or a replacement critique (e.g. “different location”).&lt;/p&gt;
+
+&lt;p&gt;These can then be fed back into the similarity metric step to find one closer to what the user wants.&lt;/p&gt;
+
+&lt;h3 id=&quot;code-implementation&quot;&gt;Code Implementation&lt;/h3&gt;
+&lt;p&gt;A lot of this is created with the help of another article. This article covers a simple implementation of a constraint-based KB recommender.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;import data&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ast&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;literal_eval&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;path/to/data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Select just relevant features
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relevant_features&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;title&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;release_date&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;runtime&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;vote_average&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relevant_features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Print the dataframe
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-4.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;preprocess data&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#Convert release_date into pandas datetime format
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;release_date&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;release_date&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;coerce&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Extract year from release_date-column and store the values into a new year-column
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;year&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DatetimeIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;release_date&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Helper function to convert NaN to 0, if there are any, and all other years to integers.
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convert_int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Apply convert_int to the year feature
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;year&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;year&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert_int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Drop the release_date column
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;release_date&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Convert all NaN into stringified empty lists
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillna&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;[]&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Apply literal_eval to convert stringified empty lists to the list object
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;literal_eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#Convert list of dictionaries to a list of strings
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;name&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;isinstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#Create a new feature by exploding genres
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reset_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#Name the new feature as &apos;genre&apos;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;genre&apos;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#Create a new dataframe gen_df which by dropping the old &apos;genres&apos; feature and adding the new &apos;genre&apos;.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genres&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#Print the head of the new gen_df
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-5.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;implementation of constraint-based recommender&lt;/em&gt;
+The filtering section is where the constraint satisfaction happens in its simplest form&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build_chart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percentile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;#Ask for preferred genres
+&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input preferred genre&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;genre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;genre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Ask for lower limit of duration
+&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input shortest duration&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;low_time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Ask for upper limit of duration
+&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input longest duration&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;high_time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;high_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Ask for lower limit of timeline
+&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input earliest year&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;low_year&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low_year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Ask for upper limit of timeline
+&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input latest year&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;high_year&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;high_year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Define a new movies variable to store the preferred movies. Copy the contents of gen_df to movies
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gen_df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Filter based on the condition
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;genre&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;genre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;runtime&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;low_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;runtime&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;high_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;year&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;low_year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;year&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;high_year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Compute the values of C and m for the filtered movies
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_average&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quantile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;percentile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Only consider movies that have higher than m votes. Save this in a new dataframe q_movies
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  
+   &lt;span class=&quot;c1&quot;&gt;#Calculate score using the IMDB formula
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;score&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_average&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+                                      &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;vote_count&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;c1&quot;&gt;#Sort movies in descending order of their scores
+&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;score&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q_movies&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After inputting [animation, 10, 40, 2000, and 2019], I get the following recommendations.&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/rs-5-6.webp&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+&lt;p&gt;Aggarwal, C. C. (2016). Recommender systems: The textbook. SPRINGER.&lt;/p&gt;
+
+&lt;p&gt;Expert systems in Artificial Intelligence — Javatpoint. www.javatpoint.com. (n.d.). Retrieved February 26, 2023, from &lt;a href=&quot;https://www.javatpoint.com/expert-systems-in-artificial-intelligence&quot;&gt;https://www.javatpoint.com/expert-systems-in-artificial-intelligence&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kantor, P. B., Rokach, L., Shapira, B., &amp;amp; Ricci, F. (2011). Recommender Systems Handbook. Springer.&lt;/p&gt;
+
+&lt;p&gt;Recommendation systems — knowledged-based recommender — Michael Fuchs Python. MFuchs. (2020, October 1). Retrieved February 26, 2023, from &lt;a href=&quot;https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender&quot;&gt;https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender&lt;/a&gt;&lt;/p&gt;
+</description>
+                <pubDate>Sun, 05 May 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/recommender-chapter5</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/recommender-chapter5</guid>
+                
+                <category>ML</category>
+                
+                <category>Knowledge Base</category>
+                
+                <category>Recommender System (추천 시스템)</category>
+                
+                <category>Python</category>
+                
+                
+            </item>
         
             <item>
                 <title>Content-Based Recommenders (4/6)</title>
@@ -768,456 +1164,6 @@ This series will initially cover the four broad categories of recommender system
                 <category>Recommender System (추천 시스템)</category>
                 
                 <category>Python</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>In three words I can sum up everything I’ve learned about life: It goes on</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Sun, 14 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/in-three-words-i-can-sum-up-everything-i-ve-learned-about-life-it-goes-on</guid>
-                
-                <category>lifestyle</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Only a life lived for others is a life worthwhile</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Fri, 12 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/only-a-life-lived-for-others-is-a-life-worthwhile</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/only-a-life-lived-for-others-is-a-life-worthwhile</guid>
-                
-                <category>workflow</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>The purpose of our lives is to be happy</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Thu, 11 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/the-purpose-of-our-lives-is-to-be-happy</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/the-purpose-of-our-lives-is-to-be-happy</guid>
-                
-                <category>lifestyle</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Love the life you live. Live the life you love</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Wed, 10 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/love-the-life-you-live-live-the-life-you-love</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/love-the-life-you-live-live-the-life-you-love</guid>
-                
-                <category>lifestyle</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>If opportunity doesn’t knock, build a door</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Tue, 09 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/if-opportunity-doesn-t-knock-build-a-door</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/if-opportunity-doesn-t-knock-build-a-door</guid>
-                
-                <category>oregon</category>
-                
-                
-            </item>
-        
-            <item>
-                <title>Strive not to be a success, but rather to be of value</title>
-                <description>&lt;p&gt;In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.&lt;/p&gt;
-
-&lt;p&gt;Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Imprinting is a kind of learning occurring at a particular life stage that is rapid and apparently independent of the consequences of behavior. In filial imprinting, young animals, particularly birds, form an association with another individual or in some cases, an object, that they respond to as they would to a parent. In 1935, the Austrian Zoologist Konrad Lorenz discovered that certain birds follow and form a bond if the object makes sounds.&lt;/p&gt;
-
-&lt;h3 id=&quot;formal-learning&quot;&gt;Formal learning&lt;/h3&gt;
-
-&lt;p&gt;These five types of play are often intersecting. All types of play generate thinking and problem-solving skills in children. Children learn to think creatively when they learn through play. Specific activities involved in each type of play change over time as humans progress through the lifespan. Play as a form of learning, can occur solitarily, or involve interacting.&lt;/p&gt;
-
-&lt;p&gt;Enculturation is the process by which people learn values and behaviors that are appropriate or necessary in their surrounding culture. This is different from acculturation, where a person adopts the values and societal rules of a culture different from their native.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Nonformal learning&lt;/a&gt; and combined approaches&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Reading directions&lt;/a&gt; helps a player learn the patterns that solve the Rubik’s Cube&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Practicing the moves repeatedly&lt;/a&gt; helps build “muscle memory” and speed.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Thinking critically about moves&lt;/a&gt; helps find shortcuts, which speeds future attempts.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Observing the Rubik’s Cube’s six colors help anchor solutions in the mind.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.wikipedia.org&quot;&gt;Revisiting the cube occasionally helps retain the skill.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electronic learning or e-learning is computer-enhanced learning. A specific and always more diffused e-learning is mobile learning (m-learning), which uses different mobile telecommunication equipment, such as cellular phones.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/30.jpg&quot; alt=&quot;Room&quot; /&gt;
-&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/vZb2zeAhmAc&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When a learner interacts with the e-learning environment, it’s called augmented learning. By adapting to the needs of individuals, the context-driven instruction can be dynamically tailored to the learner’s natural environment. Augmented digital content may include text, images, video, audio (music and voice). By personalizing instruction, augmented learning has been shown to improve learning performance for a lifetime. See also minimally invasive.&lt;/p&gt;
-
-&lt;p&gt;Rote learning is memorizing information so that it can be recalled by the learner exactly the way it was read or heard. The major technique used for rote learning is learning by repetition, based on the idea that a learner can recall the material exactly (but not its meaning) if the information is repeatedly processed. Rote learning is used in diverse areas, from mathematics to music to religion. Although it has been criticized by some educators, rote learning is a necessary precursor to meaningful learning.&lt;/p&gt;
-
-&lt;div class=&quot;gallery-box&quot;&gt;
-  &lt;div class=&quot;gallery gallery--post&quot;&gt;
-    &lt;img src=&quot;/images/32.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Mountains&quot; /&gt;
-    &lt;img src=&quot;/images/33.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Woman&quot; /&gt;
-    &lt;img src=&quot;/images/34.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Subway&quot; /&gt;
-    &lt;img src=&quot;/images/35.jpg&quot; loading=&quot;lazy&quot; alt=&quot;City&quot; /&gt;
-  &lt;/div&gt;
-  &lt;em&gt;Gallery / &lt;a href=&quot;https://unsplash.com/&quot; target=&quot;_blank&quot;&gt;Unsplash&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.&lt;/p&gt;
-
-&lt;p&gt;Informal learning is less structured than “nonformal” one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-factors&quot;&gt;Internal factors&lt;/h3&gt;
-
-&lt;p&gt;Play, as it pertains to humans as a form of learning is central to a child’s learning and development. Through play, children learn social skills such as sharing and collaboration. Children develop emotional skills such as learning to deal with the emotion of anger, through play activities. As a form of learning, play also facilitates the development of thinking and language skills in children.&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&quot;https://player.vimeo.com/video/148003889?h=d36b8b4cbb&quot; loading=&quot;lazy&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;p&gt;Transfer of learning is the application of skill, knowledge or understanding to resolve a novel problem or situation that happens when certain conditions are fulfilled. Research indicates that learning transfer is infrequent; most common when “… cued, primed, and guided…” and has sought to clarify what it is, and how it might be promoted through.&lt;/p&gt;
-
-&lt;p&gt;In incidental teaching learning is not planned by the instructor or the student, it occurs as a byproduct of another activity — an experience, observation, self-reflection, interaction, unique event, or common routine task. This learning happens in addition to or apart from the instructor’s plans and the student’s expectations. An example of incidental teaching.&lt;/p&gt;
-</description>
-                <pubDate>Mon, 08 Nov 2021 21:01:35 +0900</pubDate>
-                <link>http://localhost:4000/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</link>
-                <guid isPermaLink="true">http://localhost:4000/blog/strive-not-to-be-a-success-but-rather-to-be-of-value</guid>
-                
-                <category>technology</category>
                 
                 
             </item>
