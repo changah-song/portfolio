@@ -2,27 +2,33 @@
 layout: page
 title: About
 permalink: /about/
-image: '/images/102.jpg'
+image: '/images/profile.png'
 ---
 
-In operant conditioning, a reinforcement (by reward) or instead a punishment is given after a given behavior, changing the frequency and/or form of that behavior. Stimulus present when the behavior/consequence occurs come to control these behavior modifications.
+### Paul Song: App-Building Enthusiast and ML Learner
+**Skills**: Python, Javascript, React Native, Git, SQLite, Tensorflow, and more.
 
-> Sing like no one’s listening, love like you’ve never been hurt, dance like nobody’s watching, and live like it’s heaven on earth.
+Hello there 👋 I'm a AI & CS major graduate (2023) from Minerva University. 
 
-Observational learning is learning that occurs through observing the behavior of others. It is a form of social learning which takes various forms, based on various processes. In humans, this form of learning seems to not need reinforcement to occur, but instead, requires a social model such as a parent, sibling, friend, or teacher with surroundings.
+I enjoy cleaning, analyzing, and gaining meaningful insights from data, building and teaching myself new machine learning models, and creating mini-apps that I think would make my life a tiny bit easier. Here's to being overwhelmed with the sheer amount of information available on the internet and trying to learn new things as often as possible. 
+
+I am passionate about accessible knowledge and firmly believe that there is no knowledge unobtainable to anyone, there's just the right way to deliver it. I also believe that those given the privilege to receive said education are responsible to use it in a way that betters our society. Given this, I'm excited to start my career outside of internships and classroom settings and apply everything I've learned in a real-world setting to make a positive impact.
+
+I've worn many different hats throughout the years as a Data Analyst, Software Engineer, CS Tutor, and Machine Learning blogger and have found that I enjoy all these for many different reasons and know that whatever hat I wear next, I will enjoy it thoroughly and give it my all.
 
 <div class="gallery-box">
   <div class="gallery">
-    <img src="/images/103.jpg" loading="lazy">
-    <img src="/images/104.jpg" loading="lazy">
+    <img src="/images/profile3.jpg" loading="lazy" style="height: 420px;">
+    <img src="/images/profile4.jpg" loading="lazy" style="height: 420px;">
   </div>
-  <em>Gallery / <a href="https://unsplash.com/" target="_blank">Unsplash</a></em>
 </div>
 
-Nonformal learning is organized learning outside the formal learning system. For example, learning by coming together with people with similar interests and exchanging viewpoints, in clubs or in (international) youth organizations, workshops.
+I have an interest in continuous learning in life and never getting too comfortable sitting in one place. 
 
-Informal learning is less structured than "nonformal" one. It may occur through the experience of day-to-day situations (for example, one would learn to look ahead while walking because of the danger inherent in not paying attention to where one is going). It is learning from life, during a meal at the table with parents, play, exploring, etc.
+Through my university education, hands-on projects, and several internship experiences, I’ve learned a lot and am ready to start my career as a software engineer. I’ve learned both hard and soft skills working with people from 40+ different countries and across time zones.
 
-<p><iframe src="https://player.vimeo.com/video/148003889?h=d36b8b4cbb" loading="lazy" width="640" height="360" frameborder="0" allowfullscreen></iframe></p>
+The first job I held was a teaching job and throughout my university years and afterward, I’ve taught everyone from elementary students to high school students hoping to study abroad. Through this valuable experience, I’ve truly experienced how much education impacts people and how much potential it can plant in everyone.
 
-The educational system may use a combination of formal, informal, and nonformal learning methods. The UN and EU recognize these different forms of learning (cf. links below). In some schools, students can get points that count in the formal-learning systems if they get work done in informal-learning circuits. They may be given time to assist international youth workshops and training courses, on the condition they prepare, contribute, share, and can prove this offered valuable new insight, helped to acquire new skills, a place to experience.
+Learning is empowering and knowledge is accessible these days. My long-term goal is to empower as many people as I can through accessible education and I hope that my skills can be used for such a purpose. 
+
+I’ve written a blog series on Recommender Systems grounded on my educational background in Machine Learning and Deep Learning and created a mobile app to make learning Korean easier. These are both based on my belief and love for education.
