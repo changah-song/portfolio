@@ -1,7 +1,7 @@
 #-------------------------------
 # General Site Settings
-baseurl: "/portfolio" # the subpath of your site, e.g. /blog
-url: "https://paul-song-minerva.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 #-------------------------------
@@ -13,7 +13,7 @@ plugins:
   - jekyll-sitemap
 
 paginate: 9
-paginate_path: "portfolio/blog/page/:num"
+paginate_path: "/blog/page/:num"
 
 
 #-------------------------------
@@ -21,13 +21,13 @@ paginate_path: "portfolio/blog/page/:num"
 collections:
   pages:
     output: true
-    permalink: /portfolio/:name
+    permalink: /:name
   posts:
     output: true
-    permalink: /portfolio/:slug
+    permalink: /:slug
   authors:
     output: true
-    permalink: /portfolio/:name
+    permalink: /:name
 
 # Pages Path
 defaults:
