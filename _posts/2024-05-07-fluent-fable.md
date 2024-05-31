@@ -22,7 +22,7 @@ So, I started creating a simple mobile app using React Native as I knew some Jav
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/fluent-fable-viz.png" loading="lazy" style="width: 750px;">
+        <img src="{{site.baseurl}}/images/fluent-fable-viz.png" loading="lazy" style="width: 750px;">
     </div>
 </div>
 
