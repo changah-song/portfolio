@@ -18,7 +18,7 @@ I've worn many different hats throughout the years as a Data Analyst, Software E
 
 <div class="gallery-box">
   <div class="gallery">
-    <img src="/images/profile3.jpg" loading="lazy" style="height: 420px;">
+    <img src="/images/profile3.png" loading="lazy" style="height: 420px;">
     <img src="/images/profile4.jpg" loading="lazy" style="height: 420px;">
   </div>
 </div>

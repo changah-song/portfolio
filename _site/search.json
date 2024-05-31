@@ -61,6 +61,24 @@
       "url"      : "/blog/recommender-chapter1",
       "date"     : "01 May 2024",
       "image"    : "/images/rs-chapter1-thumbnail.avif"
+    } ,
+  
+    {
+      "title"    : "Transformers for Dummies",
+      "category" : "blog",
+      "tags"     : "machine-learning and transformer",
+      "url"      : "/blog/transformer",
+      "date"     : "02 April 2024",
+      "image"    : "/images/transformer-thumbnail.avif"
+    } ,
+  
+    {
+      "title"    : "Front and Backward Propagation of Neural Networks",
+      "category" : "blog",
+      "tags"     : "machine-learning and neural-network",
+      "url"      : "/blog/neuralnet",
+      "date"     : "01 April 2024",
+      "image"    : "/images/nn-thumbnail.avif"
     } 
   
 ]

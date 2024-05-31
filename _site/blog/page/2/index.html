@@ -6,26 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Fluent Fable: Reading for Language Learning</title>
-  <meta name='description' content=''>
+  <title>Blog</title>
+  <meta name='description' content='Some cool things I'm learning 📝'>
 
-  <link rel="canonical" href="http://localhost:4000/blog/fluent-fable">
+  <link rel="canonical" href="http://localhost:4000/blog/page/2/">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fluent Fable: Reading for Language Learning – Paul Song">
-  <meta name="twitter:description" content="Introduction
-
-">
-  <meta name="twitter:image:src" content="http://localhost:4000/images/ff-thumbnail.png">
+  <meta name="twitter:title" content="Blog – Paul Song">
+  <meta name="twitter:description" content="Some cool things I&apos;m learning 📝">
+  <meta name="twitter:image:src" content="">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Fluent Fable: Reading for Language Learning – Paul Song">
-  <meta property="og:description" content="Introduction
-
-">
-  <meta property="og:image" content="http://localhost:4000/images/ff-thumbnail.png">
+  <meta property="og:title" content="Blog – Paul Song">
+  <meta property="og:description" content="Some cool things I&apos;m learning 📝">
+  <meta property="og:image" content="">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -166,262 +162,411 @@
   
     <!-- begin content -->
     <main class="content" aria-label="Content">
-      <div class="container">
-  <div class="post-head">
-    
-    <div class="post__info">
-
-      
-        <div class="post__tags">
-          
-            <a href="/tags/?tag=full-stack" class="post__tag tag-color-js" data-accent="#AE3768" style="color: #AE3768;">full-stack</a>
-          
-            <a href="/tags/?tag=react-native" class="post__tag tag-color-js" data-accent="#AE3768" style="color: #AE3768;">react-native</a>
-          
-        </div>
-      
-
-      <h1 class="post__title">Fluent Fable: Reading for Language Learning</h1>
-
-      
-
-      <div class="post__meta">
-        <div class="post__meta__bottom">
-          <time class="post__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
-        </div>
-      </div>
-    </div>
-
-    
-
-    
-    <div class="post-image">
-      <img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning">
-    </div>
-    
-    
-    
-  </div>
-</div>
-
-<!-- begin post -->
-<div class="container">
-
-  <article class="post">
-
-    <div class="post__content">
-      <p><strong>Introduction</strong></p>
-
-<p>What’s the best way to learn a language? While there are many many approaches that have been developed throughout the years and many that I’ve personally tried, I’ve concluded that simply reading and engaging with material that you’re interested in is the best way to learn a new language and gain confidence in it. While the easiest way to expose yourself to a new language is to watch a show or series, I found it much too slow and unreliable.</p>
-
-<p>Thus, I started reading. I started reading physical books first. It was nice but I had two main issues. 1) Regularly finding a book at your right language level in a genre you’re interested in is a struggle in itself. 2) Translating words and going from dictionary/translator to book back and forth disrupts the reading process. Then I started reading on my phone and found that issue 2 could be easily eliminated thanks to an easy way to find the definition of words as I was reading. However, issue 1 still remained and I also found it hard to be motivated finish an entire book; it was much too burdensome to stick with one book in an unfamiliar language</p>
-
-<p>Well, if you can’t discipline yourself, create something that lowers the need for said discipline right?</p>
-
-<p>So, I started creating a simple mobile app using React Native as I knew some Javascript. I wanted to make the app very simple. One where you could enter, read a small passage that matched my level, translate any unfamiliar words, and exit. It would also save unfamiliar words and allow for the use of flashcards to memorize the words if you so desired.</p>
-
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/fluent-fable-viz.png" loading="lazy" style="width: 800px;" />
-    </div>
-</div>
-
-<p>개인적으로 언어를 배우면서 꼭 존재해야 되겠다고 생각한 후 시작한 프로젝트로, React Native 대해서 하나도 몰랐던 제가 많은 걸 배우면서 재밌게 만든 앱입니다.</p>
-
-<p>저 처럼 한국 국민인데 외국에서 삶 대부분을 살아오셨다면 이 앱의 목적과 기능들이 이해가 더 잘 될 거에요.</p>
-
-<p>한글은 어느 정도 이해하고 말할 수 있지만, 어휘에서 걸리는 절망적인 느낌.. 한국어가 영어를 모국어로 삼는 사람들에게는 가장 어려운 언어라는 사실과 한국어의 단어 수량이 엄청나다는 게 그 느낌을 설명하겠죠.</p>
-
-<p>제가 한국어뿐만 아니라 중국어도 열심히 공부하면서 깨달은 점은 책만 많이 읽으면 언어는 따라오게 된있다라는 거에요. 그래서 책을 읽을 때 가장 좋은 경험을 줄 수 있는 앱을 만들기로했어요.</p>
-
-<p><strong>Features, 기능</strong></p>
-
-<p>그래서, 이 앱을 많은 API를 통해서 다음의 기능을 담은 eReader을 개발했어요:</p>
-
-<ol>
-  <li>읽고 싶은 책 고르기 (Reader API)</li>
-  <li>단어 선택 후 사전 검색 (Korea Dictionary API)</li>
-  <li>단어 선택 후 어근 필터 (FastAPI를 사용해서 KONLPY API)</li>
-  <li>단어 선택 후 번역기 검색 (Translator API)</li>
-  <li>단어 저장 후 플래시 카드로 복습 (SQLite)</li>
-</ol>
-
-<p><strong>What I Learned, 배운 것</strong></p>
-
-<ol>
-  <li>Asynchronous functions</li>
-  <li>COR, FastAPI local server</li>
-  <li>Object-Oriented Programming 및 Separation of Concerns</li>
-  <li>React Hooks (State, Effect, Context)</li>
-  <li>Animation (PanResponder and Animated)</li>
-  <li>Styling and UI</li>
-</ol>
-
-<p>Documentation of Progress: <a href="https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend">https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend</a></p>
-
-    </div>
-
-    <div class="post__share">
-      <div class="share__head">
-        <div class="share__title">Share this:</div>
-      </div>
-      <ul class="share__list list-reset">
-        <li class="share__item">
-          <a class="share__link share__twitter"
-            href="https://twitter.com/intent/tweet?text=Fluent%20Fable:%20Reading%20for%20Language%20Learning&url=http://localhost:4000/blog/fluent-fable"
-            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-            title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
-        </li>
-        <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/fluent-fable"
-            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-            title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
-        </li>
-        <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/fluent-fable&amp;media=http://localhost:4000/images/ff-thumbnail.png&amp;description=Fluent%20Fable:%20Reading%20for%20Language%20Learning"
-          onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
-          rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
-        </li>
-        <li class="share__item">
-          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/fluent-fable&title=Fluent%20Fable:%20Reading%20for%20Language%20Learning&summary=&source="
-          onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
-        </li>
-      </ul>
-    </div>
-
-  </article>
-</div>
-<!-- end post -->
-
-
-
-
-
-
-
-<!-- begin related posts -->
-<div class="container">
-  <section class="related-posts  animate">
-    <div class="row">
-      <div class="col col-12">
-        <div class="container__inner">
-          <h2 class="related-posts__title">You may also like...</h2>
-          <div class="row">
-
-          
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-<!-- end related posts -->
-
-
+      <!-- begin hero -->
+<section class="hero">
   <div class="container">
     <div class="row">
       <div class="col col-12">
-        <!-- begin comments -->
-<div class="show-comments animate">
-  <button class="button button--big disqus-button" id="show-comments-button" onclick="disqus();return false;">Show Comments</button>
-</div>
-
-<div id="disqus_thread" class="post__comments">
-  <div id="disqus_empty"></div>
-</div>
-
-<script>
-  var disqus_loaded = false;
-  var disqus_shortname = 'anvod-studio-test';
-  var disqus_container = document.getElementById("disqus_thread");
-  function disqus() {
-    if (!disqus_loaded) {
-      disqus_loaded = true;
-      var e = document.createElement("script");
-      e.type = "text/javascript";
-      e.async = true;
-      e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
-      (document.getElementsByTagName("head")[0] ||
-        document.getElementsByTagName("body")[0])
-        .appendChild(e);
-      // Hide the button after opening
-      document.getElementById("show-comments-button").style.display = "none";
-      // Show disqus comments
-      disqus_container.classList.add("is-open");
-    }
-  }
-</script>
-
-<noscript>Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
-<!-- end comments --> 
+        <div class="hero__inner">
+          <h1 class="hero__title">Blog</h1>
+          
+            <p class="hero__description">Some cool things I'm learning 📝</p>
+          
+        </div>
       </div>
     </div>
   </div>
+</section>
+<!-- end hero -->
+
+<div class="container animate">
+  <div class="row">
+    
+    
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+          <a href="/tags/?tag=deep-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">deep-learning</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a>
+      </h2>
+
+      <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
+      </h2>
+
+      <p class="article__excerpt">“Ask and you shall receive”</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+          <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">nlp</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+      </h2>
+
+      <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
+      </h2>
+
+      <p class="article__excerpt">“People similar to you liked this, try it out”</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter2" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter2-thumbnail.avif" alt="Evaluating Recommender Systems (2/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter2">Evaluating Recommender Systems (2/6)</a>
+      </h2>
+
+      <p class="article__excerpt">How to approach evaluating recommenders. It’s more complicated than you might think</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-02T00:00:00+09:00">02 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/recommender-chapter1" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/rs-chapter1-thumbnail.avif" alt="Recommendation System for Dummies (1/6)">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+        
+          <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/recommender-chapter1">Recommendation System for Dummies (1/6)</a>
+      </h2>
+
+      <p class="article__excerpt">1. What are Recommender Systems?
+Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical appli...</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-05-01T00:00:00+09:00">01 May 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/transformer" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/transformer-thumbnail.avif" alt="Transformers for Dummies">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#308000" style="color: #308000;">machine-learning</a>
+        
+          <a href="/tags/?tag=transformer" class="article__tag tag-color-js" data-accent="#308000" style="color: #308000;">transformer</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/transformer">Transformers for Dummies</a>
+      </h2>
+
+      <p class="article__excerpt">If you’ve attempted to understand how Transformers work, you’ve probably come across this image from the groundbreaking paper - Attention Is All You Need (Va...</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-04-02T00:00:00+09:00">02 Apr 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+        <div class="article col col-4 col-d-6 col-t-12">
+  <div class="article__inner">
+    <div class="article__head">
+
+      
+
+      
+      <a href="/blog/neuralnet" class="article__image" aria-hidden="true" tabindex="-1">
+        <img class="lazy" data-src="/images/nn-thumbnail.avif" alt="Front and Backward Propagation of Neural Networks">
+      </a>
+      
+
+    </div>
+
+    <div class="article__content">
+
+      
+      <div class="article__tags">
+        
+          <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#308000" style="color: #308000;">machine-learning</a>
+        
+          <a href="/tags/?tag=neural-network" class="article__tag tag-color-js" data-accent="#308000" style="color: #308000;">neural-network</a>
+        
+      </div>
+      
+
+      <h2 class="article__title">
+        <a href="/blog/neuralnet">Front and Backward Propagation of Neural Networks</a>
+      </h2>
+
+      <p class="article__excerpt">
+  
+    
+      I’ve come across some great resources that explain Neural Networks (mainly 3Blue1Brown for intuition &amp; theory and this Medium article for ...</p>
+
+      <div class="article__meta">
+        <div class="article__meta__bottom">
+          <time class="article__date" datetime="2024-04-01T00:00:00+09:00">01 Apr 2024</time>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+    
+  </div>
+</div>
+
+
+<!-- begin pagination -->
+<div class="container">
+  <div class="row">
+    <div class="col col-12">
+      <nav class="pagination animate">
+        <div class="pagination__list">
+          
+            
+              <a class="previous-link" href="/blog/">&laquo;</a>
+            
+
+          
+
+          <div class="counter-box">
+            
+              <a class="back-link" href="/blog/">1</a>
+            
+            
+
+            
+              <span class="active-link">2</span>
+              
+            
+          </div>
+
+          
+            <span class="disabled">&raquo;</span>
+          
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- end pagination -->
 
     </main>
     <!-- end content -->

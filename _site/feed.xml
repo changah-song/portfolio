@@ -5,17 +5,60 @@
         <description></description>
         <link>http://localhost:4000/</link>
         <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 31 May 2024 04:31:56 +0900</pubDate>
-        <lastBuildDate>Fri, 31 May 2024 04:31:56 +0900</lastBuildDate>
+        <pubDate>Fri, 31 May 2024 18:46:25 +0900</pubDate>
+        <lastBuildDate>Fri, 31 May 2024 18:46:25 +0900</lastBuildDate>
         <generator>Jekyll v3.9.5</generator>
         
             <item>
                 <title>Fluent Fable: Reading for Language Learning</title>
-                <description>&lt;div class=&quot;gallery-box&quot;&gt;
+                <description>&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What’s the best way to learn a language? While there are many many approaches that have been developed throughout the years and many that I’ve personally tried, I’ve concluded that simply reading and engaging with material that you’re interested in is the best way to learn a new language and gain confidence in it. While the easiest way to expose yourself to a new language is to watch a show or series, I found it much too slow and unreliable.&lt;/p&gt;
+
+&lt;p&gt;Thus, I started reading. I started reading physical books first. It was nice but I had two main issues. 1) Regularly finding a book at your right language level in a genre you’re interested in is a struggle in itself. 2) Translating words and going from dictionary/translator to book back and forth disrupts the reading process. Then I started reading on my phone and found that issue 2 could be easily eliminated thanks to an easy way to find the definition of words as I was reading. However, issue 1 still remained and I also found it hard to be motivated finish an entire book; it was much too burdensome to stick with one book in an unfamiliar language&lt;/p&gt;
+
+&lt;p&gt;Well, if you can’t discipline yourself, create something that lowers the need for said discipline right?&lt;/p&gt;
+
+&lt;p&gt;So, I started creating a simple mobile app using React Native as I knew some Javascript. I wanted to make the app very simple. One where you could enter, read a small passage that matched my level, translate any unfamiliar words, and exit. It would also save unfamiliar words and allow for the use of flashcards to memorize the words if you so desired.&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
     &lt;div class=&quot;gallery&quot;&gt;
         &lt;img src=&quot;/images/fluent-fable-viz.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
+
+&lt;p&gt;개인적으로 언어를 배우면서 꼭 존재해야 되겠다고 생각한 후 시작한 프로젝트로, React Native 대해서 하나도 몰랐던 제가 많은 걸 배우면서 재밌게 만든 앱입니다.&lt;/p&gt;
+
+&lt;p&gt;저 처럼 한국 국민인데 외국에서 삶 대부분을 살아오셨다면 이 앱의 목적과 기능들이 이해가 더 잘 될 거에요.&lt;/p&gt;
+
+&lt;p&gt;한글은 어느 정도 이해하고 말할 수 있지만, 어휘에서 걸리는 절망적인 느낌.. 한국어가 영어를 모국어로 삼는 사람들에게는 가장 어려운 언어라는 사실과 한국어의 단어 수량이 엄청나다는 게 그 느낌을 설명하겠죠.&lt;/p&gt;
+
+&lt;p&gt;제가 한국어뿐만 아니라 중국어도 열심히 공부하면서 깨달은 점은 책만 많이 읽으면 언어는 따라오게 된있다라는 거에요. 그래서 책을 읽을 때 가장 좋은 경험을 줄 수 있는 앱을 만들기로했어요.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Features, 기능&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서, 이 앱을 많은 API를 통해서 다음의 기능을 담은 eReader을 개발했어요:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;읽고 싶은 책 고르기 (Reader API)&lt;/li&gt;
+  &lt;li&gt;단어 선택 후 사전 검색 (Korea Dictionary API)&lt;/li&gt;
+  &lt;li&gt;단어 선택 후 어근 필터 (FastAPI를 사용해서 KONLPY API)&lt;/li&gt;
+  &lt;li&gt;단어 선택 후 번역기 검색 (Translator API)&lt;/li&gt;
+  &lt;li&gt;단어 저장 후 플래시 카드로 복습 (SQLite)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;What I Learned, 배운 것&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Asynchronous functions&lt;/li&gt;
+  &lt;li&gt;COR, FastAPI local server&lt;/li&gt;
+  &lt;li&gt;Object-Oriented Programming 및 Separation of Concerns&lt;/li&gt;
+  &lt;li&gt;React Hooks (State, Effect, Context)&lt;/li&gt;
+  &lt;li&gt;Animation (PanResponder and Animated)&lt;/li&gt;
+  &lt;li&gt;Styling and UI&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Documentation of Progress: &lt;a href=&quot;https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend&quot;&gt;https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend&lt;/a&gt;&lt;/p&gt;
 </description>
                 <pubDate>Tue, 07 May 2024 00:00:00 +0900</pubDate>
                 <link>http://localhost:4000/blog/fluent-fable</link>
@@ -1181,6 +1224,101 @@ This series will initially cover the four broad categories of recommender system
                 <category>machine-learning</category>
                 
                 <category>rec-sys</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
+        
+            <item>
+                <title>Transformers for Dummies</title>
+                <description>&lt;p&gt;If you’ve attempted to understand how Transformers work, you’ve probably come across this image from the groundbreaking paper - &lt;a href=&quot;https://arxiv.org/pdf/1706.03762&quot;&gt;Attention Is All You Need (Vaswanti et al., 2017).&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/t-1-1.png&quot; loading=&quot;lazy&quot; style=&quot;width: 700px;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;p style=&quot;text-align: center; font-size: 15px; color: grey;&quot;&gt;
+        Transformer architecture (Vaswani et al., 2017)
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;What are you looking at? Good question. I remember being completely lost when I saw this for the first and I spent a long time scouring resources on the internet trying understand what was going on behind all this.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;I’m assuming you, the reader, have some experience with Machine Learning and at least an understanding of Neural Networks (NNs). We will be using concepts such as embeddings, feed-forward, back-propagation, weights, linear layers, activation functions that are all covered when learning about NNs. &lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;If not, Neural Networks for Dummies should be a good place to start.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;input → input embedding + positional embedding → copy paste 3 times → Query, Key, Value → Query and Key learns &lt;/p&gt;
+
+&lt;p&gt;Basic idea is to train our model to learn how words relate to each other. In other words, how similar they are (in definition and context) from each other. If I input all of Shakespeare’s works into the model, I want it to learn how all the words used in his work relate to each other. So I want it to be able to generate output that mimic his style. This is by knowing what words are often used together in a sentence (closer in context) and predicting what the next word of an input might be.&lt;/p&gt;
+
+&lt;p&gt;Imagine a 2-D plane with one axis being “size” and the other being “weight.” We can put many things on this graph (as a point) to see how similar two things are in these two categories. For example, elephants and trucks should be closer together than mice and toasters. While this does a good job of showing which things are more similar in terms of size and weight, it doesn’t capture other features such as color or being alive (in which case elephants and mice should be closer). To really capture every feature of everything, we need infinite dimensions (rather than 2-D). However, that is infeasible and so we just use hundreds of dimensions to map out everything in a hyperspace. We can’t envision this as we are limited to 3-D but there can be a 500-dimensional space where every word in our English vocabulary is a point. The closer the points are, the closer the meaning and contextual use.&lt;/p&gt;
+
+&lt;p&gt;Great, so now we can talk about input embeddings. What we input (whether it is the Bible or other texts) turns into input embeddings. This means all words in the input gets a vector attached to it and the length of that vector is the embedding size. These vectors initially start off as random numbers and will be changed as we train the model. The longer the vector (embedding size), the more information, or linguistic feature, we can store about each word. The paper uses an embedding size of 512.&lt;/p&gt;
+</description>
+                <pubDate>Tue, 02 Apr 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/transformer</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/transformer</guid>
+                
+                <category>machine-learning</category>
+                
+                <category>transformer</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
+        
+            <item>
+                <title>Front and Backward Propagation of Neural Networks</title>
+                <description>&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;I’ve come across some great resources that explain Neural Networks (mainly 3Blue1Brown for intuition &amp;amp; theory and this Medium article for code) and so this article is just to summarize what I’ve learned and is for my own learning and hopefully for others as well. &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This article assumes a basic understanding of what Neural Networks are and its basic components (layers, nodes, weights, and biases). I aim to explain clearly the theory behind forward and backpropagation and a clear code implementation behind it all.&lt;/p&gt;
+
+&lt;p&gt;I find the whole process to make more sense with two nodes.&lt;/p&gt;
+
+&lt;h3 id=&quot;forward-propagation&quot;&gt;Forward Propagation&lt;/h3&gt;
+&lt;p&gt;If you look at the following visualization, you’ll see the we have all the basic components of a NN. Input node, output node, weights, biases, and activation functions (I will arbitrarily use the sigmoid activation function throughout this article). 
+Then, we can express it in an equation. The weights and biases are initially just random numbers. The weights and biases are the only things that can affect the outcome of our NN. Given an input data, the model just does calculations until the final layer to give an output.&lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/nn-1-1.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/nn-1-2.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;back-propagation&quot;&gt;Back Propagation&lt;/h3&gt;
+&lt;p&gt;Now that we have an output, how do we train the network so that the output is more accurate? Right now the model just spits out a random output. To make it better, we have to tell the network that it did poorly and to make some changes to its previous layers, weights, and biases.
+We can use an error value (I will use the Mean Squared Error for this article) to capture how different the output is from the true output. For our two-node example, you can see that the error between the output (Y) and the true value (red Y) is captured with E. &lt;/p&gt;
+&lt;div class=&quot;gallery-box&quot;&gt;
+    &lt;div class=&quot;gallery&quot;&gt;
+        &lt;img src=&quot;/images/nn-1-3.png&quot; loading=&quot;lazy&quot; style=&quot;width: 800px;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll also notice that there are arrows pointing to the previous nodes, weights, and biases. This is our way of tweaking previous settings based on the error of our current state.
+Think of E as the error of the entire network. How do we change it? Well, we can use partial derivatives to approach it. Partial derivatives, e.g. dY/dX, can be thought of as “how much of a change in X changes Y?” So basically, how much of the previous node (X), its weights (W), and biases (b) of the previous layer can I change to change our error (E)?
+We want to minimize error. If you are familiar with gradients, you know that it always points in the direction of steepest ascent. What this means is that if we follow the gradient of a function, we end up going towards the maximum point. Since we want to go to the minimum point, we simply go the opposite direction.
+W = W - dE/dW&lt;/p&gt;
+</description>
+                <pubDate>Mon, 01 Apr 2024 00:00:00 +0900</pubDate>
+                <link>http://localhost:4000/blog/neuralnet</link>
+                <guid isPermaLink="true">http://localhost:4000/blog/neuralnet</guid>
+                
+                <category>machine-learning</category>
+                
+                <category>neural-network</category>
                 
                 
                 <category>blog</category>
