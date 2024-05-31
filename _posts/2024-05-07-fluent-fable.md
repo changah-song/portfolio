@@ -22,9 +22,26 @@ So, I started creating a simple mobile app using React Native as I knew some Jav
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/fluent-fable-viz.png" loading="lazy" style="width: 800px;">
+        <img src="/images/fluent-fable-viz.png" loading="lazy" style="width: 750px;">
     </div>
 </div>
+
+<div style="display: flex; gap: 10px;">
+  <div style="position:relative;width:33.33%;padding-top:56.25%;">
+    <iframe src="https://player.vimeo.com/video/952394445?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="first"></iframe>
+  </div>
+  
+  <div style="position:relative;width:33.33%;padding-top:56.25%;">
+    <iframe src="https://player.vimeo.com/video/952394472?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="second"></iframe>
+  </div>
+  
+  <div style="position:relative;width:33.33%;padding-top:56.25%;">
+    <iframe src="https://player.vimeo.com/video/952395102?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="third"></iframe>
+  </div>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>  
+
+---
 
 개인적으로 언어를 배우면서 꼭 존재해야 되겠다고 생각한 후 시작한 프로젝트로, React Native 대해서 하나도 몰랐던 제가 많은 걸 배우면서 재밌게 만든 앱입니다.
 
