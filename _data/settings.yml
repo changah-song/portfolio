@@ -27,7 +27,7 @@ hero:
   enable: true
   hero__title: Welcome to Paul's Repo!
   hero__description: Look around at my blogs and projects I've completed (and am currently working on) 😄.
-  hero__image: '/portfolio/images/06.jpg'
+  hero__image: '/images/06.jpg'
 
 
 #-------------------------------
@@ -35,7 +35,7 @@ hero:
 author:
   author__name: Alena Curtis
   author__bio: I’m a published content creator, brand copywriter, photographer, and social media content creator and manager. I help brands connect with their customers by developing engaging content that entertains, educates, and offers value to their audience.
-  author__avatar: /portfolio/images/01-1.jpg
+  author__avatar: /images/01-1.jpg
 
 
 #-------------------------------
@@ -68,9 +68,9 @@ author__section:
   author__section__title: Hello, my name is Alena. I’m reviewer and content creator.
   author__section__description: I’m a published content creator, brand copywriter, photographer, and social media content creator and manager. I help brands connect with their customers by developing engaging content that entertains, educates, and offers value to their audience.
   aurhor__section__button__text: More About Me
-  aurhor__section__button__link: /portfolio/about
-  author__section__big__image: /portfolio/images/100.jpg
-  author__section__small__image: /portfolio/images/101.jpg
+  aurhor__section__button__link: /about
+  author__section__big__image: /images/100.jpg
+  author__section__small__image: /images/101.jpg
 
 
 #-------------------------------
@@ -82,7 +82,7 @@ mailchimp__settings:
   mailchimp__identifier: frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3 # Add your MailChimp form identifier. For example - frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3
   mailchimp__input__text: Your email address
   mailchimp__button__text: Subscribe
-  mailchimp__background__image: /portfolio/images/subscribe-bg.jpg
+  mailchimp__background__image: /images/subscribe-bg.jpg
 
 
 #-------------------------------
@@ -103,13 +103,11 @@ social:
 footer__menu__settings:
   menu__items:
     - title: 'Home'
-      url: '/portfolio/'
+      url: '/'
     - title: 'About'
-      url: '/portfolio/about/'
+      url: '/about/'
     - title: 'Contact'
-      url: '/portfolio/contact/'
-    - title: 'Elements'
-      url: '/portfolio/elements/'
+      url: '/contact/'
 
 
 #-------------------------------
