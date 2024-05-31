@@ -11,15 +11,15 @@ color_scheme: auto # You can choose three modes auto, light, and dark. By defaul
 menu__settings:
   menu__items:
     - title: 'Home'
-      url: '/portfolio/'    
+      url: '/'    
     - title: 'Project'
-      url: '/portfolio/project/'
+      url: '/project/'
     - title: 'Blog'
-      url: '/portfolio/blog/'
+      url: '/blog/'
     - title: 'About'
-      url: '/portfolio/about/'
+      url: '/about/'
     - title: 'Contact'
-      url: '/portfolio/contact/'
+      url: '/contact/'
 
 #-------------------------------
 # Hero Settings
