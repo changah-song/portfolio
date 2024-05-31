@@ -6,28 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Recommendation System for Dummies (1/6)</title>
-  <meta name='description' content=''>
+  <title>Knowledge-Based Recommenders (5/6)</title>
+  <meta name='description' content='“Ask and you shall receive”'>
 
-  <link rel="canonical" href="http://localhost:4000/blog/recommender-chapter1">
+  <link rel="canonical" href="http://localhost:4000/recommender-chapter5">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Recommendation System for Dummies (1/6) – Paul Song">
-  <meta name="twitter:description" content="1. What are Recommender Systems?
-Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.
-
-">
-  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter1-thumbnail.avif">
+  <meta name="twitter:title" content="Knowledge-Based Recommenders (5/6) – Paul Song">
+  <meta name="twitter:description" content="“Ask and you shall receive”">
+  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter5-thumbnail.avif">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Recommendation System for Dummies (1/6) – Paul Song">
-  <meta property="og:description" content="1. What are Recommender Systems?
-Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.
-
-">
-  <meta property="og:image" content="http://localhost:4000/images/rs-chapter1-thumbnail.avif">
+  <meta property="og:title" content="Knowledge-Based Recommenders (5/6) – Paul Song">
+  <meta property="og:description" content="“Ask and you shall receive”">
+  <meta property="og:image" content="http://localhost:4000/images/rs-chapter5-thumbnail.avif">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -183,13 +177,15 @@ Hello there, if you are someone with a very basic knowledge of AI and ML concept
         </div>
       
 
-      <h1 class="post__title">Recommendation System for Dummies (1/6)</h1>
+      <h1 class="post__title">Knowledge-Based Recommenders (5/6)</h1>
 
+      
+        <div class="post__description">“Ask and you shall receive”</div>
       
 
       <div class="post__meta">
         <div class="post__meta__bottom">
-          <time class="post__date" datetime="2024-05-01T00:00:00+09:00">01 May 2024</time>
+          <time class="post__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
         </div>
       </div>
     </div>
@@ -198,7 +194,7 @@ Hello there, if you are someone with a very basic knowledge of AI and ML concept
 
     
     <div class="post-image">
-      <img class="lazy" data-src="/images/rs-chapter1-thumbnail.avif" alt="Recommendation System for Dummies (1/6)">
+      <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
     </div>
     
     
@@ -212,75 +208,258 @@ Hello there, if you are someone with a very basic knowledge of AI and ML concept
   <article class="post">
 
     <div class="post__content">
-      <h3 id="1-what-are-recommender-systems">1. What are Recommender Systems?</h3>
-<p>Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.</p>
+      <h3 id="overview">Overview</h3>
+<p>Knowledge Based Recommender Systems (KB RS) is the last (out of three) broad category of recommender we will discuss. Knowledge based recommenders specialize in receiving and utilizing explicit user requirements and using those to recommend items. So far, with both Collaborative Filtering and Content-Based recommenders, we had to predict what the user would like based on their rating information. The data we used was either explicit (e.g. likes on an Instagram post) or implicit (e.g. watch time on Youtube videos). However, this approach takes the explicit data step a lot further and <strong>specifically asks the user what they would like to find</strong>. Pretty simple huh?</p>
 
-<p>What are recommender systems? As its name suggests, it is any system put in place that tries to recommend the best (in whatever metric that is defined) item to a user. Here, item can be anything from books or movies to friend suggestions; it is just anything that can be recommended to a user.</p>
+<p>There are two types of KB RS:</p>
 
-<p>Recommender systems have been around for a while now but is a constantly evolving field as our knowledge of new machine learning and optimization techniques grows. The best recommender systems are what Netflix uses to suggest a new movie you might enjoy or what Youtube uses to keep you hooked for hours at a time.</p>
+<ul>
+  <li><strong>Constraint-Based</strong>: Given user requirements, this approach uses predefined recommender knowledge bases that contain <em>explicit rules</em> about how to relate customer requirements with item features. This is pretty much an <em>expert system</em> in <strong>knowledge base systems</strong> and is a constraint satisfaction problem.</li>
+  <li><strong>Case-Based</strong>: A user picks a specific item (case) as a target or anchor point and the algorithm finds a <strong>similar item to recommend</strong>. Results are usually used as new target cases with some interactive modifications. You’ll notice that this sounds similar to <em>Content-Based recommenders</em> where items similar to ones the user previously liked are suggested. The main difference is that most KB RS depend on the description of the items in the form of <strong>relational attributes in knowledge bases</strong> rather than as text keywords like in CB RS.
+Although quite different, both are considered KB algorithms because they encode various types of domain knowledge in the form of constraints, rules (constraint-based), similarity metrics, and utility functions (case-based) during the search process.</li>
+</ul>
 
-<p>There are many resources online, from other Medium articles to textbooks to Google courses, that explain many different types of recommender systems. So then why am I writing this series on recommender systems? It is mainly to have a centralized place where all the different types of systems can be discussed where the tone and structure of each post is familiar. There are many different types of recommender systems and not one centralized place where are all of it is discussed; the resources you can find on each different systems varies greatly and I would like to create a resource that introduces each one in one place.</p>
+<h4 id="strengths-and-weaknesses">Strengths and Weaknesses</h4>
+<p>— — — — — — — — — — — — — — —</p>
 
-<p>The best centralized resource I could find were the two following textbooks: “Recommender Systems: The Textbook” by Charu C. Aggarwal (2016) and “Recommender Systems Handbook” by Francesco Ricci et al. (2011). These textbooks has most of the currently known recommender systems but is lengthy and has no code implementation. As such, my mission was to summarize all of the concepts discussed in these resources, with the help of other online resources, and to also include code implementation for better understanding.</p>
+<p>🔺 Strengths</p>
 
-<h3 id="2-overview-of-series">2. Overview of Series</h3>
+<ul>
+  <li>
+    <p><strong><em>Complex Item Domain</em></strong>. When the item has many complex aspects to consider and requires expert knowledge in the domain, KB RS are able to capture that using knowledge bases curated by these experts. This is especially important when the item is of great significance and requires a lot of thought such as the purchase of a house.</p>
+  </li>
+  <li>
+    <p><strong><em>Rarely-Bought Items</em></strong>. Items that are not frequently bought doesn’t garner enough ratings for CF &amp; CB recommenders to be able to work.</p>
+  </li>
+  <li>
+    <p><strong><em>Avoids Cold Start Problem</em></strong>. User data is not needed as what the user wants is explicitly defined. Recommendation can be accurate and start as soon as the user wants without the recommender requiring existing rating data to work well. This is a great strength over CF &amp; CB recommenders.</p>
+  </li>
+</ul>
+
+<p>🔻 Weaknesses</p>
+
+<ul>
+  <li><strong><em>Knowledge Acquisition Bottleneck</em></strong>. The creation of the knowledge base requires the conversion of the knowledge possessed by domain experts into formal, executable representations</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: The main takeaway should be that the three main categories of recommenders are good for different contexts. For KB, we don’t care too much for serendipitous recommendations, as we did for CF and CB, because the user is looking for something specific rather than something unexpected but pleasant.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="constraint-based">Constraint-Based</h3>
+<p>The following section will go into the theory and logic underlying this method but it is not necessary to understand to know what the constraint-based KB algorithm does. Read if you want to know its base level ties to knowledge bases and finite state machines.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: Knowledge base systems are an entire field on its own in AI and so I suggest finding resources to familiarize yourself with this topic if you haven’t learned about it. Briefly put, as shown in the image below, KB systems require the creation of a knowledge base (an organized collection of facts about the domain) and the rules engine (a bunch of logical rules, usually if-else statements, that represents the domain knowledge) by an expert in the domain. When the non-expert user specifies explicit requirements, the KB system runs it thorgh the rules engine to find something in the knowledge base that lies under the constraints of what the user wanted.</td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-chapter1-overview.png" loading="lazy" style="width: 800px; height: 300px;" />
+        <img src="/images/rs-5-1.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Source: Javapoint, N.D.
+    </p>
+</div>
+<p>Ricci et al. defines two variables and three sets of constraints. The two variables are the user and item attributes (V_C, V_PROD) while the three constraints are logical constraints, user-item constraints, and allowed recommendation constraints (C_R, C_F, C_PROD). This becomes a constraint satisfaction problem where we have to find the right variables to fit all the constraints.</p>
+
+<p>An example of a knowledge base with these variables and constraints is shown below:</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-2.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Example of KB in financial services. Image from Ricci et al. (2011)
+    </p>
+</div>
+
+<p>Given concrete user requirements, C_C, the solution cannot violate the following logic:</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-3.webp" loading="lazy" style="width: 700px;" />
     </div>
 </div>
 
-<p>Overview of the series and the four main categories of recommender systems. Image by author.
-This series will initially cover the four broad categories of recommender systems: Collaborative Filtering, Content-Based, Knowledge-Based, and Hybrid Recommenders. These four categories alone cover most of what makes up recommender systems. Additional chapters to this series will be less-used, but still useful, systems or more advanced explorations of systems already covered earlier. We will also be covering case-studies, equipped with our new-found knowledge.</p>
+<p>As long as an item meets this condition, it can be recommended to the user. One such way of doing that is in the form of finite state models (FSM). Finite state models can represent all the relationships built up in the KB in a graphical way. As long as an item can pass through all the nodes and reach the end, it satisfies all the constraints and can be recommended.</p>
 
-<p>A brief summary of the four main categories are as follows:</p>
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Note</strong>: Finite State Models is a topic in the theory of computation that is heavily based on logic and can be used to graphically represent relationships between many different states as long as the rules for the relationships are well defined. It is a fascinating subject but one you don’t need a deep understanding of to understand Constraint-Based KB.</td>
+    </tr>
+  </tbody>
+</table>
 
-<ul>
-  <li><strong>Collaborative Filtering (CF)</strong> — Uses the ratings of other users to recommend items to you.</li>
-  <li><strong>Content-Based (CB)</strong> — Uses your own historical data to recommend items to you.</li>
-  <li><strong>Knowledge-Based (KB)</strong> — Uses your explicitly requirements to recommend items to you.</li>
-  <li><strong>Hybrid</strong> — Combines algorithms in various ways to create a more well-rounded recommender.</li>
-</ul>
+<p>As long as the constraints are well defined and the knowledge base is well structured, a requirement from user the should be able to draw out an item that best fits the item the user wants.</p>
 
-<p>While seemingly simple, there is a lot of information to cover in each of these fields. Anything that can be optimized, will be, and there are a lot of trade-offs to be considered. Through the discussion of these three categories, you should get a feel for the advantages and disadvantages of each and what we look out for in recommender systems.</p>
+<h3 id="case-based">Case-Based</h3>
+<p>Similarity metrics are used to retrieve examples similar to the specified item. For this to work effectively, there are two crucial components: <strong>similarity metrics</strong> and <strong>critiquing methods</strong>.</p>
 
-<h3 id="3-keywords-to-familiarize">3. Keywords to Familiarize</h3>
-<p>When diving into the field of recommender systems and especially if you want to do your own research and read up on more information during and after this series, there are keywords that will be very helpful if you familiarize yourself with them. These are mainly the goals and challenges of recommender systems. No matter what recommender system you choose to research, many of these keywords will pop up. I believe it will be helpful if you can greet most of those concepts here before moving on.</p>
+<p><em>Note</em>: Not too much can be explained in detail in this section as each implementation of KB RS is so specific to each domain. It is very hard to generalize the best similarity metrics or critiquing methods; a lot of the decisions have to be made by the domain expert.</p>
 
-<p>However, the first concept you should be familiar with is the <strong>user-item ratings matrix</strong>. In its simplest form, imagine a table where the row heading is the item (i.e. Avengers, Lion King, Barbie, etc.) and the column heading is the user (i.e. Adam, Bob, Christine, etc.). The cells where the item and user intersect are the ratings given by the user for the item. Now, viewed as a matrix, it is a m x n matrix containing m users and n items.</p>
+<h4 id="similarity-metrics">Similarity Metrics</h4>
 
-<h4 id="goals">Goals</h4>
+<p>With continuous variables, similarity can be something as simple as the difference between two numbers (e.g. the price of a car might be considered similar if the difference is close to 0) or it might be more complicated and consider more dimensions or use the standard deviation to set the similarity function.</p>
 
-<p>The goals of a recommender system are usually the same. Different systems try to reach these goals in various ways and how it does so will be covered in each chapter.</p>
+<p>With categorical data, the determination of similarity is much more challenging. Usually, domain hierarchies are used to measure the similarity within these variables. <strong>Domain hierarchies</strong> can be thought of as tree graphs where each category can be set to be under some category and those categories can also have sub-categories. The closer two objects are within the context of a domain hierarchy, the more similar it is. There are sometimes pre-made domain hierarchies (e.g. movie genre where commercial romance is closer to commercial comedy than an education documentary) but sometimes it has to be hand made by domain experts.</p>
 
-<ul>
-  <li><strong>Relevance</strong>. The most obvious one is relevance. Are the items being recommended relevant to the user? This is usually necessary in order for the user to engage with the item.</li>
-  <li><strong>Novelty</strong>. The item recommended should be new to the user.</li>
-  <li><strong>Serendipity</strong>. The item recommended should be unexpected to the user. This is slightly different from novelty as even new items can be expected. For example, if I know that I enjoyed Avatar, being recommended Avatar 2 is not unexpected although it is novel.</li>
-  <li><strong>Diversity</strong>. The items recommended should be diverse so that there is a higher change of the user liking at least one of what was recommended.</li>
-</ul>
+<h4 id="critiquing">Critiquing</h4>
 
-<h4 id="challenges">Challenges</h4>
+<p>After a certain result is found using the similarity metrics and recommended to the user, the user has to be able to provide feedback and tweak the results to further match what they are looking for. This is also done in constraint-based KB recommenders. The user specifies change requests on one or more of the attributes of an item they like. The change request can be a directional critique (e.g. “smaller”) or a replacement critique (e.g. “different location”).</p>
 
-<p>Throughout the series, the most common concepts that will be reoccurring are the challenges that recommender systems face in general and how different systems aim to combat these different challenges.</p>
+<p>These can then be fed back into the similarity metric step to find one closer to what the user wants.</p>
+
+<h3 id="code-implementation">Code Implementation</h3>
+<p>A lot of this is created with the help of another article. This article covers a simple implementation of a constraint-based KB recommender.</p>
 
 <ul>
-  <li><strong>Long-Tail</strong>. Only a fraction of items are rated frequently. Why is this a problem? (1) High-frequency items are relatively competitive with little profit for the merchant. There is more profit to be gained from the lower frequency items. (2) Difficult to provide robust rating predictions as many recommender systems tend to recommend popular items rather than infrequent items. Has a negative impact on diversity.</li>
-  <li><strong>Data Sparsity</strong>. The user-item ratings matrix is typically not going to be full. There wil be missing ratings as many users have not rated or have not interacted with many items. This leads to a matrix that is sparse and thus leads to less accurate predictions and recommendations.</li>
-  <li><strong>Scalability</strong>. A recommender system feasible at a small scale might be infeasible at a larger scale. The time and space complexity of the algorithms used must be carefully considered.</li>
-  <li><strong>Cold-Start</strong>. New items cannot be recommended until some users rate it, and new users are unlikely to be given good recommendations because of the lack of their rating or purchase history. When the number of initially available ratings are relatively small, it can be difficult to give recommendations because there is no way to compare a new user (that we want to recommend items to) with another user or look at their historical data.</li>
-  <li><strong>Curse of Dimensionality</strong>. When working with data in high-dimensional spaces, it can be challenging to analyze the data and make predictions with it. This isn’t an issue when just looking at user, item, and ratings but in many recommender systems, we want to include even more information such as age, location, gender, etc. for a more robust prediction. However, handling high-dimensional data is computationally more expensive and more complex.</li>
+  <li><em>import data</em></li>
 </ul>
 
-<h3 id="4-dataset">4. Dataset</h3>
-<p>The dataset that will be used for most of the code implementations is the MovieLense 1M dataset. This is a staple in many recommender system implementation resources you will find online. This is a simple dataset that contains the ratings of 6000 users for 4000 movies.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
 
-<p>Download the dataset and save it for future use.</p>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"path/to/data"</span><span class="p">)</span>
 
-<hr />
+<span class="c1"># Select just relevant features
+</span><span class="n">relevant_features</span> <span class="o">=</span> <span class="p">[</span><span class="s">'title'</span><span class="p">,</span><span class="s">'genres'</span><span class="p">,</span> <span class="s">'release_date'</span><span class="p">,</span> <span class="s">'runtime'</span><span class="p">,</span> <span class="s">'vote_average'</span><span class="p">,</span> <span class="s">'vote_count'</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">relevant_features</span><span class="p">]</span>
 
-<p>Are you ready to explore the many different types of recommender systems? Let’s go!</p>
+<span class="c1"># Print the dataframe
+</span><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-4.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<ul>
+  <li><em>preprocess data</em></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Convert release_date into pandas datetime format
+</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s">'coerce'</span><span class="p">)</span>
+<span class="c1"># Extract year from release_date-column and store the values into a new year-column
+</span><span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'release_date'</span><span class="p">]).</span><span class="n">year</span>
+<span class="c1">#Helper function to convert NaN to 0, if there are any, and all other years to integers.
+</span><span class="k">def</span> <span class="nf">convert_int</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="k">try</span><span class="p">:</span>
+       <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+   <span class="k">except</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">0</span>
+<span class="c1">#Apply convert_int to the year feature
+</span><span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="n">convert_int</span><span class="p">)</span>
+<span class="c1">#Drop the release_date column
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'release_date'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span>
+<span class="c1">#Convert all NaN into stringified empty lists
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="s">'[]'</span><span class="p">)</span>
+<span class="c1">#Apply literal_eval to convert stringified empty lists to the list object
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="n">literal_eval</span><span class="p">)</span>
+<span class="c1">#Convert list of dictionaries to a list of strings
+</span><span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'genres'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s">'name'</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[])</span>
+
+<span class="c1">#Create a new feature by exploding genres
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'genres'</span><span class="p">]),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">stack</span><span class="p">().</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1">#Name the new feature as 'genre'
+</span><span class="n">s</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">'genre'</span>
+
+<span class="c1">#Create a new dataframe gen_df which by dropping the old 'genres' feature and adding the new 'genre'.
+</span><span class="n">gen_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'genres'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1">#Print the head of the new gen_df
+</span><span class="n">gen_df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-5.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<ul>
+  <li><em>implementation of constraint-based recommender</em>
+The filtering section is where the constraint satisfaction happens in its simplest form</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_chart</span><span class="p">(</span><span class="n">gen_df</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+   <span class="c1">#Ask for preferred genres
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input preferred genre"</span><span class="p">)</span>
+   <span class="n">genre</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">genre</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for lower limit of duration
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input shortest duration"</span><span class="p">)</span>
+   <span class="n">low_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">low_time</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for upper limit of duration
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input longest duration"</span><span class="p">)</span>
+   <span class="n">high_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">high_time</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for lower limit of timeline
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input earliest year"</span><span class="p">)</span>
+   <span class="n">low_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">low_year</span><span class="p">)</span>
+  
+   <span class="c1">#Ask for upper limit of timeline
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">"Input latest year"</span><span class="p">)</span>
+   <span class="n">high_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">high_year</span><span class="p">)</span>
+  
+   <span class="c1">#Define a new movies variable to store the preferred movies. Copy the contents of gen_df to movies
+</span>   <span class="n">movies</span> <span class="o">=</span> <span class="n">gen_df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+  
+   <span class="c1">#Filter based on the condition
+</span>   <span class="n">movies</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">movies</span><span class="p">[</span><span class="s">'genre'</span><span class="p">]</span> <span class="o">==</span> <span class="n">genre</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'runtime'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">low_time</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'runtime'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">high_time</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">low_year</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">movies</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">high_year</span><span class="p">)]</span>
+  
+   <span class="c1">#Compute the values of C and m for the filtered movies
+</span>   <span class="n">C</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[</span><span class="s">'vote_average'</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+   <span class="n">m</span> <span class="o">=</span> <span class="n">movies</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">].</span><span class="n">quantile</span><span class="p">(</span><span class="n">percentile</span><span class="p">)</span>
+  
+   <span class="c1">#Only consider movies that have higher than m votes. Save this in a new dataframe q_movies
+</span>   <span class="n">q_movies</span> <span class="o">=</span> <span class="n">movies</span><span class="p">.</span><span class="n">copy</span><span class="p">().</span><span class="n">loc</span><span class="p">[</span><span class="n">movies</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">]</span>
+  
+   <span class="c1">#Calculate score using the IMDB formula
+</span>   <span class="n">q_movies</span><span class="p">[</span><span class="s">'score'</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_movies</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">]</span><span class="o">+</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s">'vote_average'</span><span class="p">])</span>
+                                      <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="s">'vote_count'</span><span class="p">])</span> <span class="o">*</span> <span class="n">C</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+   <span class="c1">#Sort movies in descending order of their scores
+</span>   <span class="n">q_movies</span> <span class="o">=</span> <span class="n">q_movies</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">'score'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+  
+   <span class="k">return</span> <span class="n">q_movies</span>
+</code></pre></div></div>
+
+<p>After inputting [animation, 10, 40, 2000, and 2019], I get the following recommendations.</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-5-6.webp" loading="lazy" style="width: 700px;" />
+    </div>
+</div>
+
+<h3 id="resources">Resources</h3>
+<p>Aggarwal, C. C. (2016). Recommender systems: The textbook. SPRINGER.</p>
+
+<p>Expert systems in Artificial Intelligence — Javatpoint. www.javatpoint.com. (n.d.). Retrieved February 26, 2023, from <a href="https://www.javatpoint.com/expert-systems-in-artificial-intelligence">https://www.javatpoint.com/expert-systems-in-artificial-intelligence</a></p>
+
+<p>Kantor, P. B., Rokach, L., Shapira, B., &amp; Ricci, F. (2011). Recommender Systems Handbook. Springer.</p>
+
+<p>Recommendation systems — knowledged-based recommender — Michael Fuchs Python. MFuchs. (2020, October 1). Retrieved February 26, 2023, from <a href="https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender">https://michael-fuchs-python.netlify.app/2020/10/01/recommendation-systems-knowledged-based-recommender/#build-the-knowledged-based-recommender</a></p>
 
     </div>
 
@@ -291,22 +470,22 @@ This series will initially cover the four broad categories of recommender system
       <ul class="share__list list-reset">
         <li class="share__item">
           <a class="share__link share__twitter"
-            href="https://twitter.com/intent/tweet?text=Recommendation%20System%20for%20Dummies%20(1/6)&url=http://localhost:4000/blog/recommender-chapter1"
+            href="https://twitter.com/intent/tweet?text=Knowledge-Based%20Recommenders%20(5/6)&url=http://localhost:4000/recommender-chapter5"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/recommender-chapter1"
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/recommender-chapter5"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/recommender-chapter1&amp;media=http://localhost:4000/images/rs-chapter1-thumbnail.avif&amp;description=Recommendation%20System%20for%20Dummies%20(1/6)"
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/recommender-chapter5&amp;media=http://localhost:4000/images/rs-chapter5-thumbnail.avif&amp;description=Knowledge-Based%20Recommenders%20(5/6)"
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
           rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/recommender-chapter1&title=Recommendation%20System%20for%20Dummies%20(1/6)&summary=&source="
+          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/recommender-chapter5&title=Knowledge-Based%20Recommenders%20(5/6)&summary=%E2%80%9CAsk%20and%20you%20shall%20receive%E2%80%9D&source="
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
         </li>
       </ul>
@@ -353,7 +532,7 @@ This series will initially cover the four broad categories of recommender system
                   
 
                   
-                  <a href="/blog/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
                   </a>
                   
@@ -375,7 +554,7 @@ This series will initially cover the four broad categories of recommender system
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a>
+                    <a href="/recommender-chapter6">Making Recommenders Better (6/6)</a>
                   </h2>
 
                   <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
@@ -400,6 +579,13 @@ This series will initially cover the four broad categories of recommender system
             
       
             
+            
+            
+            
+      
+            
+      
+            
 
             <div class="article col col-12">
               <div class="article__inner">
@@ -408,8 +594,8 @@ This series will initially cover the four broad categories of recommender system
                   
 
                   
-                  <a href="/blog/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
-                    <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
+                  <a href="/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
                   </a>
                   
 
@@ -424,18 +610,20 @@ This series will initially cover the four broad categories of recommender system
                     
                       <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
                     
+                      <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">nlp</a>
+                    
                   </div>
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
+                    <a href="/recommender-chapter4">Content-Based Recommenders (4/6)</a>
                   </h2>
 
-                  <p class="article__excerpt">“Ask and you shall receive”</p>
+                  <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
 
                   <div class="article__meta">
                     <div class="article__meta__bottom">
-                      <time class="article__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
+                      <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
                     </div>
                   </div>
 
@@ -461,8 +649,8 @@ This series will initially cover the four broad categories of recommender system
                   
 
                   
-                  <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
-                    <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
+                  <a href="/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
                   </a>
                   
 
@@ -477,20 +665,18 @@ This series will initially cover the four broad categories of recommender system
                     
                       <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
                     
-                      <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">nlp</a>
-                    
                   </div>
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+                    <a href="/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
                   </h2>
 
-                  <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
+                  <p class="article__excerpt">“People similar to you liked this, try it out”</p>
 
                   <div class="article__meta">
                     <div class="article__meta__bottom">
-                      <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
+                      <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
                     </div>
                   </div>
 
@@ -600,7 +786,7 @@ This series will initially cover the four broad categories of recommender system
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
+                    <a class="recent-posts__image" href="/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -614,7 +800,7 @@ This series will initially cover the four broad categories of recommender system
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
+                    <h4 class="recent-posts__title"><a href="/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
@@ -625,7 +811,7 @@ This series will initially cover the four broad categories of recommender system
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
+                    <a class="recent-posts__image" href="/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -641,7 +827,7 @@ This series will initially cover the four broad categories of recommender system
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
+                    <h4 class="recent-posts__title"><a href="/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>

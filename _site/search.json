@@ -4,7 +4,7 @@
       "title"    : "Fluent Fable: Reading for Language Learning",
       "category" : "project",
       "tags"     : "full-stack and react-native",
-      "url"      : "/blog/fluent-fable",
+      "url"      : "/fluent-fable",
       "date"     : "07 May 2024",
       "image"    : "/images/ff-thumbnail.png"
     } ,
@@ -13,7 +13,7 @@
       "title"    : "Making Recommenders Better (6/6)",
       "category" : "blog",
       "tags"     : "machine-learning, rec-sys, and deep-learning",
-      "url"      : "/blog/recommender-chapter6",
+      "url"      : "/recommender-chapter6",
       "date"     : "06 May 2024",
       "image"    : "/images/rs-chapter6-thumbnail.avif"
     } ,
@@ -22,7 +22,7 @@
       "title"    : "Knowledge-Based Recommenders (5/6)",
       "category" : "blog",
       "tags"     : "machine-learning and rec-sys",
-      "url"      : "/blog/recommender-chapter5",
+      "url"      : "/recommender-chapter5",
       "date"     : "05 May 2024",
       "image"    : "/images/rs-chapter5-thumbnail.avif"
     } ,
@@ -31,7 +31,7 @@
       "title"    : "Content-Based Recommenders (4/6)",
       "category" : "blog",
       "tags"     : "machine-learning, rec-sys, and nlp",
-      "url"      : "/blog/recommender-chapter4",
+      "url"      : "/recommender-chapter4",
       "date"     : "04 May 2024",
       "image"    : "/images/rs-chapter4-thumbnail.avif"
     } ,
@@ -40,7 +40,7 @@
       "title"    : "Collaborative Filtering Recommenders (3/6)",
       "category" : "blog",
       "tags"     : "machine-learning and rec-sys",
-      "url"      : "/blog/recommender-chapter3",
+      "url"      : "/recommender-chapter3",
       "date"     : "03 May 2024",
       "image"    : "/images/rs-chapter3-thumbnail.avif"
     } ,
@@ -49,7 +49,7 @@
       "title"    : "Evaluating Recommender Systems (2/6)",
       "category" : "blog",
       "tags"     : "machine-learning and rec-sys",
-      "url"      : "/blog/recommender-chapter2",
+      "url"      : "/recommender-chapter2",
       "date"     : "02 May 2024",
       "image"    : "/images/rs-chapter2-thumbnail.avif"
     } ,
@@ -58,7 +58,7 @@
       "title"    : "Recommendation System for Dummies (1/6)",
       "category" : "blog",
       "tags"     : "machine-learning and rec-sys",
-      "url"      : "/blog/recommender-chapter1",
+      "url"      : "/recommender-chapter1",
       "date"     : "01 May 2024",
       "image"    : "/images/rs-chapter1-thumbnail.avif"
     } ,
@@ -67,7 +67,7 @@
       "title"    : "Transformers for Dummies",
       "category" : "blog",
       "tags"     : "machine-learning and transformer",
-      "url"      : "/blog/transformer",
+      "url"      : "/transformer",
       "date"     : "02 April 2024",
       "image"    : "/images/transformer-thumbnail.avif"
     } ,
@@ -76,7 +76,7 @@
       "title"    : "Front and Backward Propagation of Neural Networks",
       "category" : "blog",
       "tags"     : "machine-learning and neural-network",
-      "url"      : "/blog/neuralnet",
+      "url"      : "/neuralnet",
       "date"     : "01 April 2024",
       "image"    : "/images/nn-thumbnail.avif"
     } 

@@ -6,22 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Making Recommenders Better (6/6)</title>
-  <meta name='description' content='Hybrid? Machine Learning? So many ways to improve recommenders.'>
+  <title>Front and Backward Propagation of Neural Networks</title>
+  <meta name='description' content=''>
 
-  <link rel="canonical" href="http://localhost:4000/blog/recommender-chapter6">
+  <link rel="canonical" href="http://localhost:4000/neuralnet">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Making Recommenders Better (6/6) – Paul Song">
-  <meta name="twitter:description" content="Hybrid? Machine Learning? So many ways to improve recommenders.">
-  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter6-thumbnail.avif">
+  <meta name="twitter:title" content="Front and Backward Propagation of Neural Networks – Paul Song">
+  <meta name="twitter:description" content="
+  
+    
+      I’ve come across some great resources that explain Neural Networks (mainly 3Blue1Brown for intuition &amp;amp; theory and this Medium article for code) and so this article is just to summarize what I’ve learned and is for my own learning and hopefully for others as well. 
+    
+  
+
+
+">
+  <meta name="twitter:image:src" content="http://localhost:4000/images/nn-thumbnail.avif">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Making Recommenders Better (6/6) – Paul Song">
-  <meta property="og:description" content="Hybrid? Machine Learning? So many ways to improve recommenders.">
-  <meta property="og:image" content="http://localhost:4000/images/rs-chapter6-thumbnail.avif">
+  <meta property="og:title" content="Front and Backward Propagation of Neural Networks – Paul Song">
+  <meta property="og:description" content="
+  
+    
+      I’ve come across some great resources that explain Neural Networks (mainly 3Blue1Brown for intuition &amp;amp; theory and this Medium article for code) and so this article is just to summarize what I’ve learned and is for my own learning and hopefully for others as well. 
+    
+  
+
+
+">
+  <meta property="og:image" content="http://localhost:4000/images/nn-thumbnail.avif">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -170,24 +186,20 @@
       
         <div class="post__tags">
           
-            <a href="/tags/?tag=machine-learning" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+            <a href="/tags/?tag=machine-learning" class="post__tag tag-color-js" data-accent="#308000" style="color: #308000;">machine-learning</a>
           
-            <a href="/tags/?tag=rec-sys" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
-          
-            <a href="/tags/?tag=deep-learning" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">deep-learning</a>
+            <a href="/tags/?tag=neural-network" class="post__tag tag-color-js" data-accent="#308000" style="color: #308000;">neural-network</a>
           
         </div>
       
 
-      <h1 class="post__title">Making Recommenders Better (6/6)</h1>
+      <h1 class="post__title">Front and Backward Propagation of Neural Networks</h1>
 
-      
-        <div class="post__description">Hybrid? Machine Learning? So many ways to improve recommenders.</div>
       
 
       <div class="post__meta">
         <div class="post__meta__bottom">
-          <time class="post__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
+          <time class="post__date" datetime="2024-04-01T00:00:00+09:00">01 Apr 2024</time>
         </div>
       </div>
     </div>
@@ -196,7 +208,7 @@
 
     
     <div class="post-image">
-      <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
+      <img class="lazy" data-src="/images/nn-thumbnail.avif" alt="Front and Backward Propagation of Neural Networks">
     </div>
     
     
@@ -210,114 +222,45 @@
   <article class="post">
 
     <div class="post__content">
-      <p>Good job reaching the end of the series! Now you know a lot about the basics of recommender systems. What now? Now we discuss ways we can improve upon the previous approaches we covered. We’ve gone over so many different approaches each with their own pros and cons. There are countless ways to make recommenders stronger and we will be looking at two common approaches.</p>
+      <table>
+  <tbody>
+    <tr>
+      <td>I’ve come across some great resources that explain Neural Networks (mainly 3Blue1Brown for intuition &amp; theory and this Medium article for code) and so this article is just to summarize what I’ve learned and is for my own learning and hopefully for others as well. </td>
+    </tr>
+  </tbody>
+</table>
 
-<h3 id="hybrid">Hybrid</h3>
-<p>The hybrid approach, as its name suggests, takes advantage of different strengths of the three main recommenders (CF, CB, KB) and combines them in a way that makes the resulting recommender much stronger. There are three approaches within hybrid recommenders: ensemble, monolithic, and mixed.</p>
+<p>This article assumes a basic understanding of what Neural Networks are and its basic components (layers, nodes, weights, and biases). I aim to explain clearly the theory behind forward and backpropagation and a clear code implementation behind it all.</p>
 
-<p><strong>Ensemble</strong> — results from different algorithms are combined into a single output
-<strong>Monolithic</strong> — various data types are used
-<strong>Mixed Systems</strong> — results from different algorithms are shown side-by-side</p>
+<p>I find the whole process to make more sense with two nodes.</p>
 
+<h3 id="forward-propagation">Forward Propagation</h3>
+<p>If you look at the following visualization, you’ll see the we have all the basic components of a NN. Input node, output node, weights, biases, and activation functions (I will arbitrarily use the sigmoid activation function throughout this article). 
+Then, we can express it in an equation. The weights and biases are initially just random numbers. The weights and biases are the only things that can affect the outcome of our NN. Given an input data, the model just does calculations until the final layer to give an output.</p>
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;" />
+        <img src="/images/nn-1-1.png" loading="lazy" style="width: 800px;" />
     </div>
-    <p style="text-align: center; font-size: 15px; color: grey;">
-        Taxonomy of hybrid systems. Image by Aggarwal (2016).
-    </p>
 </div>
-<p>Within each category, there are different implementations but for now, we will explore hybrid recommenders from a more general perspective. What different algorithms could we use together? Below are some examples.</p>
-
-<ul>
-  <li>Knowledge-Based Ensemble: This type of hybrid recommender combines the strengths of knowledge-based systems with other recommender types. We know that the benefits of knowledge-based algorithms is that it doesn’t require user data and can thus avoid the cold-start problem. This is a problem that both CF and CB recommenders face and so this recommender starts with a KB recommender and then uses CF and CB once sufficient data is collected.</li>
-  <li>Content-Boosted Collaborative Filtering: This type of hybrid recommender combines the strengths of both content-based and collaborative filtering techniques. Content-based filtering is used to analyze the features of items, and collaborative filtering is used to capture the user-item interactions. The content features are then used to adjust the similarity calculations in collaborative filtering, which leads to more personalized recommendations.</li>
-  <li>Collaborative-Boosted Content Filtering: This type of hybrid recommender also combines content-based and collaborative filtering techniques, but in a different way. Collaborative filtering is used to generate a set of candidate items, and then content-based filtering is used to rank those items based on their features. This method is useful when there is a large number of items and the collaborative filtering algorithm struggles to efficiently generate recommendations.</li>
-  <li>Model-Based Hybrid Recommenders: This type of hybrid recommender combines different recommendation algorithms into a single model. For example, a model could combine matrix factorization and association rule mining techniques. The advantage of this approach is that it can capture the strengths of different algorithms while minimizing their weaknesses. The challenge, however, is to determine the appropriate weighting and combination of the different algorithms in the model.</li>
-</ul>
-
-<h3 id="machine-learning">Machine Learning</h3>
-<p>Ah, Machine Learning. A sure-fire way to improve classification models. ML is mostly used in collaborative filtering and content-based recommenders (and various hybrid recommenders). The implementation or deep-dive into ML in recommenders will not be done as there are many resources available online and that is a large topic to get into</p>
-
-<h4 id="ml-in-collaborative-filtering">ML in Collaborative Filtering</h4>
-
-<p>Well, in our model-based CF approach, we need to create a model that can fill in the empty cells of our user-item matrix. SVDs and its variations have been the main go-to until ML techniques completely outperformed traditional methods. Below are several ways in which ML can improve model-based CF.</p>
-
-<ol>
-  <li>Improve on Matrix Factorization — SVD is good but it only captures linear relationships within the data. The product of three matrices to best approximate the original matrix is limited as it cannot perform nonlinear transformation and can miss out on more complex patterns. ML can perform matrix factorization much better as it is not limited to linear transformations. This creates a much more accurate model.</li>
-  <li>Use much more Data Types — Given that we have a lot of information about the user and/or item (what user watches, searches, age, location, gender, etc.), it can be hard to include all of the data we have in traditional approaches as it is not scalable and high-dimensionality can be infeasible. With ML, embeddings are a great way to reduce the dimensionality of various data types and can be directly inputted into neural networks. This provides the model with a greater quantity and quality of data and can only improve upon traditional methods.</li>
-  <li>Learn the user-item matrix without Matrix Factorization — ML can also just go forth and predict the user-item matrix by finding patterns within the original matrix. Autoencoders (AE) are one such popular way to do that. As shown below, the architecture of this deep learning technique is to input the thing we want to recreate and outputting a good approximation of that thing. The middle layer forces the model to learn the input layer with a great reduction in dimensionality and nodes and thus learns only the essential qualities of the input. This is then generalized back into the same dimension as the input layer to create the output, an approximation of the input. In recommender systems, the input can be the user-item matrix with missing ratings. By training the AE to learn the patterns of the input, it is forced to learn the essential patterns of the matrix because of the bottleneck hidden layer. The output is the user-item matrix but with all the missing entries filled out.</li>
-</ol>
-
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;" />
+        <img src="/images/nn-1-2.png" loading="lazy" style="width: 800px;" />
     </div>
-    <p style="text-align: center; font-size: 15px; color: grey;">
-        Image by Jordan (2018).
-    </p>
 </div>
 
-<h4 id="ml-in-content-based">ML in Content-Based</h4>
-
-<p>How does it benefit content-based algorithms? Well we have already touched on one method with NLP. Since a lot of data we have about an item ends up being text-based, NLP has been extremely useful in extracting features from such text-based data. However, ML isn’t just limited to extracting features from texts and items also have other forms of data. What other forms of data can be used? Images, audio, and video of course.</p>
-
-<p>One deep learning neural network I want to introduce here is the convolutional neural network (CNN). It is well-known for working well with image data.</p>
-
+<h3 id="back-propagation">Back Propagation</h3>
+<p>Now that we have an output, how do we train the network so that the output is more accurate? Right now the model just spits out a random output. To make it better, we have to tell the network that it did poorly and to make some changes to its previous layers, weights, and biases.
+We can use an error value (I will use the Mean Squared Error for this article) to capture how different the output is from the true output. For our two-node example, you can see that the error between the output (Y) and the true value (red Y) is captured with E. </p>
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-3.webp" loading="lazy" style="width: 700px;" />
+        <img src="/images/nn-1-3.png" loading="lazy" style="width: 800px;" />
     </div>
-    <p style="text-align: center; font-size: 15px; color: grey;">
-        Image by Ratan (2020).
-    </p>
 </div>
 
-<p>You can see that it is composed of three types of layers: convolution, pooling, and fully-connected layers. What are they?</p>
-
-<ul>
-  <li>In convolutional layers, the CNN applies filters to the input image in order to extract features, such as edges, shapes, and textures. These filters are learned during the training process, and they can be reused across different regions of the input image.</li>
-  <li>Pooling layers are used to reduce the dimensionality of the feature maps produced by the convolutional layers. This helps to decrease the computational requirements of the network while retaining important features.</li>
-  <li>The fully connected layers are used to classify the image or video based on the features extracted by the convolutional and pooling layers. In these layers, the network combines the extracted features and makes a prediction about the class or category of the input image or video.</li>
-</ul>
-
-<p>Using CNN, the capability of our content-based recommenders expand tenfold. We can now extract features from images and use that to learn a user’s preference and recommend personalized items. However, this isn’t all. Through CNN, there are ways to extract features from audio. How does a model for learning images learn sounds? Easy, convert the sounds into images and everything else is the same.</p>
-
-<p>Spectrograms are a fascinating way to visualize sound in an accurate manner that takes into account amplitude, period, frequency, etc. of the audio. Ketan Doshi has a great <a href="https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504">Medium series on Audio Deep Learning</a> that I recommend you check out!</p>
-
-<p>Now that sound and images can be used as data sources, it is no surprise that we can also extract information from videos which is just a combination of sound and images. How exciting!</p>
-
-<hr />
-<h3 id="code-implementation-of-ml-in-model-based-cf">Code Implementation of ML in Model-Based CF</h3>
-<p>Here, we implement an Autoencoder that learns the user-item matrix with three simple layers.</p>
-
-<h4 id="data-prep">Data Prep</h4>
-<script src="https://gist.github.com/paul-song-minerva/ce624f5f3e09d041f8d1d148d66bc4be.js"></script>
-
-<h4 id="autoencoder-model">Autoencoder Model**</h4>
-<script src="https://gist.github.com/paul-song-minerva/56b04a44970ade4055f31b81a9a53bc6.js"></script>
-
-<h4 id="evaluation">Evaluation</h4>
-<script src="https://gist.github.com/paul-song-minerva/d692d450fabfc2816b5522756e88b7a8.js"></script>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MAE: 0.15602776775088187
-RMSE: 0.7032389679040674
-Spearman: 0.8605877952195891
-</code></pre></div></div>
-
-<hr />
-<p>We see that it has a great performance with only three layers. This is the same dataset used in our CB and CF chapters and so we can see that it performs better than any of the previous approaches, both for rating accuracy and rank correlation.</p>
-
-<p>This was just a quick introduction into more advanced recommenders. Now that you know all there is to know about the basics of recommenders, find more advanced recommenders in fields you’re interested in to see how they work!</p>
-
-<h3 id="resources">Resources</h3>
-<p>Aggarwal, C. C. (2016). Recommender Systems. <a href="https://doi.org/10.1007/978-3-319-29659-3">https://doi.org/10.1007/978-3-319-29659-3</a></p>
-
-<p>Doshi, K. (2021, May 21). Audio deep learning made simple (part 1): State-of-the-art techniques. Medium. Retrieved April 2, 2023, from <a href="https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504">https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504</a></p>
-
-<p>Jeremy Jordan. (2018, March 19). Introduction to autoencoders. Jeremy Jordan. Retrieved April 2, 2023, from <a href="https://www.jeremyjordan.me/autoencoders/">https://www.jeremyjordan.me/autoencoders/</a></p>
-
-<p>Ratan, P. (2021, January 14). What is the Convolutional Neural Network Architecture? Analytics Vidhya. Retrieved April 2, 2023, from <a href="https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/">https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/</a></p>
+<p>You’ll also notice that there are arrows pointing to the previous nodes, weights, and biases. This is our way of tweaking previous settings based on the error of our current state.
+Think of E as the error of the entire network. How do we change it? Well, we can use partial derivatives to approach it. Partial derivatives, e.g. dY/dX, can be thought of as “how much of a change in X changes Y?” So basically, how much of the previous node (X), its weights (W), and biases (b) of the previous layer can I change to change our error (E)?
+We want to minimize error. If you are familiar with gradients, you know that it always points in the direction of steepest ascent. What this means is that if we follow the gradient of a function, we end up going towards the maximum point. Since we want to go to the minimum point, we simply go the opposite direction.
+W = W - dE/dW</p>
 
     </div>
 
@@ -328,22 +271,22 @@ Spearman: 0.8605877952195891
       <ul class="share__list list-reset">
         <li class="share__item">
           <a class="share__link share__twitter"
-            href="https://twitter.com/intent/tweet?text=Making%20Recommenders%20Better%20(6/6)&url=http://localhost:4000/blog/recommender-chapter6"
+            href="https://twitter.com/intent/tweet?text=Front%20and%20Backward%20Propagation%20of%20Neural%20Networks&url=http://localhost:4000/neuralnet"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/recommender-chapter6"
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/neuralnet"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/recommender-chapter6&amp;media=http://localhost:4000/images/rs-chapter6-thumbnail.avif&amp;description=Making%20Recommenders%20Better%20(6/6)"
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/neuralnet&amp;media=http://localhost:4000/images/nn-thumbnail.avif&amp;description=Front%20and%20Backward%20Propagation%20of%20Neural%20Networks"
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
           rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/recommender-chapter6&title=Making%20Recommenders%20Better%20(6/6)&summary=Hybrid?%20Machine%20Learning?%20So%20many%20ways%20to%20improve%20recommenders.&source="
+          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/neuralnet&title=Front%20and%20Backward%20Propagation%20of%20Neural%20Networks&summary=&source="
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
         </li>
       </ul>
@@ -382,6 +325,54 @@ Spearman: 0.8605877952195891
             
       
             
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+                    
+                      <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+                    
+                      <a href="/tags/?tag=deep-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">deep-learning</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/recommender-chapter6">Making Recommenders Better (6/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
+
+                  <div class="article__meta">
+                    <div class="article__meta__bottom">
+                      <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+              
             
             
             
@@ -397,7 +388,7 @@ Spearman: 0.8605877952195891
                   
 
                   
-                  <a href="/blog/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
                   </a>
                   
@@ -417,7 +408,7 @@ Spearman: 0.8605877952195891
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
+                    <a href="/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
                   </h2>
 
                   <p class="article__excerpt">“Ask and you shall receive”</p>
@@ -450,7 +441,7 @@ Spearman: 0.8605877952195891
                   
 
                   
-                  <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
                   </a>
                   
@@ -472,7 +463,7 @@ Spearman: 0.8605877952195891
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+                    <a href="/recommender-chapter4">Content-Based Recommenders (4/6)</a>
                   </h2>
 
                   <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
@@ -480,59 +471,6 @@ Spearman: 0.8605877952195891
                   <div class="article__meta">
                     <div class="article__meta__bottom">
                       <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            
-              
-              
-            
-            
-            
-      
-            
-      
-            
-
-            <div class="article col col-12">
-              <div class="article__inner">
-                <div class="article__head">
-
-                  
-
-                  
-                  <a href="/blog/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
-                    <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
-                  </a>
-                  
-
-                </div>
-
-                <div class="article__content">
-
-                  
-                  <div class="article__tags">
-                    
-                      <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
-                    
-                      <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
-                    
-                  </div>
-                  
-
-                  <h2 class="article__title">
-                    <a href="/blog/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
-                  </h2>
-
-                  <p class="article__excerpt">“People similar to you liked this, try it out”</p>
-
-                  <div class="article__meta">
-                    <div class="article__meta__bottom">
-                      <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
                     </div>
                   </div>
 
@@ -642,7 +580,7 @@ Spearman: 0.8605877952195891
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
+                    <a class="recent-posts__image" href="/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -656,7 +594,7 @@ Spearman: 0.8605877952195891
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
+                    <h4 class="recent-posts__title"><a href="/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
@@ -667,7 +605,7 @@ Spearman: 0.8605877952195891
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
+                    <a class="recent-posts__image" href="/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -683,7 +621,7 @@ Spearman: 0.8605877952195891
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
+                    <h4 class="recent-posts__title"><a href="/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>

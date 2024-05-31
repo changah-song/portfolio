@@ -6,26 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Fluent Fable: Reading for Language Learning</title>
-  <meta name='description' content=''>
+  <title>Making Recommenders Better (6/6)</title>
+  <meta name='description' content='Hybrid? Machine Learning? So many ways to improve recommenders.'>
 
-  <link rel="canonical" href="http://localhost:4000/blog/fluent-fable">
+  <link rel="canonical" href="http://localhost:4000/recommender-chapter6">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fluent Fable: Reading for Language Learning – Paul Song">
-  <meta name="twitter:description" content="Introduction
-
-">
-  <meta name="twitter:image:src" content="http://localhost:4000/images/ff-thumbnail.png">
+  <meta name="twitter:title" content="Making Recommenders Better (6/6) – Paul Song">
+  <meta name="twitter:description" content="Hybrid? Machine Learning? So many ways to improve recommenders.">
+  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter6-thumbnail.avif">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Fluent Fable: Reading for Language Learning – Paul Song">
-  <meta property="og:description" content="Introduction
-
-">
-  <meta property="og:image" content="http://localhost:4000/images/ff-thumbnail.png">
+  <meta property="og:title" content="Making Recommenders Better (6/6) – Paul Song">
+  <meta property="og:description" content="Hybrid? Machine Learning? So many ways to improve recommenders.">
+  <meta property="og:image" content="http://localhost:4000/images/rs-chapter6-thumbnail.avif">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -174,20 +170,24 @@
       
         <div class="post__tags">
           
-            <a href="/tags/?tag=full-stack" class="post__tag tag-color-js" data-accent="#AE3768" style="color: #AE3768;">full-stack</a>
+            <a href="/tags/?tag=machine-learning" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
           
-            <a href="/tags/?tag=react-native" class="post__tag tag-color-js" data-accent="#AE3768" style="color: #AE3768;">react-native</a>
+            <a href="/tags/?tag=rec-sys" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+          
+            <a href="/tags/?tag=deep-learning" class="post__tag tag-color-js" data-accent="#477690" style="color: #477690;">deep-learning</a>
           
         </div>
       
 
-      <h1 class="post__title">Fluent Fable: Reading for Language Learning</h1>
+      <h1 class="post__title">Making Recommenders Better (6/6)</h1>
 
+      
+        <div class="post__description">Hybrid? Machine Learning? So many ways to improve recommenders.</div>
       
 
       <div class="post__meta">
         <div class="post__meta__bottom">
-          <time class="post__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
+          <time class="post__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
         </div>
       </div>
     </div>
@@ -196,7 +196,7 @@
 
     
     <div class="post-image">
-      <img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning">
+      <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
     </div>
     
     
@@ -210,54 +210,114 @@
   <article class="post">
 
     <div class="post__content">
-      <p><strong>Introduction</strong></p>
+      <p>Good job reaching the end of the series! Now you know a lot about the basics of recommender systems. What now? Now we discuss ways we can improve upon the previous approaches we covered. We’ve gone over so many different approaches each with their own pros and cons. There are countless ways to make recommenders stronger and we will be looking at two common approaches.</p>
 
-<p>What’s the best way to learn a language? While there are many many approaches that have been developed throughout the years and many that I’ve personally tried, I’ve concluded that simply reading and engaging with material that you’re interested in is the best way to learn a new language and gain confidence in it. While the easiest way to expose yourself to a new language is to watch a show or series, I found it much too slow and unreliable.</p>
+<h3 id="hybrid">Hybrid</h3>
+<p>The hybrid approach, as its name suggests, takes advantage of different strengths of the three main recommenders (CF, CB, KB) and combines them in a way that makes the resulting recommender much stronger. There are three approaches within hybrid recommenders: ensemble, monolithic, and mixed.</p>
 
-<p>Thus, I started reading. I started reading physical books first. It was nice but I had two main issues. 1) Regularly finding a book at your right language level in a genre you’re interested in is a struggle in itself. 2) Translating words and going from dictionary/translator to book back and forth disrupts the reading process. Then I started reading on my phone and found that issue 2 could be easily eliminated thanks to an easy way to find the definition of words as I was reading. However, issue 1 still remained and I also found it hard to be motivated finish an entire book; it was much too burdensome to stick with one book in an unfamiliar language</p>
-
-<p>Well, if you can’t discipline yourself, create something that lowers the need for said discipline right?</p>
-
-<p>So, I started creating a simple mobile app using React Native as I knew some Javascript. I wanted to make the app very simple. One where you could enter, read a small passage that matched my level, translate any unfamiliar words, and exit. It would also save unfamiliar words and allow for the use of flashcards to memorize the words if you so desired.</p>
+<p><strong>Ensemble</strong> — results from different algorithms are combined into a single output
+<strong>Monolithic</strong> — various data types are used
+<strong>Mixed Systems</strong> — results from different algorithms are shown side-by-side</p>
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/fluent-fable-viz.png" loading="lazy" style="width: 800px;" />
+        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;" />
     </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Taxonomy of hybrid systems. Image by Aggarwal (2016).
+    </p>
+</div>
+<p>Within each category, there are different implementations but for now, we will explore hybrid recommenders from a more general perspective. What different algorithms could we use together? Below are some examples.</p>
+
+<ul>
+  <li>Knowledge-Based Ensemble: This type of hybrid recommender combines the strengths of knowledge-based systems with other recommender types. We know that the benefits of knowledge-based algorithms is that it doesn’t require user data and can thus avoid the cold-start problem. This is a problem that both CF and CB recommenders face and so this recommender starts with a KB recommender and then uses CF and CB once sufficient data is collected.</li>
+  <li>Content-Boosted Collaborative Filtering: This type of hybrid recommender combines the strengths of both content-based and collaborative filtering techniques. Content-based filtering is used to analyze the features of items, and collaborative filtering is used to capture the user-item interactions. The content features are then used to adjust the similarity calculations in collaborative filtering, which leads to more personalized recommendations.</li>
+  <li>Collaborative-Boosted Content Filtering: This type of hybrid recommender also combines content-based and collaborative filtering techniques, but in a different way. Collaborative filtering is used to generate a set of candidate items, and then content-based filtering is used to rank those items based on their features. This method is useful when there is a large number of items and the collaborative filtering algorithm struggles to efficiently generate recommendations.</li>
+  <li>Model-Based Hybrid Recommenders: This type of hybrid recommender combines different recommendation algorithms into a single model. For example, a model could combine matrix factorization and association rule mining techniques. The advantage of this approach is that it can capture the strengths of different algorithms while minimizing their weaknesses. The challenge, however, is to determine the appropriate weighting and combination of the different algorithms in the model.</li>
+</ul>
+
+<h3 id="machine-learning">Machine Learning</h3>
+<p>Ah, Machine Learning. A sure-fire way to improve classification models. ML is mostly used in collaborative filtering and content-based recommenders (and various hybrid recommenders). The implementation or deep-dive into ML in recommenders will not be done as there are many resources available online and that is a large topic to get into</p>
+
+<h4 id="ml-in-collaborative-filtering">ML in Collaborative Filtering</h4>
+
+<p>Well, in our model-based CF approach, we need to create a model that can fill in the empty cells of our user-item matrix. SVDs and its variations have been the main go-to until ML techniques completely outperformed traditional methods. Below are several ways in which ML can improve model-based CF.</p>
+
+<ol>
+  <li>Improve on Matrix Factorization — SVD is good but it only captures linear relationships within the data. The product of three matrices to best approximate the original matrix is limited as it cannot perform nonlinear transformation and can miss out on more complex patterns. ML can perform matrix factorization much better as it is not limited to linear transformations. This creates a much more accurate model.</li>
+  <li>Use much more Data Types — Given that we have a lot of information about the user and/or item (what user watches, searches, age, location, gender, etc.), it can be hard to include all of the data we have in traditional approaches as it is not scalable and high-dimensionality can be infeasible. With ML, embeddings are a great way to reduce the dimensionality of various data types and can be directly inputted into neural networks. This provides the model with a greater quantity and quality of data and can only improve upon traditional methods.</li>
+  <li>Learn the user-item matrix without Matrix Factorization — ML can also just go forth and predict the user-item matrix by finding patterns within the original matrix. Autoencoders (AE) are one such popular way to do that. As shown below, the architecture of this deep learning technique is to input the thing we want to recreate and outputting a good approximation of that thing. The middle layer forces the model to learn the input layer with a great reduction in dimensionality and nodes and thus learns only the essential qualities of the input. This is then generalized back into the same dimension as the input layer to create the output, an approximation of the input. In recommender systems, the input can be the user-item matrix with missing ratings. By training the AE to learn the patterns of the input, it is forced to learn the essential patterns of the matrix because of the bottleneck hidden layer. The output is the user-item matrix but with all the missing entries filled out.</li>
+</ol>
+
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Image by Jordan (2018).
+    </p>
 </div>
 
-<p>개인적으로 언어를 배우면서 꼭 존재해야 되겠다고 생각한 후 시작한 프로젝트로, React Native 대해서 하나도 몰랐던 제가 많은 걸 배우면서 재밌게 만든 앱입니다.</p>
+<h4 id="ml-in-content-based">ML in Content-Based</h4>
 
-<p>저 처럼 한국 국민인데 외국에서 삶 대부분을 살아오셨다면 이 앱의 목적과 기능들이 이해가 더 잘 될 거에요.</p>
+<p>How does it benefit content-based algorithms? Well we have already touched on one method with NLP. Since a lot of data we have about an item ends up being text-based, NLP has been extremely useful in extracting features from such text-based data. However, ML isn’t just limited to extracting features from texts and items also have other forms of data. What other forms of data can be used? Images, audio, and video of course.</p>
 
-<p>한글은 어느 정도 이해하고 말할 수 있지만, 어휘에서 걸리는 절망적인 느낌.. 한국어가 영어를 모국어로 삼는 사람들에게는 가장 어려운 언어라는 사실과 한국어의 단어 수량이 엄청나다는 게 그 느낌을 설명하겠죠.</p>
+<p>One deep learning neural network I want to introduce here is the convolutional neural network (CNN). It is well-known for working well with image data.</p>
 
-<p>제가 한국어뿐만 아니라 중국어도 열심히 공부하면서 깨달은 점은 책만 많이 읽으면 언어는 따라오게 된있다라는 거에요. 그래서 책을 읽을 때 가장 좋은 경험을 줄 수 있는 앱을 만들기로했어요.</p>
+<div class="gallery-box">
+    <div class="gallery">
+        <img src="/images/rs-6-3.webp" loading="lazy" style="width: 700px;" />
+    </div>
+    <p style="text-align: center; font-size: 15px; color: grey;">
+        Image by Ratan (2020).
+    </p>
+</div>
 
-<p><strong>Features, 기능</strong></p>
+<p>You can see that it is composed of three types of layers: convolution, pooling, and fully-connected layers. What are they?</p>
 
-<p>그래서, 이 앱을 많은 API를 통해서 다음의 기능을 담은 eReader을 개발했어요:</p>
+<ul>
+  <li>In convolutional layers, the CNN applies filters to the input image in order to extract features, such as edges, shapes, and textures. These filters are learned during the training process, and they can be reused across different regions of the input image.</li>
+  <li>Pooling layers are used to reduce the dimensionality of the feature maps produced by the convolutional layers. This helps to decrease the computational requirements of the network while retaining important features.</li>
+  <li>The fully connected layers are used to classify the image or video based on the features extracted by the convolutional and pooling layers. In these layers, the network combines the extracted features and makes a prediction about the class or category of the input image or video.</li>
+</ul>
 
-<ol>
-  <li>읽고 싶은 책 고르기 (Reader API)</li>
-  <li>단어 선택 후 사전 검색 (Korea Dictionary API)</li>
-  <li>단어 선택 후 어근 필터 (FastAPI를 사용해서 KONLPY API)</li>
-  <li>단어 선택 후 번역기 검색 (Translator API)</li>
-  <li>단어 저장 후 플래시 카드로 복습 (SQLite)</li>
-</ol>
+<p>Using CNN, the capability of our content-based recommenders expand tenfold. We can now extract features from images and use that to learn a user’s preference and recommend personalized items. However, this isn’t all. Through CNN, there are ways to extract features from audio. How does a model for learning images learn sounds? Easy, convert the sounds into images and everything else is the same.</p>
 
-<p><strong>What I Learned, 배운 것</strong></p>
+<p>Spectrograms are a fascinating way to visualize sound in an accurate manner that takes into account amplitude, period, frequency, etc. of the audio. Ketan Doshi has a great <a href="https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504">Medium series on Audio Deep Learning</a> that I recommend you check out!</p>
 
-<ol>
-  <li>Asynchronous functions</li>
-  <li>COR, FastAPI local server</li>
-  <li>Object-Oriented Programming 및 Separation of Concerns</li>
-  <li>React Hooks (State, Effect, Context)</li>
-  <li>Animation (PanResponder and Animated)</li>
-  <li>Styling and UI</li>
-</ol>
+<p>Now that sound and images can be used as data sources, it is no surprise that we can also extract information from videos which is just a combination of sound and images. How exciting!</p>
 
-<p>Documentation of Progress: <a href="https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend">https://github.com/paul-song-minerva/fluent-fable/tree/main/frontend</a></p>
+<hr />
+<h3 id="code-implementation-of-ml-in-model-based-cf">Code Implementation of ML in Model-Based CF</h3>
+<p>Here, we implement an Autoencoder that learns the user-item matrix with three simple layers.</p>
+
+<h4 id="data-prep">Data Prep</h4>
+<script src="https://gist.github.com/paul-song-minerva/ce624f5f3e09d041f8d1d148d66bc4be.js"></script>
+
+<h4 id="autoencoder-model">Autoencoder Model**</h4>
+<script src="https://gist.github.com/paul-song-minerva/56b04a44970ade4055f31b81a9a53bc6.js"></script>
+
+<h4 id="evaluation">Evaluation</h4>
+<script src="https://gist.github.com/paul-song-minerva/d692d450fabfc2816b5522756e88b7a8.js"></script>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MAE: 0.15602776775088187
+RMSE: 0.7032389679040674
+Spearman: 0.8605877952195891
+</code></pre></div></div>
+
+<hr />
+<p>We see that it has a great performance with only three layers. This is the same dataset used in our CB and CF chapters and so we can see that it performs better than any of the previous approaches, both for rating accuracy and rank correlation.</p>
+
+<p>This was just a quick introduction into more advanced recommenders. Now that you know all there is to know about the basics of recommenders, find more advanced recommenders in fields you’re interested in to see how they work!</p>
+
+<h3 id="resources">Resources</h3>
+<p>Aggarwal, C. C. (2016). Recommender Systems. <a href="https://doi.org/10.1007/978-3-319-29659-3">https://doi.org/10.1007/978-3-319-29659-3</a></p>
+
+<p>Doshi, K. (2021, May 21). Audio deep learning made simple (part 1): State-of-the-art techniques. Medium. Retrieved April 2, 2023, from <a href="https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504">https://towardsdatascience.com/audio-deep-learning-made-simple-part-1-state-of-the-art-techniques-da1d3dff2504</a></p>
+
+<p>Jeremy Jordan. (2018, March 19). Introduction to autoencoders. Jeremy Jordan. Retrieved April 2, 2023, from <a href="https://www.jeremyjordan.me/autoencoders/">https://www.jeremyjordan.me/autoencoders/</a></p>
+
+<p>Ratan, P. (2021, January 14). What is the Convolutional Neural Network Architecture? Analytics Vidhya. Retrieved April 2, 2023, from <a href="https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/">https://www.analyticsvidhya.com/blog/2020/10/what-is-the-convolutional-neural-network-architecture/</a></p>
 
     </div>
 
@@ -268,22 +328,22 @@
       <ul class="share__list list-reset">
         <li class="share__item">
           <a class="share__link share__twitter"
-            href="https://twitter.com/intent/tweet?text=Fluent%20Fable:%20Reading%20for%20Language%20Learning&url=http://localhost:4000/blog/fluent-fable"
+            href="https://twitter.com/intent/tweet?text=Making%20Recommenders%20Better%20(6/6)&url=http://localhost:4000/recommender-chapter6"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/fluent-fable"
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/recommender-chapter6"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/fluent-fable&amp;media=http://localhost:4000/images/ff-thumbnail.png&amp;description=Fluent%20Fable:%20Reading%20for%20Language%20Learning"
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/recommender-chapter6&amp;media=http://localhost:4000/images/rs-chapter6-thumbnail.avif&amp;description=Making%20Recommenders%20Better%20(6/6)"
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
           rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/fluent-fable&title=Fluent%20Fable:%20Reading%20for%20Language%20Learning&summary=&source="
+          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/recommender-chapter6&title=Making%20Recommenders%20Better%20(6/6)&summary=Hybrid?%20Machine%20Learning?%20So%20many%20ways%20to%20improve%20recommenders.&source="
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
         </li>
       </ul>
@@ -301,7 +361,7 @@
 
 <!-- begin related posts -->
 <div class="container">
-  <section class="related-posts  animate">
+  <section class="related-posts is-related animate">
     <div class="row">
       <div class="col col-12">
         <div class="container__inner">
@@ -329,6 +389,52 @@
             
       
             
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+                    
+                      <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">“Ask and you shall receive”</p>
+
+                  <div class="article__meta">
+                    <div class="article__meta__bottom">
+                      <time class="article__date" datetime="2024-05-05T00:00:00+09:00">05 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+              
             
             
             
@@ -336,6 +442,54 @@
             
       
             
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+                    
+                      <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+                    
+                      <a href="/tags/?tag=nlp" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">nlp</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
+
+                  <div class="article__meta">
+                    <div class="article__meta__bottom">
+                      <time class="article__date" datetime="2024-05-04T00:00:00+09:00">04 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+              
+              
             
             
             
@@ -343,35 +497,52 @@
             
       
             
+
+            <div class="article col col-12">
+              <div class="article__inner">
+                <div class="article__head">
+
+                  
+
+                  
+                  <a href="/recommender-chapter3" class="article__image" aria-hidden="true" tabindex="-1">
+                    <img class="lazy" data-src="/images/rs-chapter3-thumbnail.avif" alt="Collaborative Filtering Recommenders (3/6)">
+                  </a>
+                  
+
+                </div>
+
+                <div class="article__content">
+
+                  
+                  <div class="article__tags">
+                    
+                      <a href="/tags/?tag=machine-learning" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">machine-learning</a>
+                    
+                      <a href="/tags/?tag=rec-sys" class="article__tag tag-color-js" data-accent="#477690" style="color: #477690;">rec-sys</a>
+                    
+                  </div>
+                  
+
+                  <h2 class="article__title">
+                    <a href="/recommender-chapter3">Collaborative Filtering Recommenders (3/6)</a>
+                  </h2>
+
+                  <p class="article__excerpt">“People similar to you liked this, try it out”</p>
+
+                  <div class="article__meta">
+                    <div class="article__meta__bottom">
+                      <time class="article__date" datetime="2024-05-03T00:00:00+09:00">03 May 2024</time>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
             
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
-            
+              
+                  
           </div>
         </div>
       </div>
@@ -471,7 +642,7 @@
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
+                    <a class="recent-posts__image" href="/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -485,7 +656,7 @@
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
+                    <h4 class="recent-posts__title"><a href="/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
@@ -496,7 +667,7 @@
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
+                    <a class="recent-posts__image" href="/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -512,7 +683,7 @@
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
+                    <h4 class="recent-posts__title"><a href="/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>

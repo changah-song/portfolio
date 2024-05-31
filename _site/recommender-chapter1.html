@@ -6,22 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Evaluating Recommender Systems (2/6)</title>
-  <meta name='description' content='How to approach evaluating recommenders. It’s more complicated than you might think'>
+  <title>Recommendation System for Dummies (1/6)</title>
+  <meta name='description' content=''>
 
-  <link rel="canonical" href="http://localhost:4000/blog/recommender-chapter2">
+  <link rel="canonical" href="http://localhost:4000/recommender-chapter1">
   <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Evaluating Recommender Systems (2/6) – Paul Song">
-  <meta name="twitter:description" content="How to approach evaluating recommenders. It’s more complicated than you might think">
-  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter2-thumbnail.avif">
+  <meta name="twitter:title" content="Recommendation System for Dummies (1/6) – Paul Song">
+  <meta name="twitter:description" content="1. What are Recommender Systems?
+Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.
+
+">
+  <meta name="twitter:image:src" content="http://localhost:4000/images/rs-chapter1-thumbnail.avif">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Evaluating Recommender Systems (2/6) – Paul Song">
-  <meta property="og:description" content="How to approach evaluating recommenders. It’s more complicated than you might think">
-  <meta property="og:image" content="http://localhost:4000/images/rs-chapter2-thumbnail.avif">
+  <meta property="og:title" content="Recommendation System for Dummies (1/6) – Paul Song">
+  <meta property="og:description" content="1. What are Recommender Systems?
+Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.
+
+">
+  <meta property="og:image" content="http://localhost:4000/images/rs-chapter1-thumbnail.avif">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -177,15 +183,13 @@
         </div>
       
 
-      <h1 class="post__title">Evaluating Recommender Systems (2/6)</h1>
+      <h1 class="post__title">Recommendation System for Dummies (1/6)</h1>
 
-      
-        <div class="post__description">How to approach evaluating recommenders. It’s more complicated than you might think</div>
       
 
       <div class="post__meta">
         <div class="post__meta__bottom">
-          <time class="post__date" datetime="2024-05-02T00:00:00+09:00">02 May 2024</time>
+          <time class="post__date" datetime="2024-05-01T00:00:00+09:00">01 May 2024</time>
         </div>
       </div>
     </div>
@@ -194,7 +198,7 @@
 
     
     <div class="post-image">
-      <img class="lazy" data-src="/images/rs-chapter2-thumbnail.avif" alt="Evaluating Recommender Systems (2/6)">
+      <img class="lazy" data-src="/images/rs-chapter1-thumbnail.avif" alt="Recommendation System for Dummies (1/6)">
     </div>
     
     
@@ -208,197 +212,75 @@
   <article class="post">
 
     <div class="post__content">
-      <blockquote>
-  <p>LEARNING GOALS — 4 different ways to evaluate recommender systems: accuracy, correlation, utility, and usage.</p>
-</blockquote>
+      <h3 id="1-what-are-recommender-systems">1. What are Recommender Systems?</h3>
+<p>Hello there, if you are someone with a very basic knowledge of AI and ML concepts and want to explore a very practical application of these subjects, recommender systems are a great place to start as they employ so many of the theoretical concepts covered in classroom settings.</p>
 
-<p>Before we start exploring the many different ways to implement recommender systems, we should first discuss how we can evaluate them because only then can we we compare different algorithms and see which one performs better in which ways. However, even before evaluating specific recommenders, let’s discuss two broad situations we find ourselves in when evaluating recommenders: offline and online.</p>
+<p>What are recommender systems? As its name suggests, it is any system put in place that tries to recommend the best (in whatever metric that is defined) item to a user. Here, item can be anything from books or movies to friend suggestions; it is just anything that can be recommended to a user.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td><strong>Note</strong>: The offline approach is mostly used in evaluating recommenders and the one I’ll be using for the rest of the series but I discuss online approach for completeness.</td>
-    </tr>
-  </tbody>
-</table>
+<p>Recommender systems have been around for a while now but is a constantly evolving field as our knowledge of new machine learning and optimization techniques grows. The best recommender systems are what Netflix uses to suggest a new movie you might enjoy or what Youtube uses to keep you hooked for hours at a time.</p>
 
-<h4 id="online">Online</h4>
+<p>There are many resources online, from other Medium articles to textbooks to Google courses, that explain many different types of recommender systems. So then why am I writing this series on recommender systems? It is mainly to have a centralized place where all the different types of systems can be discussed where the tone and structure of each post is familiar. There are many different types of recommender systems and not one centralized place where are all of it is discussed; the resources you can find on each different systems varies greatly and I would like to create a resource that introduces each one in one place.</p>
 
-<p>When evaluating how well our recommender performs online, we are measuring the <strong>users’ (usually real-time) reactions</strong> given the recommended item. For example, the clicks or views a recommended Youtube video gets gives insight into how effective the recommendation was. Some methods used in this approach is <strong>A/B testing</strong> and <strong>multi-armed bandit</strong> recommenders.</p>
+<p>The best centralized resource I could find were the two following textbooks: “Recommender Systems: The Textbook” by Charu C. Aggarwal (2016) and “Recommender Systems Handbook” by Francesco Ricci et al. (2011). These textbooks has most of the currently known recommender systems but is lengthy and has no code implementation. As such, my mission was to summarize all of the concepts discussed in these resources, with the help of other online resources, and to also include code implementation for better understanding.</p>
 
-<p>Briefly explained, A/B testing aims to see how well a different course of action impacts user behavior by conducting both the default (A) and new (B) at the same time and seeing which performs better.</p>
-
-<p>For example, to user 1, I can recommend an item A and then to another similar user 2, I can recommend an item B. If item B ends up getting more clicks/purchases, we can conclude that recommending B was more effective.</p>
-
-<p>A more nuanced approach to this is the multi-armed bandit approach where we optimize the recommendations by working within the tradeoff between exploration and exploitation After recommending various items (exploration), we get a sense of what is liked and so we can focus on recommending that item (exploitation). This is especially useful in combating the Cold-Start problem where there is initially no data to make good recommendations right away.</p>
-
-<p>However, the online evaluation approach involves active user participation and an evaluation in real time and so we will not be using this approach in this series.</p>
-
-<h4 id="offline">Offline</h4>
-
-<p>From a research and practice perspective, we use the offline approach as we have access to many historical data and various data types that can lend to a better assessment of the generalizability strength of our recommenders. To start, we have to know that there is not one full-proof way to evaluate the effectiveness of recommenders as it has various goals as discussed in an earlier chapter.</p>
-
-<p>There are two ways to evaluate recommenders — <strong>rating</strong> or <strong>ranking</strong>. Rating evaluates how accurately the recommender predicts the ratings of items. Ranking evaluates how well the recommender recommends items that is desirable to the user. Below are four common evaluation methods that either evaluate rating or ranking.</p>
-
-<h3 id="accuracy-rmse--rating">Accuracy (RMSE) — rating</h3>
-<p>This is the most straightforward method. We look at the predictions and compare that to the truth value. This means that when we train our model, we usually want to leave out some items that the user already rated, also known as the train-test split approach, so that we can compare prediction to truth. If this is done for all the users in our data and find the average, we can get a score for how accurately the recommender predicted ratings.</p>
-
-<p>A common approach used in regression problems is <strong><em>mean squared error (MSE)</em></strong>, <strong><em>root mean squared error (RMSE)</em></strong>, and <strong><em>mean absolute error (MAE)</em></strong>. These are all simple ways to evaluate the accuracy of a classification algorithm. For recommenders, we have predicted ratings and truth ratings and so we can apply any of these methods to get a score.</p>
-
-<p>RMSE measures the <em>average difference between values predicted by a model and the actual values</em>. This leads to a simple formula and its translation into Python code shown below assuming ‘pred’ holds the predicted ratings and ‘true’ holds the true ratings 💻.</p>
+<h3 id="2-overview-of-series">2. Overview of Series</h3>
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq1.webp" loading="lazy" style="width: 700px; height: 100px;" />
+        <img src="/images/rs-chapter1-overview.png" loading="lazy" style="width: 800px; height: 300px;" />
     </div>
 </div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">pred</span> <span class="o">-</span> <span class="n">true</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-</code></pre></div></div>
+<p>Overview of the series and the four main categories of recommender systems. Image by author.
+This series will initially cover the four broad categories of recommender systems: Collaborative Filtering, Content-Based, Knowledge-Based, and Hybrid Recommenders. These four categories alone cover most of what makes up recommender systems. Additional chapters to this series will be less-used, but still useful, systems or more advanced explorations of systems already covered earlier. We will also be covering case-studies, equipped with our new-found knowledge.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td><strong>Note</strong>: This approach penalizes deviances that go further away from the truth value by squaring the difference between pred and true. MAE simply takes the absolute value of the difference instead of squaring it. Which is better has no clear answer and is a topic that the reader can choose to research further.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="correlation-spearman--ranking">Correlation (Spearman) — ranking</h3>
-<p>How can we evaluate recommenders without looking at the rating accuracy? Look at the ranking accuracy! This approach measures how effective the top-n recommendations are. We just want to check if our ranking is similar to the true ranking. One approach to this is to use the rank correlation coefficient and the main implementation of this is by using the Spearman rank correlation coefficient (though there are others such as the Kendall rank correlation coefficient with its own pros and cons).</p>
-
-<p><em>Spearman rank correlation coefficient</em> approach goes as follows:</p>
-
-<ol>
-  <li>Rank all items for the prediction and truth value for a user</li>
-  <li>Apply Pearson correlation coefficient between pred and true rankings</li>
-  <li>Average over all users to obtain global correlation coefficient</li>
-</ol>
-
-<p>The coefficient will be in range (-1, +1) and large positive values are more desirable as the ranking of the predicted more highly correlated with the true ranking.</p>
-
-<p>Using the <em>scipy.stats</em> library and its <em>spearmanr</em> method, one way we can implement this is in Python is shown below. This algorithm assumes that ‘true’ holds the true rating of every user and ‘pred’ holds the predicted ratings of every user (<em>np.argsort</em> finds rankings based on the ratings) 💻.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">spearmanr</span>
-<span class="n">spearman_scores</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">true</span><span class="p">)):</span>
-    <span class="n">true_rank</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">true</span><span class="p">[</span><span class="n">user</span><span class="p">])</span>
-    <span class="n">pred_rank</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">user</span><span class="p">])</span>
-    <span class="n">spearman_scores</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">true_rank</span><span class="p">,</span> <span class="n">pred_rank</span><span class="p">).</span><span class="n">correlation</span><span class="p">)</span>
-<span class="n">average_spearman</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spearman_scores</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="utility-r-score-and-arhr--rating--ranking">Utility (R-Score and ARHR) — rating &amp; ranking</h3>
-<p>Realistically, we want to consider <strong>both the rating and ranking</strong> when evaluating recommenders. Accuracy measures, such as RMSE, are useful but don’t take into account the difference in importance of items highly ranked vs. lowly ranked. High ranked items are what the user is actually going to see.</p>
-
-<p>The utility approach aims to use both the rating and ranking to evaluate the effectiveness of recommenders and assumes two things: (1) higher rated items are of greater utility and (2) higher ranked items are of greater utility. An intuitive way to implement these rules is make it so that our evaluation value is lower when the rank-based utility is higher (further down the recommended list) and higher when the rating-based utility is higher: <em>rating-utility / ranking-utility</em>.</p>
+<p>A brief summary of the four main categories are as follows:</p>
 
 <ul>
-  <li><strong>R-Score</strong></li>
+  <li><strong>Collaborative Filtering (CF)</strong> — Uses the ratings of other users to recommend items to you.</li>
+  <li><strong>Content-Based (CB)</strong> — Uses your own historical data to recommend items to you.</li>
+  <li><strong>Knowledge-Based (KB)</strong> — Uses your explicitly requirements to recommend items to you.</li>
+  <li><strong>Hybrid</strong> — Combines algorithms in various ways to create a more well-rounded recommender.</li>
 </ul>
 
-<p>One approach is the <strong>R-score</strong> where the utility, U(u, i), of item i to user u is a product of the rating-based and ranking-based utility values as shown below. This utility function finds the utility of all items for a user and then the average of that is found to get the R-score value of a recommender.</p>
+<p>While seemingly simple, there is a lot of information to cover in each of these fields. Anything that can be optimized, will be, and there are a lot of trade-offs to be considered. Through the discussion of these three categories, you should get a feel for the advantages and disadvantages of each and what we look out for in recommender systems.</p>
 
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq2.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-<p>where v_i is the ranking of the item i and alpha is a half-life parameter</p>
+<h3 id="3-keywords-to-familiarize">3. Keywords to Familiarize</h3>
+<p>When diving into the field of recommender systems and especially if you want to do your own research and read up on more information during and after this series, there are keywords that will be very helpful if you familiarize yourself with them. These are mainly the goals and challenges of recommender systems. No matter what recommender system you choose to research, many of these keywords will pop up. I believe it will be helpful if you can greet most of those concepts here before moving on.</p>
 
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq3.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-<p>L limits the amount of ranked items we use in our calculation. For example, we can choose to just use the top-10 (L=10) items to calculate the ranking-based utility.</p>
+<p>However, the first concept you should be familiar with is the <strong>user-item ratings matrix</strong>. In its simplest form, imagine a table where the row heading is the item (i.e. Avengers, Lion King, Barbie, etc.) and the column heading is the user (i.e. Adam, Bob, Christine, etc.). The cells where the item and user intersect are the ratings given by the user for the item. Now, viewed as a matrix, it is a m x n matrix containing m users and n items.</p>
 
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq4.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
+<h4 id="goals">Goals</h4>
 
-<table>
-  <tbody>
-    <tr>
-      <td><strong>Note</strong>: Looking at the denominator when calculating U, we can see that this approach penalizes low-ranking items a lot. In situations where ranking doesn’t matter too much (such as news recommendations), we can choose to lighten the penalty. One such approach is the discounted cumulative gain (DCG).</td>
-    </tr>
-  </tbody>
-</table>
+<p>The goals of a recommender system are usually the same. Different systems try to reach these goals in various ways and how it does so will be covered in each chapter.</p>
 
 <ul>
-  <li><strong>ARHR</strong></li>
+  <li><strong>Relevance</strong>. The most obvious one is relevance. Are the items being recommended relevant to the user? This is usually necessary in order for the user to engage with the item.</li>
+  <li><strong>Novelty</strong>. The item recommended should be new to the user.</li>
+  <li><strong>Serendipity</strong>. The item recommended should be unexpected to the user. This is slightly different from novelty as even new items can be expected. For example, if I know that I enjoyed Avatar, being recommended Avatar 2 is not unexpected although it is novel.</li>
+  <li><strong>Diversity</strong>. The items recommended should be diverse so that there is a higher change of the user liking at least one of what was recommended.</li>
 </ul>
 
-<p>Another approach is the <em>average reciprocal hit rate (ARHR)</em> also called <em>mean reciprocal hit-rate (MRR)</em>. This approaches is designed for implicit feedback data. Implicit feedback is given whenever a user clicks on an article, completes a video, or buys an item. The user is not explicitly rating items but their behavior can implicitly tell us what they like. This means that the data will likely be either 1 (bought, liked, clicked) or 0 (didn’t). While it is designed for implicit feedback where missing values can be set to 0, it can be generalized to be used for explicit feedback.</p>
+<h4 id="challenges">Challenges</h4>
 
-<p>In this context, we can apply the same principle as above where the rank-based utility is 1/v_i (where v_i is the rank of item i) and the rating-based utility is simply r_ui.</p>
-
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq5.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq6.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-
-<h3 id="usage-precision-recall-and-roc">Usage (Precision, Recall, and ROC)</h3>
-<ul>
-  <li><strong>Precision &amp; Recall</strong></li>
-</ul>
-
-<p>In the context of recommenders, there are four scenarios.</p>
+<p>Throughout the series, the most common concepts that will be reoccurring are the challenges that recommender systems face in general and how different systems aim to combat these different challenges.</p>
 
 <ul>
-  <li><strong>TP, true-positives</strong>: relevant items + recommended</li>
-  <li><strong>FP, false-positives</strong>: irrelevant items + recommended</li>
-  <li><strong>FN, false-negatives</strong>: relevant items + not recommended</li>
-  <li><strong>TN, true-negatives</strong>: irrelevant items + not recommended</li>
+  <li><strong>Long-Tail</strong>. Only a fraction of items are rated frequently. Why is this a problem? (1) High-frequency items are relatively competitive with little profit for the merchant. There is more profit to be gained from the lower frequency items. (2) Difficult to provide robust rating predictions as many recommender systems tend to recommend popular items rather than infrequent items. Has a negative impact on diversity.</li>
+  <li><strong>Data Sparsity</strong>. The user-item ratings matrix is typically not going to be full. There wil be missing ratings as many users have not rated or have not interacted with many items. This leads to a matrix that is sparse and thus leads to less accurate predictions and recommendations.</li>
+  <li><strong>Scalability</strong>. A recommender system feasible at a small scale might be infeasible at a larger scale. The time and space complexity of the algorithms used must be carefully considered.</li>
+  <li><strong>Cold-Start</strong>. New items cannot be recommended until some users rate it, and new users are unlikely to be given good recommendations because of the lack of their rating or purchase history. When the number of initially available ratings are relatively small, it can be difficult to give recommendations because there is no way to compare a new user (that we want to recommend items to) with another user or look at their historical data.</li>
+  <li><strong>Curse of Dimensionality</strong>. When working with data in high-dimensional spaces, it can be challenging to analyze the data and make predictions with it. This isn’t an issue when just looking at user, item, and ratings but in many recommender systems, we want to include even more information such as age, location, gender, etc. for a more robust prediction. However, handling high-dimensional data is computationally more expensive and more complex.</li>
 </ul>
 
-<p><em>Precision</em> is defined as the percentage of recommended items that turn out to be relevant. All recommended items is TP + FP and relevant and recommended is TP and so the formula for precision is TP/(TP + FP).</p>
+<h3 id="4-dataset">4. Dataset</h3>
+<p>The dataset that will be used for most of the code implementations is the MovieLense 1M dataset. This is a staple in many recommender system implementation resources you will find online. This is a simple dataset that contains the ratings of 6000 users for 4000 movies.</p>
 
-<p><em>Recall</em> is defined as the percentage of relevant items that have been recommended. All relevant items is TP + TN and relevant and recommended is once again TP and so the formula for recall is TP/(TP+TN).</p>
-
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq7.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-
-<p>One way to unify the two metrics is the F1-measure which is the harmonic mean between the precision and the recall. The closer the precision, recall, or F1 are to 1, the better the recommender.</p>
-
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq8.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-<p>F_1 measure that unifies precision and recall.</p>
-
-<ul>
-  <li><strong>ROC</strong>
-If you’re familiar with the ROC (receiver operating characteristic) curve, you would know that is a graph showing the performance of a classification model at all classification thresholds. It uses binary data and so is fit for evaluating recommenders that use binary data (usually implicit feedback). The x-axis is the false positive rate (FPR) and the y-axis is the true positive rate (TPR).</li>
-</ul>
-
-<div class="gallery-box">
-    <div class="gallery">
-        <img src="/images/rs-2-eq9.webp" loading="lazy" style="width: 700px; height: 100px;" />
-    </div>
-</div>
-
-<p>If the recommended list is too small, recommenders will not recommend all relevant items (false negative) and if the list is too large, recommenders will start to recommend irrelevant items (false positive). This trade-off can be captured in an ROC curve and we can quantify how effective the recommender is at recommending relevant items that has a high chance of being used.</p>
+<p>Download the dataset and save it for future use.</p>
 
 <hr />
-<p>We’ve seen how there are many different ways to evaluate the effectiveness of recommenders. From looking at ratings, rankings, and both and considering how much the ranking order matters to which type of data we are working with (implicit or explicit, binary or multivariate), the evaluation metric can change. The best evaluation metric depends on the recommender we’re implementing and so when trying to find the best evaluation metric for your recommender, I hope that this guide can be a good starting point where you can now confidently find more nuanced metrics on your own!</p>
 
-<h4 id="resources">Resources</h4>
-
-<p>Aggarwal, C. C. (2016). Recommender Systems. <a href="https://doi.org/10.1007/978-3-319-29659-3">https://doi.org/10.1007/978-3-319-29659-3</a></p>
+<p>Are you ready to explore the many different types of recommender systems? Let’s go!</p>
 
     </div>
 
@@ -409,22 +291,22 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
       <ul class="share__list list-reset">
         <li class="share__item">
           <a class="share__link share__twitter"
-            href="https://twitter.com/intent/tweet?text=Evaluating%20Recommender%20Systems%20(2/6)&url=http://localhost:4000/blog/recommender-chapter2"
+            href="https://twitter.com/intent/tweet?text=Recommendation%20System%20for%20Dummies%20(1/6)&url=http://localhost:4000/recommender-chapter1"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/recommender-chapter2"
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/recommender-chapter1"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/blog/recommender-chapter2&amp;media=http://localhost:4000/images/rs-chapter2-thumbnail.avif&amp;description=Evaluating%20Recommender%20Systems%20(2/6)"
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=http://localhost:4000/recommender-chapter1&amp;media=http://localhost:4000/images/rs-chapter1-thumbnail.avif&amp;description=Recommendation%20System%20for%20Dummies%20(1/6)"
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest"
           rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
         </li>
         <li class="share__item">
-          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/recommender-chapter2&title=Evaluating%20Recommender%20Systems%20(2/6)&summary=How%20to%20approach%20evaluating%20recommenders.%20It%E2%80%99s%20more%20complicated%20than%20you%20might%20think&source="
+          <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/recommender-chapter1&title=Recommendation%20System%20for%20Dummies%20(1/6)&summary=&source="
           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
         </li>
       </ul>
@@ -471,7 +353,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   
-                  <a href="/blog/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter6" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)">
                   </a>
                   
@@ -493,7 +375,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a>
+                    <a href="/recommender-chapter6">Making Recommenders Better (6/6)</a>
                   </h2>
 
                   <p class="article__excerpt">Hybrid? Machine Learning? So many ways to improve recommenders.</p>
@@ -526,7 +408,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   
-                  <a href="/blog/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter5" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter5-thumbnail.avif" alt="Knowledge-Based Recommenders (5/6)">
                   </a>
                   
@@ -546,7 +428,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
+                    <a href="/recommender-chapter5">Knowledge-Based Recommenders (5/6)</a>
                   </h2>
 
                   <p class="article__excerpt">“Ask and you shall receive”</p>
@@ -579,7 +461,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   
-                  <a href="/blog/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
+                  <a href="/recommender-chapter4" class="article__image" aria-hidden="true" tabindex="-1">
                     <img class="lazy" data-src="/images/rs-chapter4-thumbnail.avif" alt="Content-Based Recommenders (4/6)">
                   </a>
                   
@@ -601,7 +483,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                   
 
                   <h2 class="article__title">
-                    <a href="/blog/recommender-chapter4">Content-Based Recommenders (4/6)</a>
+                    <a href="/recommender-chapter4">Content-Based Recommenders (4/6)</a>
                   </h2>
 
                   <p class="article__excerpt">“You like blue? Lemme introduce you to a slightly different shade of blue”</p>
@@ -718,7 +600,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
+                    <a class="recent-posts__image" href="/fluent-fable" ><img class="lazy" data-src="/images/ff-thumbnail.png" alt="Fluent Fable: Reading for Language Learning"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -732,7 +614,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
+                    <h4 class="recent-posts__title"><a href="/fluent-fable">Fluent Fable: Reading for Language Learning</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-07T00:00:00+09:00">07 May 2024</time>
@@ -743,7 +625,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                 
                 <div class="recent-posts">
                   
-                    <a class="recent-posts__image" href="/blog/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
+                    <a class="recent-posts__image" href="/recommender-chapter6" ><img class="lazy" data-src="/images/rs-chapter6-thumbnail.avif" alt="Making Recommenders Better (6/6)"></a>
                   
                   <div class="recent-posts__content">
                     <div class="article__meta">
@@ -759,7 +641,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
                       </div>
                       
                     </div>
-                    <h4 class="recent-posts__title"><a href="/blog/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
+                    <h4 class="recent-posts__title"><a href="/recommender-chapter6">Making Recommenders Better (6/6)</a></h4>
                     <div class="article__meta">
                       <div class="article__meta__bottom">
                         <time class="article__date" datetime="2024-05-06T00:00:00+09:00">06 May 2024</time>
