@@ -25,7 +25,7 @@ The best centralized resource I could find were the two following textbooks: “
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-chapter1-overview.png" loading="lazy" style="width: 800px; height: 300px;">
+        <img src="{{site.baseurl}}/images/rs-chapter1-overview.png" loading="lazy" style="width: 800px; height: 300px;">
     </div>
 </div>
 

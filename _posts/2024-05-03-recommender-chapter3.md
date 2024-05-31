@@ -29,7 +29,7 @@ The visualization below shows the two different categories of memory-based RS. F
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-1.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-1.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">Two different approaches in memory-based recommenders.</p>
 
@@ -41,7 +41,7 @@ The visualization below shows the two different categories of memory-based RS. F
 Calculating similarity can be thought of as finding the distance between the two users. Why distance? As a simple example, imagine we want to compare the similarity between three people A, B, and C. We only know two things about each person — their height and weight. If we map out the “location” of these people in a space where the x- and y- axis are height and weight, we get the following graph:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-2.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-2.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">Visualization of users.</p>
 
@@ -54,7 +54,7 @@ We can see that A and B are closer in distance in this space and so we can concl
 The simplest way to calculate the distance here is the **Manhattan** and **Euclidean** distance. The following equation is for calculating the Euclidean distance where i is the number of dimension and x and y are the users. The Euclidean distance is essentially the Pythagorean equation when calculating the hypotenuse in a right triangle:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-3.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-3.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 
@@ -64,7 +64,7 @@ The closer a user is to another, the Euclidean/Manhattan distance should be clos
 There are more ways to calculate the similarity amongst users that is commonly used: **cosine similarity** and **Pearson correlation**. If we imagine the space that the users are located in as a vector space (as a point can be represented as a vector), we get the following graph:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-3.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-3.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">Visualization of users in vector space.</p>
 </div>
@@ -73,7 +73,7 @@ There are more ways to calculate the similarity amongst users that is commonly u
 In simple terms, cosine similarity measures the angle between two vectors. If the angle is 0, the vectors overlap. This doesn’t take into account magnitude and so it isn’t really a ‘distance similarity’ but more of a ‘directional similarity.’ The following equation calculates cosine similarity.
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-4.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-4.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 
@@ -97,7 +97,7 @@ After the closest neighbors have been located, we should now fill in the empty c
 The simplest way to approach this is the weighted average method.
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-5.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-5.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">Weighted average. Image by Abjiheet Anand (2020).</p>
 </div>
@@ -188,7 +188,7 @@ Given our user-item ratings matrix of A with m users and n items, our model aims
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-6.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-6.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">Matrix Factorization. Image by Google </p>
 </div>
@@ -206,7 +206,7 @@ To find the matrices U and V, we treat this like an optimization problem. We sta
 One common and intuitive way to approach the objective function is by using squared distances. We minimize the sum of squared errors over all pairs of observed entries:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-3-7.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-3-7.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 

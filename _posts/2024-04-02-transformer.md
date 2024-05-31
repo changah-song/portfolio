@@ -14,7 +14,7 @@ If you've attempted to understand how Transformers work, you've probably come ac
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/t-1-1.png" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/t-1-1.png" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Transformer architecture (Vaswani et al., 2017)

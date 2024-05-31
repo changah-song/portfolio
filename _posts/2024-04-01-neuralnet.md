@@ -21,12 +21,12 @@ If you look at the following visualization, you'll see the we have all the basic
 Then, we can express it in an equation. The weights and biases are initially just random numbers. The weights and biases are the only things that can affect the outcome of our NN. Given an input data, the model just does calculations until the final layer to give an output.
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/nn-1-1.png" loading="lazy" style="width: 800px;">
+        <img src="{{site.baseurl}}/images/nn-1-1.png" loading="lazy" style="width: 800px;">
     </div>
 </div>
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/nn-1-2.png" loading="lazy" style="width: 800px;">
+        <img src="{{site.baseurl}}/images/nn-1-2.png" loading="lazy" style="width: 800px;">
     </div>
 </div>
 
@@ -35,7 +35,7 @@ Now that we have an output, how do we train the network so that the output is mo
 We can use an error value (I will use the Mean Squared Error for this article) to capture how different the output is from the true output. For our two-node example, you can see that the error between the output (Y) and the true value (red Y) is captured with E. 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/nn-1-3.png" loading="lazy" style="width: 800px;">
+        <img src="{{site.baseurl}}/images/nn-1-3.png" loading="lazy" style="width: 800px;">
     </div>
 </div>
 

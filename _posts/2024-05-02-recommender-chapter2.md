@@ -44,7 +44,7 @@ RMSE measures the *average difference between values predicted by a model and th
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq1.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq1.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 
@@ -89,21 +89,21 @@ One approach is the **R-score** where the utility, U(u, i), of item i to user u 
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq2.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq2.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 where v_i is the ranking of the item i and alpha is a half-life parameter
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq3.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq3.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 L limits the amount of ranked items we use in our calculation. For example, we can choose to just use the top-10 (L=10) items to calculate the ranking-based utility.
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq4.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq4.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 
@@ -117,12 +117,12 @@ In this context, we can apply the same principle as above where the rank-based u
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq5.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq5.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq6.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq6.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 
@@ -143,7 +143,7 @@ In the context of recommenders, there are four scenarios.
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq7.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq7.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 
@@ -152,7 +152,7 @@ One way to unify the two metrics is the F1-measure which is the harmonic mean be
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq8.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq8.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 F_1 measure that unifies precision and recall.
@@ -162,7 +162,7 @@ If you’re familiar with the ROC (receiver operating characteristic) curve, you
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-2-eq9.webp" loading="lazy" style="width: 700px; height: 100px;">
+        <img src="{{site.baseurl}}/images/rs-2-eq9.webp" loading="lazy" style="width: 700px; height: 100px;">
     </div>
 </div>
 

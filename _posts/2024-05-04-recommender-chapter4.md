@@ -62,7 +62,7 @@ Once the document is sufficiently reduced and the terms are extracted, we should
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-4-1.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-4-1.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         N is the number of documents and n is the number of total terms covering all the documents. w_kj is the weight for term t_k in document d_j
@@ -83,7 +83,7 @@ We know D (input) and T (NLP feature extraction). How do we calculate the weight
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-4-2.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-4-2.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         TF-IDF = TF * IDF where TF is simply the frequency of a term k in document j and IDF is the inverse document frequency. Taken from Aggarwal (2016).
@@ -104,7 +104,7 @@ Similar to CF recommenders, we can recommend items that were found to be similar
 ### Visual Overview
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-4-3.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-4-3.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Visual overview of Content-Based RS. Image by Author.

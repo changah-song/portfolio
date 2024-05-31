@@ -43,7 +43,7 @@ The following section will go into the theory and logic underlying this method b
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-1.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-1.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Source: Javapoint, N.D.
@@ -54,7 +54,7 @@ Ricci et al. defines two variables and three sets of constraints. The two variab
 An example of a knowledge base with these variables and constraints is shown below:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-2.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-2.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Example of KB in financial services. Image from Ricci et al. (2011)
@@ -64,7 +64,7 @@ An example of a knowledge base with these variables and constraints is shown bel
 Given concrete user requirements, C_C, the solution cannot violate the following logic:
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-3.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-3.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 
@@ -112,7 +112,7 @@ df.head()
 ```
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-4.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-4.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 
@@ -155,7 +155,7 @@ gen_df.head()
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-5.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-5.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 
@@ -219,7 +219,7 @@ def build_chart(gen_df, percentile=0.8):
 After inputting [animation, 10, 40, 2000, and 2019], I get the following recommendations.
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-5-6.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-5-6.webp" loading="lazy" style="width: 700px;">
     </div>
 </div>
 

@@ -21,7 +21,7 @@ The hybrid approach, as its name suggests, takes advantage of different strength
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-6-1.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Taxonomy of hybrid systems. Image by Aggarwal (2016).
@@ -47,7 +47,7 @@ Well, in our model-based CF approach, we need to create a model that can fill in
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-1.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-6-1.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Image by Jordan (2018).
@@ -62,7 +62,7 @@ One deep learning neural network I want to introduce here is the convolutional n
 
 <div class="gallery-box">
     <div class="gallery">
-        <img src="/images/rs-6-3.webp" loading="lazy" style="width: 700px;">
+        <img src="{{site.baseurl}}/images/rs-6-3.webp" loading="lazy" style="width: 700px;">
     </div>
     <p style="text-align: center; font-size: 15px; color: grey;">
         Image by Ratan (2020).
