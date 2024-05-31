@@ -27,7 +27,7 @@ hero:
   enable: true
   hero__title: Welcome to Paul's Repo!
   hero__description: Look around at my blogs and projects I've completed (and am currently working on) 😄.
-  hero__image: '{{site.baseurl}}/images/06.jpg'
+  hero__image: '/images/06.jpg'
 
 
 #-------------------------------
