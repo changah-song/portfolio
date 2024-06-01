@@ -1,7 +1,7 @@
 #-------------------------------
 # Site Settings
 title: Paul Song
-logo: '{{site.baseurl}}/images/icon.png'
+logo: 
 description: 
 color_scheme: auto # You can choose three modes auto, light, and dark. By default, the auto mode is set, which means the user can choose the light or dark mode themself.
 
@@ -27,7 +27,7 @@ hero:
   enable: true
   hero__title: Welcome to Paul's Repo!
   hero__description: Look around at my blogs and projects I've completed (and am currently working on) 😄.
-  hero__image: '{{site.baseurl}}/images/06.jpg'
+  hero__image: '/images/06.jpg'
 
 
 #-------------------------------
